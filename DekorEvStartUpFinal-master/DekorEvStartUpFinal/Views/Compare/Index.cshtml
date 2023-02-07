@@ -1,0 +1,11 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Compare
+@model List<CompareVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <section id="Compare">
+         @await Html.PartialAsync("_CompareIndexPartial",Model)
+    </section>
+

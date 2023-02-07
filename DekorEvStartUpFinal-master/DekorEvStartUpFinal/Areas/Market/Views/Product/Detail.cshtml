@@ -1,0 +1,141 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<section style="background-color: #eee;">
+    <div class="container-fluid py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-9 col-xl-4">
+                <div class="card text-black">
+                    <img src="~/assets/images/@Model.MainImage"
+                         class="card-img-top" />
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h3 class="text-muted mb-4">@Model.Name</h3>
+                        </div>
+                        <div>
+
+                            <div class="d-flex justify-content-between">
+                                <span> Description</span><span class="text-break">@Model.Description</span>
+                            </div>
+                            <hr />
+                            <div class="d-flex justify-content-between">
+                                <span>Product CostPrice</span><span>$@Model.CostPrice</span>
+                            </div>
+                            <hr />
+                            <div class="d-flex justify-content-between">
+                                <span>Product SalePrice</span><span>$@Model.SalePrice</span>
+                            </div>
+                            <hr />
+
+                            <div class="d-flex justify-content-between">
+                                <span>Product DiscountPrice</span><span>$@Model.DiscountPrice</span>
+                            </div>
+                            <hr />
+
+                        </div>
+
+                        @foreach (var item in Model.ProductColorMaterials)
+                        {
+
+                            <div class="d-flex justify-content-between">
+                                <span>Product Spesific Count</span>
+
+
+
+                                <p> Color:@item.Color.Name Material:@(item.Material.Name) Count:@( item.Count) </p>
+                            </div>
+                            <hr />
+
+
+                        }
+                        <div class="d-flex justify-content-between">
+                            <span>Product Count</span><span>@Model.Count</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>Vip</span>
+                            @if (Model.IsVip == true)
+                            {
+                                <span class="text-success">This product is VIP</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger"> This product is Not VIP</span>
+                            }
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>Premium</span>
+                            @if (Model.IsPremium == true)
+                            {
+                                <span class="text-success">This product is Premium</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">This product is Not Premium</span>
+                            }
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>Fronted</span>
+                            @if (Model.IsFronted == true)
+                            {
+                                <span class="text-success">This product is Fronted</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">This product is Not Fronted</span>
+                            }
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>Deliverable</span>
+                            @if (Model.IsDeliverable == true)
+                            {
+                                <span class="text-success">This product is Deliverable</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">This product is Not Deliverable</span>
+                            }
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>Bestseller</span>
+                            @if (Model.IsBestSeller == true)
+                            {
+                                <span class="text-success">This product is Bestseller</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">This product is Not Bestseller</span>
+                            }
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <span>New</span>
+                            @if (Model.IsNew == true)
+                            {
+                                <span class="text-success">This product is New</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">This product is Not New</span>
+                            }
+                        </div>
+                        <hr />
+                       
+                       
+
+                        <a class="btn btn-primary" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To Back</a>
+                        <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@Model.Id">Update</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

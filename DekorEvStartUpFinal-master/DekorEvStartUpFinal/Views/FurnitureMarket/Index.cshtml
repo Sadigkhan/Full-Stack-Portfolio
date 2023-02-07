@@ -1,0 +1,42 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="Stores">
+    <div class="container">
+        <h3>Bütün mağazalar</h3>
+        <div class="row g-3">
+
+            @foreach (AppUser user in Model)
+            {
+                  <div class="col-lg-6 col-6 col-sm-6 col-md-6">
+                <div class="store">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="store-logo">
+                                <img src="~/assets/images/@user.UserImage" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="store-sm-details">
+                                <a class="store-name" asp-controller="FurnitureMarket" asp-action="StoreDetail" asp-route-id="@user.Id">@user.UserName</a>
+                                <p>@user.Description</p>
+                                <a class="d-block store-phone" href="tel:@user.PhoneNumber">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>@user.PhoneNumber</span>
+                                </a>
+                                <span class="store-count-prod">@user.Products.Count().ToString() məhsul</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+          
+            
+        </div>
+    </div>
+</section>
+
+

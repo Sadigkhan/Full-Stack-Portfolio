@@ -1,0 +1,196 @@
+﻿@model ProductDetailVM
+@{
+    ViewData["Title"] = "ProductDetail";
+}
+
+@{
+    string currentUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path;
+    string enc = System.Net.WebUtility.UrlEncode(currentUrl);
+    string text = System.Net.WebUtility.UrlEncode(Model.Product.Name);
+}
+
+<section id="Product-details">
+    <div class="container">
+        <div class="pr-box">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="pr-img">
+                        <img src="~/assets/images/@Model.Product.ProductColorMaterials.Find(p=>p.ColorId == ViewBag.ColorId && p.MaterialId == ViewBag.MaterialId).Image" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="pr-details">
+                        <span>@Model.Product.Category.Name</span>
+                        <h4 class="pr-name">@Model.Product.Name</h4>
+                        <hr>
+                        @if (Model.Product.IsDeliverable == true)
+                        {
+                            <p class="shipping">Çatdırılma: <span>Var</span></p>
+
+                        }
+                        else
+                        {
+                            <p class="shipping">Çatdırılma: <span>Yoxdur</span></p>
+                        }
+                        @if (Model.Product.IsNew == true)
+                        {
+                            <p class="new-old">Yeni: <span>Bəli</span></p>
+                        }
+                        else
+                        {
+                            <p class="new-old">Yeni: <span>Xeyr</span></p>
+                        }
+                        @if (Model.Product.AppUser != null)
+                        {
+                            @if (Model.Product.AppUser.City == null)
+                            {
+                                <p class="city">Şəhər: <span>Yoxdur</span></p>
+                            }
+                            else
+                            {
+                                <p class="city">Şəhər: <span>@Model.Product.AppUser.City</span></p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="city">Şəhər: <span>Bakı</span></p>
+
+                        }
+
+                       @* Making VIP Fronted Premium From Detail View Side*@
+
+                       @* @if (User.Identity.IsAuthenticated && User.IsInRole("Market") && Model.appUser.Id == Model.Product.AppUserId)
+                        {
+                            <form action="">
+                                <button type="submit" style="background-color: #04913a;">
+                                    <img src="photos/up-arrow.png" alt="">
+                                    İrəli çək
+                                </button>
+                                <button type="submit" style="background-color: #eeb90d;">
+                                    <img src="photos/vip.png" alt="">
+                                    VIP et
+                                </button>
+                                <button type="submit" style="background-color: #ee5833;">
+                                    <img src="photos/premium-quality.png" alt="">
+                                    Premium et
+                                </button>
+                            </form>
+                            @if(!Model.Product.IsFronted)
+                            {
+                            <a class="btn btn-success" asp-route-id="@Model.Product.Id" asp-action="MakeFrontedFromDetail" asp-controller="product">İrəli çək</a>
+                                
+                            }
+                                @if(!Model.Product.IsVip)
+                            {
+                            <a class="btn btn-warning"  asp-route-id="@Model.Product.Id" asp-action="MakeVipFromDetail" asp-controller="product">VİP et</a>
+                                
+                            }
+                                @if(!Model.Product.IsPremium)
+                            {
+                            <a class="btn btn-danger"  asp-route-id="@Model.Product.Id" asp-action="MakePremiumFromDetail" asp-controller="product">Premium et</a>
+                                
+                            }
+                        }*@
+
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="cust-details">
+                        @if (Model.Product.DiscountPrice > 0)
+                        {
+                            <div class="price-sec">
+                                <span class="pr-price">@Model.Product.DiscountPrice <span>₼</span></span>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="price-sec">
+                                <span class="pr-price">@Model.Product.SalePrice <span>₼</span></span>
+                            </div>
+                        }
+
+                        <ul>
+                            <li>
+                                <img src="images/list.png" alt="">
+                                <span>Elanın nömrəsi: <span>@Model.Product.ProductCode</span></span>
+                            </li>
+                            <li>
+                                <img src="images/calendar.png" alt="">
+                                <span>Yüklənmə tarixi: <span>@Model.Product.CreatedAt</span></span>
+                            </li>
+                            <li>
+                                <img src="images/visibility.png" alt="">
+                                @if (Model.Product.ViewCount==null)
+                                {
+                                    <span>Baxış sayı: <span>1</span></span>
+                                }
+                                else
+                                {
+                                    <span>Baxış sayı: <span>@Model.Product.ViewCount.Count</span></span>
+                                }
+
+                            </li>
+                            @if (Model.Product.AppUser != null)
+                            {
+                                @if (Model.Product.AppUser.PhoneNumber == null)
+                                {
+                                    <li>
+                                        <img src="images/phone.png" alt="">
+                                        <span>Əlaqə: <span style="color: #333e48;">Yoxdur</span></span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <img src="images/phone.png" alt="">
+                                        <span>Əlaqə: <span style="color: #333e48;">@Model.Product.AppUser.PhoneNumber</span></span>
+                                    </li>
+                                }
+
+                            }
+                            else
+                            {
+                                <span>Əlaqə: <span style="color: #333e48;">+123123123132</span></span>
+                            }
+
+                        </ul>
+                        <div class="shop-cart-btn">
+                            <button class="add-to-cart-button">
+                               
+                                <a style="padding:8px 16px; color:white;" asp-controller="product" asp-action="addbasket" asp-route-id="@Model.Product.Id" asp-route-page="Detail" asp-route-colorId="@ViewBag.ColorId" asp-route-materialId="@ViewBag.MaterialId" class="add-basket-btn">Bəyəndiklərimə əlavə et</a>
+                            </button>
+                        </div>
+                        <div class="shop-cart-btn">
+                            <button class="add-to-compare-button">
+
+                                <a style="padding:8px 16px; color:white;" asp-controller="product" asp-action="compare" asp-route-id="@Model.Product.Id" asp-route-page="Detail" asp-route-colorId="@ViewBag.ColorId" asp-route-materialId="@ViewBag.MaterialId" class="add-compare-btn compare">Müqayisə Et</a>
+                            </button>
+                        </div>
+
+                        <div class="share">
+                                <nav>
+                                    <a class="sharer" href="https://twitter.com/intent/tweet?url=@enc&text=@text" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-twitter"></i></a>
+                                    <a class="sharer" href="https://www.facebook.com/sharer/sharer.php?u=@enc" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-facebook"></i></a>
+                                   
+                                </nav>
+                            </div>
+
+
+                     
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-details" style="margin-top:50px;">
+                <p>@Model.Product.Description</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Script{
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+}

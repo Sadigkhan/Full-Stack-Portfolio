@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Color>
+@{
+    int count = (ViewBag.PageIndex - 1) * 5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Color color in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+            <td>@color.Name</td>
+            @*<td>@category.Products.Count()</td>*@
+            <td style="color:@(color.IsDeleted ? "red":"white")">@(color.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@color.Id">Update</a>
+                <a id="@(color.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(color.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-action="@(color.IsDeleted ? "Restore":"Delete")" asp-route-id="@color.Id">@(color.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,27 @@
+﻿@model RegisterVM
+
+@{
+    ViewData["Title"] = "RegisterAsStore";
+}
+
+    <section id="Login-form">
+        <div class="container">
+            <div class="box col-lg-9 mx-auto">
+               <div class="row">
+                <div class="col-lg-6">
+                    <div class="left">
+                        <img class="img-fluid" src="~/assets/images/register-wallpaper.jpg" alt="">
+                        <h4>Hesabın var? <a href="login.html">Daxil ol</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                   <div class="right pt-5 px-4">
+                       <h3>Qeydiyyat</h3>
+                      @await Html.PartialAsync("_RegisterPartial",Model)
+                   </div>
+                </div>
+               </div>
+            </div>
+        </div>
+    </section>
+

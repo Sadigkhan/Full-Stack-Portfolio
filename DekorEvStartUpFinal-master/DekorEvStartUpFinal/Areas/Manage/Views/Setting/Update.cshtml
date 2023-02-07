@@ -1,0 +1,70 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-lg-4 h3 mb-4 text-gray-800">
+        <h1>Setting Update</h1>
+    </div>
+    <div class="col-lg-4">
+        <img style="width:50%" src="~/assets/images/@Model.Logo" alt="Alternate Text" />
+    </div>
+      <div class="col-lg-4">
+        <img style="width:50%" src="~/assets/images/@Model.AboutUsImage" alt="Alternate Text" />
+    </div>
+    <div class="col-lg-12 mx-auto">
+        <form method="post" enctype="multipart/form-data">
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number">
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter email">
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress"></label>
+                <input asp-for="Adress" class="form-control" placeholder="Enter Adress">
+                <span asp-validation-for="Adress"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Offer"></label>
+                <textarea asp-for="Offer" class="form-control" placeholder="Enter Offer"></textarea>
+                <span asp-validation-for="Offer"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AboutUs"></label>
+                <textarea asp-for="AboutUs" class="form-control" placeholder="Enter AboutUs Text"></textarea>
+                <span asp-validation-for="AboutUs"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AboutUsImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="AboutUsImageFile" placeholder="Select About Us Image">
+                <span class="text-danger" asp-validation-for="AboutUsImageFile"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoImage"></label>
+                <input class="form-control" accept="image/*" asp-for="LogoImage" placeholder="Slect Logo Image">
+                <span class="text-danger" asp-validation-for="LogoImage"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+@section Script{
+<partial name="_ValidationFormScriptPartial">
+    <script>
+        CKEDITOR.replace('Offer');
+    </script>
+    <script>
+        CKEDITOR.replace('AboutUs');
+    </script>
+    }

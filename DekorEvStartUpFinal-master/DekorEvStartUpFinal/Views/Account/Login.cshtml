@@ -1,0 +1,49 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<section id="Login-form">
+    <div class="container">
+        <div class="row">
+            <div class="box col-lg-9 mx-auto">
+
+                <div class="col-lg-6">
+                    <div class="left">
+                        <img class="img-fluid" src="~/assets/images/login-wallpaper.jpg" alt="">
+                        <h4>Hesabın yoxdur? <a asp-controller="account" asp-action="register">Qeydiyyatdan keç</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right pt-5 px-4">
+                        <h3>Daxil ol</h3>
+                        <form method="post">
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                            <div class="form-box">
+                                <input asp-for="Email" type="text" placeholder=" E-poçt">
+                                <span class="text text-danger" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-box">
+                                <input asp-for="Password" type="password" placeholder="Şifrə">
+                                <span class="text text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="label">
+                                    <input asp-for="RememberMe" id="remember" type="checkbox">
+                                    <label for="remember">Məni yadda saxla</label>
+                                </div>
+                                <div class="forgot">
+                                    <a asp-action="ResetPassword" asp-controller="account">Şifrəni unutmusan?</a>
+                                </div>
+                            </div>
+                            <button>DAXİL OL</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,56 @@
+﻿@model OrderVM
+<form method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="single-input-item">
+                <label asp-for="FullName" >FullName </label>
+                <input asp-for="FullName" placeholder="FullName " />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="single-input-item">
+                <label  asp-for="Email" >Email </label>
+                <input  asp-for="Email"  placeholder="Email"  />
+            </div>
+        </div>
+    </div>
+
+    <div class="single-input-item">
+        <label asp-for="Address"> Address</label>
+        <input asp-for="Address" placeholder=" Address" />
+    </div>
+
+    <div class="single-input-item">
+        <label asp-for="Country"> Country</label>
+        <input asp-for="Country" placeholder=" Country" />
+    </div>
+     <div class="single-input-item">
+        <label asp-for="State"> Country</label>
+        <input asp-for="State" placeholder=" State" />
+    </div>
+       <div class="single-input-item">
+        <label asp-for="City"> City</label>
+        <input asp-for="City" placeholder=" City" />
+    </div>
+   
+      </div>
+       <div class="single-input-item">
+        <label asp-for="ZipCode"> ZipCode</label>
+        <input asp-for="ZipCode" placeholder=" ZipCode" />
+    </div>
+  
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+        
+</form>

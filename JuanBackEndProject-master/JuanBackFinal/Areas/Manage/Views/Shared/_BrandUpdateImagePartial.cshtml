@@ -1,0 +1,21 @@
+﻿@model Brand
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label asp-for="BrandImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="BrandImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="BrandImageFile"></span>
+                <div class="col-lg-6">
+                    <img style="width:50%" src="~/assets/img/brand/@Model.BrandImage" alt="Alternate Text" />
+                </div>
+            </div>
+       
+          
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

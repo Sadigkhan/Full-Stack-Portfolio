@@ -1,0 +1,98 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Basket
+@model List<BasketVM>
+@{
+    double subTotal = 0;
+}
+
+<div class="container">
+    <div class="row mt-5 align-items-baseline justify-content-between">
+        <div class="card-box col-lg-8">
+            <div class="cart-top">
+                <h1 class="cart-head">Bəyəndiklərim</h1>
+                <div class="d-flex justify-content-between">
+                    <h6 class="text-body">
+                        Bəyəndiyim
+                        <span id="Total_Counts" class="text-count">@Model.Count</span>
+                        məhsul var
+                    </h6>
+                </div>
+            </div>
+            <div class="cart-main">
+                <div class="pro-boxs table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Məhsul</th>
+                                <th scope="col">Adı</th>
+                                <th scope="col">Qiyməti</th>
+                                <th scope="col">Sayı</th>
+                                <th scope="col">Məbləğ</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count()>0)
+                           {
+                               foreach (BasketVM item in Model)
+                               {
+                                    <tr>
+                                <td>
+                                    <img width="200px" style="object-fit:cover;" height="150px" src="~/assets/images/@item.Image" alt="">
+                                </td>
+                                <td>@item.Name</td>
+                                <td>@item.Price AZN</td>
+                                <td class=" align-items-center">
+                                    <a asp-action="update" asp-controller="basket" asp-route-id="@item.ProductId" asp-route-count="@(item.Count-1)" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" style="user-select: none;" class="decrease">-</a>
+                                    <span style="user-select: none;" class="count_prod">@item.Count</span>
+                                    <a asp-action="update" asp-controller="basket" asp-route-id="@item.ProductId" asp-route-count="@(item.Count+1)" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" style="user-select: none;" class="increase">+</a>
+                                </td>
+                                <td>@(item.Price*item.Count) AZN</td>
+                                <td> <a asp-action="DeleteCard" asp-controller="Basket" asp-route-id="@item.ProductId" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" class="deletecard"><i class="fa-solid fa-xmark "></i></a></td>
+                                    </tr>
+                                    subTotal += item.Price * item.Count;
+
+                               }
+                           }
+                           
+
+                        </tbody>
+                    </table>
+
+                </div>
+               @* <div class="cart-footer d-flex justify-content-between align-items-center">
+                    <div class="cart-footer-left">
+                        <button>
+                            <i class="fa-solid fa-left-long"></i>Davam et
+                        </button>
+                    </div>
+                    <div class="cart-footer-right">
+                        <button id="UpdateCart">
+                            <i class="fa-solid fa-arrows-rotate"></i>Yenilə
+                        </button>
+                    </div>
+                </div>
+*@
+            </div>
+        </div>
+        <div id="Product_Sub" class="products-subtotal col-lg-3">
+            <div class="subtotal-table">
+                <div class="subtotal">
+                    <h6>Ümumi məbləğ</h6>
+                    <h1 id="TotalPriceSub" class="totalPrice"> @subTotal</h1>
+                </div>
+                <div class="total">
+                    <h6>Məhsul sayı</h6>
+                    <h1 id="Total_Count" class="totalPrice">@Model.Count</h1>
+                </div>
+            </div>
+           @* <a href="#">
+                Alış verişə davam et
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>*@
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Index";
+    int count = (ViewBag.PageIndex - 1) * 5;
+    string tags = "";
+    string categories = "";
+}
+
+<div class="row justify-content-between align-items-center">
+    <div class="col-lg-2 h3 mb-4 text-gray-800">
+        <h1>Blogs</h1>
+    </div>
+
+    <div class="col-lg-2 h3 mb-4 text-gray-800">
+        <a asp-controller="Blog" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="Create" asp-area="Manage" class="btn btn-primary">Create</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 tagTable">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Blog Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Blog Tags</th>
+                    <th scope="col">Blog Categories</th>
+                    <th scope="col">Blog Publisher</th>
+                    <th scope="col">Creation Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Setting</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Blog blog in Model)
+                {
+                    count++;
+                    tags = string.Join(", ", blog.BlogTags.Select(p => p.Tag!=null?p.Tag.Name:""));
+                    categories = string.Join(", ", blog.BlogToCategories.Select(b => b.BlogCategory != null ? b.BlogCategory.Name : ""));
+                    <tr>
+                    <th scope="row">@count</th>
+                    <td>
+                        <img style="width:50%" src="~/assets/img/blog/@blog.BlogImage" alt="Alternate Text" />
+                    </td>
+                    <td>@blog.Title</td>
+                    <td>@tags</td>
+                    <td>@categories</td>
+                    <td>@blog.Publisher.PublisherName</td>
+                    <td>@blog.CreatedAt</td>
+
+                    <td style="color:@(blog.IsDeleted ? "red":"green")">@(blog.IsDeleted ? "DeActive":"Active")</td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@blog.Id">Detail</a>
+                        <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@blog.Id">Update</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@blog.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                @if (ViewBag.PageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="1" aria-label="Previous">
+                            @("<<")
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@(ViewBag.PageIndex-1)" aria-label="Previous">
+                            @("<")
+                        </a>
+                    </li>
+                    @if (ViewBag.PageIndex == ViewBag.PageCount && ViewBag.PageIndex > 2)
+                    {
+                        <li class="page-item"><a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@(ViewBag.PageIndex-2)">@(ViewBag.PageIndex-2)</a></li>
+                    }
+                    <li class="page-item"><a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@(ViewBag.PageIndex-1)">@(ViewBag.PageIndex-1)</a></li>
+                }
+
+                <li class="page-item active"><a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@ViewBag.PageIndex">@ViewBag.PageIndex</a></li>
+
+                @if (ViewBag.PageIndex < ViewBag.PageCount)
+                {
+                    <li class="page-item"><a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@(ViewBag.PageIndex + 1)">@(ViewBag.PageIndex + 1)</a></li>
+                    @if (ViewBag.PageIndex == 1 && (ViewBag.PageIndex + 2) < ViewBag.PageCount)
+                    {
+                        <li class="page-item"><a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@(ViewBag.PageIndex+2)">@(ViewBag.PageIndex+2)</a></li>
+                    }
+                    <li class="page-item">
+                        <a class="page-link" asp-route-status="@ViewBag.Status" asp-route-page="@(ViewBag.PageIndex + 1)" aria-label="Next">
+                            @(">")
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-route-status="@ViewBag.Status" asp-action="index" asp-route-page="@ViewBag.PageCount" aria-label="Next">
+                            @(">>")
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>

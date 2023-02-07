@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Banner>
+@{ 
+    int count = (ViewBag.PageIndex - 1)*5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Baner Image</th>
+            <th scope="col">Banner SubTitle</th>
+            <th scope="col">Banner Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Banner banner in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+                                    <td>
+                            <img  style="width:50%" src="~/assets/img/banner/@banner.BannerImage" alt="Alternate Text" />
+                        </td>
+            <td>@banner.SubTitle</td>
+            <td>@banner.Title</td>
+            <td style="color:@(banner.IsDeleted ? "red":"green")">@(banner.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                @*<a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@publisher.Id">Detail</a>*@
+                <a class="btn btn-warning" asp-action="Update" asp-controller="banner" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@banner.Id">Update</a>
+                <a id="@(banner.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(banner.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="@(banner.IsDeleted ? "Restore":"Delete")" asp-route-id="@banner.Id">@(banner.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

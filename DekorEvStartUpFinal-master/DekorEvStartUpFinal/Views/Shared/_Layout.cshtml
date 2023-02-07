@@ -1,0 +1,471 @@
+﻿@inject LayoutService layoutService
+
+
+@{
+    Setting setting = await layoutService.GetSetting();
+
+    List<Category> category = await layoutService.GetCategory();
+
+    int count = await layoutService.BasketItemCount();
+
+    int compareCount = await layoutService.CompareItemCount();
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+@*    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4J4FFT');</script>
+<!-- End Google Tag Manager -->*@
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eviniz üçün hər şey burada</title>
+    <link rel="icon" href="~/assets/images/home-icon-silhouette.png">
+    <link rel="stylesheet" type="text/css" href="~/assets/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/slick/slick-theme.css" />
+    <link rel="stylesheet" href="~/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7E2DXV35L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K7E2DXV35L');
+</script>
+
+</head>
+<body>
+@*
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4J4FFT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->*@
+
+
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 ht-left">
+                        <a asp-controller="about" asp-action="index">Haqqımızda</a>
+                        <a asp-controller="contact" asp-action="index">Əlaqə</a>
+                    </div>
+                    <div class="col-lg-6 ht-right d-flex align-items-center justify-content-end">
+                        <a asp-controller="FurnitureMarket" asp-action="index">Mağazalar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-mid">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <div class="logo">
+                        <a asp-controller="home" asp-action="index">
+                            <img src="~/assets/images/@setting.Logo" alt="">
+                        </a>
+                    </div>
+                    <div class="searchbar">
+                        <form method="get" asp-controller="Product" asp-action="Search">
+                            <input name="query" id="input-search" type="text" placeholder="Search" autocomplete="off" placeholder="Axtar">
+
+                        </form>
+                        <div class="d-none search-list">
+                            <ol style=" list-style-type: none;color:black; margin-top:10px;" id="prod-search-list">
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="header-icons">
+                        <ul>
+                            <li>
+                                <a asp-controller="compare" asp-action="index">
+                                    <svg width="23" height="23" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0)">
+                                            <path d="M20.298 8.38686L21.7149 7.56033C18.6493 2.2939 12.0415 0.282014 6.56113 2.94644V0.930145H4.9212V5.84994H9.84099V4.21001H7.74598C12.3848 2.24224 17.7631 4.03197 20.298 8.38686Z" fill="#5d5d5d" />
+                                            <path d="M5.33116 21.1635C1.52924 18.0758 0.528575 12.686 2.96884 8.43938L1.54702 7.61942C-1.2363 12.4662 -0.183154 18.6069 4.05611 22.2492H2.0513V23.8892H6.97109V18.9694H5.33116V21.1635V21.1635Z" fill="#5d5d5d" />
+                                            <path d="M22.5209 11.2355L19.0426 14.7146L20.202 15.874L21.5959 14.4801C21.0492 19.5603 16.7683 23.4158 11.6588 23.43V25.0699C17.7465 25.0539 22.7967 20.3557 23.2514 14.2849L24.8405 15.874L26 14.7146L22.5209 11.2355Z" fill="#5d5d5d" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0">
+                                                <rect width="26" height="26" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    <span>
+                                        MÜQAYİSƏ
+                                        <span class="count-compare">@compareCount</span>
+
+                                    </span>
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a asp-controller="basket" asp-action="index">
+                                    <img src="~/assets/images/wishlist.png" alt="">
+                                    <span>
+                                        Bəyəndiklərim
+                                        <span class="count-basket">@count</span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                            {
+                                <li class="user-login">
+                                    <img src="~/assets/images/user.png" alt="">
+                                    <span class="ms-2">@User.Identity.Name</span>
+                                    <div class="acc-dropdown" style="z-index:1">
+                                        <a class="mb-3" asp-controller="account" asp-action="profile">
+                                            <img src="~/assets/images/login.png" alt="">
+                                            Tənzimləmələr
+                                        </a>
+                                        <a asp-controller="Account" asp-action="logout">
+                                            <img src="~/assets/images/339-3396821_png-file-svg-download-icon-logout-transparent-png.png" alt="">
+                                            Hesabdan Çıxış
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                            else if (User.Identity.IsAuthenticated && User.IsInRole("Market"))
+                            {
+                                <li class="user-login">
+                                    <img src="~/assets/images/user.png" alt="">
+                                    <span class="ms-2">@User.Identity.Name</span>
+                                    <div class="acc-dropdown" style="z-index:1">
+                                        <a class="mb-3" asp-controller="product" asp-action="index" asp-area="Market">
+                                            <img src="~/assets/images/login.png" alt="">
+                                            Idarəetmə paneli
+                                        </a>
+                                        <a class="mb-3" asp-controller="account" asp-action="profile">
+                                            <img src="~/assets/images/login.png" alt="">
+                                            Tənzimləmələr
+                                        </a>
+                                        <a asp-controller="Account" asp-action="logout">
+                                            <img src="~/assets/images/register.png" alt="">
+                                            Hesabdan Çıxış
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                            else if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="user-login">
+                                    <img src="~/assets/images/user.png" alt="">
+                                    <span class="ms-2">@User.Identity.Name</span>
+                                    <div class="acc-dropdown" style="z-index:1">
+                                        <a class="mb-3" asp-controller="Market" asp-action="index" asp-area="Manage">
+                                            <img src="~/assets/images/login.png" alt="">
+                                            Idarəetmə Paneli
+                                        </a>
+                                        <a class="mb-3" asp-controller="Account" asp-action="Profile">
+                                            <img src="~/assets/images/register.png" alt="">
+                                            Tənzimləmələr
+                                        </a>
+                                        <a asp-controller="Account" asp-action="logout">
+                                            <img src="~/assets/images/339-3396821_png-file-svg-download-icon-logout-transparent-png.png" alt="">
+                                            Hesabdan Çıxış
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="user-login">
+                                    <img src="~/assets/images/user.png" alt="">
+                                    <span class="ms-2">PROFILIM</span>
+                                    <div class="acc-dropdown " style="z-index:1">
+                                        <a class="mb-3" asp-controller="account" asp-action="login">
+                                            <img src="~/assets/images/login.png" alt="">
+                                            Daxil Ol
+                                        </a>
+                                        <a asp-controller="Account" asp-action="Register">
+                                            <img src="~/assets/images/register.png" alt="">
+                                            Qeydiyyatdan Keç
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-nav">
+            <div class="container">
+                <ul>
+                    @foreach (Category item in category)
+                    {
+                        <li>
+                            <img src="~/assets/images/@item.CategoryImage" alt="">
+                            <a asp-controller="Shop" asp-action="index" asp-route-CatId="@item.Id">@item.Name</a>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="Phone-header">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-2">
+                    <img class="ham-menu" src="~/assets/images/hamburger-menu.png" alt="">
+                </div>
+                <div class="col-8 text-center">
+                    <a asp-action="index" asp-controller="home">
+                        <img class="logo" src="~/assets/images/@setting.Logo" alt="">
+                    </a>
+                </div>
+                <div class="col-2">
+                    <ul>
+                        <li>
+                            <a class="search-icon" href="#">
+                                <img src="~/assets/images/search.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="Bottom-nav">
+        <div class="container">
+            <nav class="mobile-bottom-nav">
+                <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+                    <div class="mobile-bottom-nav__item-content">
+                        <img src="~/assets/images/home (2).png" alt="">
+                        <a style="color: #F76E11;" asp-action="index" asp-controller="home">
+                            <span>Ana səhifə</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mobile-bottom-nav__item">
+                    <div class="mobile-bottom-nav__item-content">
+                        <img src="~/assets/images/categories (1).png" alt="">
+                        <a asp-action="index" asp-controller="compare" style="color:black;">Müqayisə</a>
+                    </div>
+                </div>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Market"))
+                {
+                    <div class="mobile-bottom-nav__item bottom-nav-add-event">
+                        <i class="fa-solid fa-plus"></i>
+                        <a asp-controller="product" asp-action="index" asp-area="Market" style="font-weight: bold; color:black;">İdarəetmə</a>
+                    </div>
+                }
+                else if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                {
+                    <div class="mobile-bottom-nav__item bottom-nav-add-event">
+                        <i class="fa-solid fa-plus"></i>
+                        <a asp-controller="Market" asp-action="index" asp-area="Manage" style="font-weight: bold; color:black;">İdarəetmə</a>
+                    </div>
+                }
+
+                <div class="mobile-bottom-nav__item">
+                    <div class="mobile-bottom-nav__item-content">
+                        <img src="~/assets/images/shopping-cart (2).png" alt="">
+                        <a style="color: #333;" asp-action="index" asp-controller="basket">
+                            <span>Bəyəndiklərim</span>
+                        </a>
+                    </div>
+                </div>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                {
+                    <div class="mobile-bottom-nav__item">
+                        <div class="mobile-bottom-nav__item-content">
+                            <img src="~/assets/images/enter (1).png" alt="">
+                            <a asp-action="logout" asp-controller="account">
+                                <span>Çıxış</span>
+                            </a>
+                        </div>
+                    </div>
+
+                }
+                else if (User.Identity.IsAuthenticated && User.IsInRole("Market"))
+                {
+                    <div class="mobile-bottom-nav__item">
+                        <div class="mobile-bottom-nav__item-content">
+                            <img src="~/assets/images/enter (1).png" alt="">
+                            <a asp-action="logout" asp-controller="account">
+                                <span>Çıxış</span>
+                            </a>
+                        </div>
+                    </div>
+                }
+                else if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                {
+                    <div class="mobile-bottom-nav__item">
+                        <div class="mobile-bottom-nav__item-content">
+                            <img src="~/assets/images/enter (1).png" alt="">
+                            <a asp-action="logout" asp-controller="account">
+                                <span>Çıxış</span>
+                            </a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="mobile-bottom-nav__item">
+                        <div class="mobile-bottom-nav__item-content">
+                            <img src="~/assets/images/enter (1).png" alt="">
+                            <a asp-action="Login" asp-controller="account">
+                                <span>Giriş</span>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+
+            </nav>
+
+        </div>
+    </section>
+
+
+
+
+
+    <div id="Search-area">
+        <form method="get" asp-controller="Product" asp-action="Search">
+            <input name="query" id="input-search" type="text" placeholder="Search" autocomplete="off" placeholder="Axtar">
+
+        </form>
+        <div class="d-none search-list">
+            <ol style=" list-style-type: none;color:black; margin-top:10px;" id="prod-search-list">
+            </ol>
+        </div>
+    </div>
+
+
+    <section id="Sidebar">
+        <div class="close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+
+        <div class="side-nav">
+            <a asp-controller="home" asp-action="index">Ana səhifə</a>
+            <a asp-controller="Shop" asp-action="index">Bütün elanlar</a>
+            <a asp-controller="furnituremarket" asp-action="index">Mağazalar</a>
+            <a asp-controller="contact" asp-action="index">Bizimlə əlaqə</a>
+             <a asp-controller="Account" asp-action="profile">Hesabım</a>
+        </div>
+        <div class="side-contact">
+            <a href="tel:@setting.PhoneNumber">
+                <i class="fa-solid fa-phone"></i>
+                <span>@setting.PhoneNumber</span>
+            </a>
+        </div>
+    </section>
+
+
+
+    @RenderBody()
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-12">
+                    <img class="logo" src="~/assets/images/@setting.Logo" alt="">
+                    <a href="tel:@setting.PhoneNumber">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>@setting.PhoneNumber</span>
+                    </a>
+                    <a href="mailto:@setting.Email">
+                        <i class="fa-solid fa-at"></i>
+                        <span>@setting.Email</span>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <h5>Xidmətlərimiz</h5>
+                    <ul>
+                        <li>
+                            <a asp-action="login" asp-controller="account">Daxil olmaq</a>
+                        </li>
+                        <li>
+                            <a asp-controller="account" asp-action="registerasstore">Mağaza açmaq</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <h5>Kateqoriyalar</h5>
+                    <ul>
+                        @foreach (Category item in category)
+                        {
+                            <li>
+                                <a asp-controller="Shop" asp-action="index" asp-route-CatId="@item.Id">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <h5>Profil</h5>
+                    <ul>
+                       @if (!User.Identity.IsAuthenticated)
+                      {
+                           <li>
+                            <a asp-action="login" asp-controller="account">Daxil olmaq</a>
+                        </li>
+                        <li>
+                            <a asp-action="register" asp-controller="account">Qeydiyyat</a>
+                        </li>
+                      }
+                        <li>
+                            <a asp-action="index" asp-controller="basket">Bəyəndiklərim</a>
+                        </li>
+                        <li>
+                            <a asp-action="index" asp-controller="compare">Müqayisə</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+
+ 
+        var Connection = new signalR.HubConnectionBuilder().withUrl("/DekorHub").build()
+        Connection.start()
+
+     Connection.on("blockuser", function () {
+         console.log("test")
+          location.replace("/account/logout")
+        })
+
+</script>
+
+<script type="text/javascript" src="~/assets/slick/slick.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="~/assets/js/slider.js"></script>
+<script src="~/assets/js/main.js" asp-append-version="true"></script>
+<script src="~/assets/js/basket.js" asp-append-version="true"></script>
+
+</html>
+@RenderSection("Script", required: false)

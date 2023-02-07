@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Product>
+
+@foreach (Product product in Model)
+{
+    @foreach (var item in product.ProductColorMaterials)
+   {
+        <div class="slide-box">
+        <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">
+            <div data-id="1" class="vip-box">
+                <div class="box-top">
+                    <img src="~/assets/images/@product.MainImage" alt="">
+                </div>
+                <div class="box-bottom">
+                    <span>Mebel</span>
+                    <h6>@product.Name</h6>
+                    <div class="bb-price-cart d-flex justify-content-between align-items-center">
+                        @if (product.DiscountPrice > 0)
+                        {
+                            <span class="price">@product.DiscountPrice <span class="manat">₼</span></span>
+                            <del class="price">@product.SalePrice <span class="manat">₼</span></del>
+                            
+                        }
+                        else
+                        {
+                          <span class="price">@product.SalePrice <span class="manat">₼</span></span>
+                        }
+                        <a asp-controller="product" asp-action="AddBasket" asp-route-id="@product.Id" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" class="add-basket-btn text-decoration-none">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Səbətə at</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+   }
+   
+}
+

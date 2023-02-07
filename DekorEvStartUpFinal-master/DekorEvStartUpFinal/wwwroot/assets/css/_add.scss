@@ -1,0 +1,73 @@
+#Add{
+    padding: 4rem 0;
+    h3{
+        font-family: HelveticaBold;
+    }
+    .add-box{
+        display: flex;
+        background-color: #fff;
+        border: 1px solid #e6a14786;
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+        border-radius: 7px;
+        padding: 15px;
+        width: 70%;
+        margin: 1rem auto 0;
+        .left{
+            width: 65%;
+            form{
+                .in{
+                    display: flex;
+                .text{
+                    width: 30%;
+                    label{
+                        display: block;
+                        font-size: 16px;
+                        margin-bottom: 26px;
+                    }
+                }
+                .form{
+                    width: 50%;
+                    input,select,textarea{
+                        width: 95%;
+                        padding: 4px 0 4px 5px;
+                        border-radius: 5px;
+                        border: 1px solid #c1c1c1;
+                        margin-bottom: 15px;
+                    }
+                    .ship-bool,.is_new{
+                        input{
+                            width: 5% !important;
+                        }
+                    }
+                    .ship-bool {
+                        margin: 10px 0 15px;
+                        margin-top: 10px;
+                    }
+                    
+                }
+                }
+                button{
+                    padding: 8px 40px;
+                    margin-top: 15px;
+                    font-size: 15px;
+                    border: 1px solid #e6a247;
+                    background-color: #e6a247;
+                    color: #fff;
+                    border-radius: 5px;
+                }
+            }
+        }
+        .right{
+            width: 28%;
+            h4{
+                margin-bottom: 15px;
+            }
+            ul{
+                list-style:square;
+                li{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

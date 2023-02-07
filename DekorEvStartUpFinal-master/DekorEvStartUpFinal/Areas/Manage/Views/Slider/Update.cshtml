@@ -1,0 +1,24 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Update Slider</h1>
+    </div>
+</div>
+<div class="productupdate">
+    @await Html.PartialAsync("_SliderUpdateImagePartial", Model)
+</div>
+<div class="row">
+    <div class="col-lg-11" align="right">
+        <a class="btn btn-primary" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial">
+        <script src="~/manage/js/Custom.js"></script>
+
+}

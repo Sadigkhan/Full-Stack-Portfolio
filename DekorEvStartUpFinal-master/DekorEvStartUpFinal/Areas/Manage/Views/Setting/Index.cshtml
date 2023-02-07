@@ -1,0 +1,40 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Striped Table</h5>
+			  <div class="table-responsive">
+               <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Logo</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone Number</th>
+                      <th scope="col">Adress</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th style="align-items:center" scope="row">1</th>
+                      <td>
+                          <img style="width:50%" src="~/assets/images/@Model.Logo" />
+                      </td>
+                      <td>@Model.Email</td>
+                      <td>@Model.PhoneNumber</td>
+                      <td>@Model.Adress</td>
+                      <td>
+                          <a class="btn btn-success" asp-action="Detail">Detail</a>
+                          <a class="btn btn-warning" asp-action="Update">Update</a>
+                      </td>
+                    </tr>
+   
+                  </tbody>
+                </table>
+            </div>
+            </div>
+          </div>

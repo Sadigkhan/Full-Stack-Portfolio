@@ -1,0 +1,115 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Order
+@model OrderVM
+@{
+    ViewData["Title"] = "Create";
+    double subTotal = 0;
+}
+
+<!-- main wrapper start -->
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">Checkout</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- checkout main wrapper start -->
+    <div class="checkout-page-wrapper section-padding">
+        <div class="container">
+            <div class="row">
+                <!-- Checkout Billing Details -->
+                <div class="col-lg-6">
+                    <div class="checkout-billing-details-wrap">
+                        <h4 class="checkout-title">Billing Details</h4>
+                        @await Html.PartialAsync("_OrderFormPartial", Model)
+                    </div>
+                </div>
+
+                <!-- Order Summary Details -->
+                <div class="col-lg-6">
+                    <div class="order-summary-details">
+                        <h4 class="checkout-title">Your Order Summary</h4>
+                        <div class="order-summary-content">
+                            <!-- Order Summary Table -->
+                            <div class="order-summary-table table-responsive text-center">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Products</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (Basket basket in Model.Baskets)
+                                        {
+                                            <tr >
+                                                <td >
+                                                    <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@basket.ProductId" >@basket.Product.Name size:@basket.Material <strong>@((double)(basket.Product.DiscountPrice > 0 ? basket.Product.DiscountPrice : basket.Product.SalePrice)) × @basket.Count</strong></a>
+                                                </td>
+                                                <td>$@(basket.Count * (basket.Product.DiscountPrice > 0 ? basket.Product.DiscountPrice : basket.Product.SalePrice))</td>
+                                            </tr>
+                                            subTotal+=basket.Count*(double)(basket.Product.DiscountPrice > 0 ? basket.Product.DiscountPrice : basket.Product.SalePrice);
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="text-danger">
+                                            <td>Sub Total</td>
+                                            <td><strong>$@subTotal</strong></td>
+                                        </tr>
+                                        <tr class="text-danger">
+                                            <td>Shipping</td>
+                                            <td><strong>$@(subTotal*5/100)</strong></td>
+                                        </tr>
+                                        <tr class="text-danger">
+                                            <td >Total Amount</td>
+                                            <td><strong>$@((subTotal * 5 / 100)+subTotal)</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- Order Payment Method -->
+                            <div class="order-payment-method">
+                                <div class="single-payment-method show">
+                                    <div class="payment-method-name">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
+                                            <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method-details" data-method="cash">
+                                        <p>Pay with cash upon delivery.</p>
+                                    </div>
+                                </div>
+                                <div class="summary-footer-area">
+                                    <div class="custom-control custom-checkbox mb-20">
+                                        <input type="checkbox" class="custom-control-input" id="terms" required />
+                                        <label class="custom-control-label" for="terms">
+                                            I have read and agree to
+                                            the website <a href="index.html">terms and conditions.</a>
+                                        </label>
+                                    </div>
+                                    <button type="submit" form="orderForm" class="btn btn-sqr">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- checkout main wrapper end -->
+</main>
+<!-- main wrapper end -->

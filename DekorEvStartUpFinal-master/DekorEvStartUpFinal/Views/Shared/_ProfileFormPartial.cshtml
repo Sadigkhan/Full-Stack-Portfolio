@@ -1,0 +1,62 @@
+﻿@model MemberUpdateVM
+
+<form asp-action="Edit" asp-controller="Account" enctype="multipart/form-data" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-box-profile">
+        <input type="text" asp-for="FullName" placeholder="Ad və Soyad">
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="text" asp-for="UserName" placeholder="İstifadəçi adı">
+        <span class="text-danger" asp-validation-for="UserName"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="email" asp-for="Email" placeholder="E-poçt">
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="tel" asp-for="PhoneNumber" placeholder="Tel">
+        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="text" asp-for="Adress" placeholder="Ünvan">
+        <span class="text-danger" asp-validation-for="Adress"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="text" asp-for="City" placeholder="Şəhər">
+        <span class="text-danger" asp-validation-for="City"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="password" asp-for="CurrentPassword" placeholder="Mövcud şifrə">
+        <span class="text-danger" asp-validation-for="CurrentPassword"></span>
+    </div>
+    <div class="form-box-profile">
+        <input type="password" asp-for="Password" placeholder="Yeni Şifrə">
+        <span class="text-danger" asp-validation-for="Password"></span>
+
+    </div>
+    <div class="form-box-profile">
+        <input type="password" asp-for="ConfirmPassword" placeholder="Yeni şifrəni yenidən daxil edin">
+        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+
+    </div>
+    <div class="form-box-profile">
+        <label style="width: 50%; font-size: 14px;" class="btn btn-warning text-light">
+            <i class="fa fa-image"></i> Profil şəkli yüklə<input type="file" style="display: none;" asp-for="UserImageFile">
+        </label>
+        <span class="text text-warning" asp-validation-for="UserImageFile"></span>
+    </div>
+
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Market"))
+    {
+        <div class="form-box-profile">
+            <textarea style="width:100%; border:none;" asp-for="Description" placeholder="Mağaza haqqında ümumi məlumat"></textarea>
+            <span class="text text-warning" asp-validation-for="Description"></span>
+        </div>
+    }
+
+    <div class="form-box-profile mt-5 w-100 text-center">
+        <button type="submit">Göndər</button>
+    </div>
+</form>
+

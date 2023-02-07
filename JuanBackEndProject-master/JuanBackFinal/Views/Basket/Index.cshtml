@@ -1,0 +1,78 @@
+﻿@model List<BasketVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <main>
+        <!-- breadcrumb area start -->
+        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrap text-center">
+                            <nav aria-label="breadcrumb">
+                                <h1 class="breadcrumb-title">Cart</h1>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+
+        <!-- cart main wrapper start -->
+        <div class="cart-main-wrapper section-padding">
+            <div class="container">
+                <div class="section-bg-color">
+                    <div class="row basketContainer">
+                     @await Html.PartialAsync("_BasketIndexPartial",Model)
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart main wrapper end -->
+    </main>
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", ".basketUpdate", function (e) {
+                e.preventDefault()
+                console.log(e.target)
+                let url = $(this).attr("href")
+
+                let count = e.target.parentElement.children[1].value
+
+                updateBasket(url, count)
+            })
+            $(document).on("click", ".remove_item", function (e) {
+                e.preventDefault()
+                var notification = document.querySelector(".notification")
+                let url = $(this).attr("href")
+
+                console.log(url)
+                fetch(url).then(response => response.text()).then(data => $('.basketContainer').html(data)
+    
+                ).then(
+                   notification.innerHTML=notification.innerHTML-"1"
+                )
+                 
+            })
+            
+
+            function updateBasket(url,count) {
+                url = url + "?count=" + count
+                
+                fetch(url).then(response => response.text()).then(data => $('.basketContainer').html(data))
+            }
+        })
+      
+         
+    
+    </script>
+}

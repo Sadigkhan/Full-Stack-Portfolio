@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <script src="~/manageassets/assets/plugins/ckeditor/ckeditor.js"></script>
+    <!-- loader-->
+    <link href="~/manageassets/assets/css/pace.min.css" rel="stylesheet" />
+    @*<script src="~/manageassets/assets/js/pace.min.js"></script>*@
+    <!--favicon-->
+    <link rel="icon" href="~/manageassets/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Vector CSS -->
+    <link href="~/manageassets/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- simplebar CSS-->
+    <link href="~/manageassets/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="~/manageassets/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS-->
+    <link href="~/manageassets/assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="~/manageassets/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Sidebar CSS-->
+    <link href="~/manageassets/assets/css/sidebar-menu.css" rel="stylesheet" />
+    <!-- Custom Style-->
+    <link href="~/manageassets/assets/css/app-style.css" rel="stylesheet" />
+    @RenderSection("Style",required:false)
+
+</head>
+
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+            <div class="brand-logo">
+                <a asp-controller="Market" asp-action="index" asp-area="manage">
+                    <img src="~/manageassets/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <h5 class="logo-text">Dekor Ev Admin</h5>
+                </a>
+            </div>
+            <ul class="sidebar-menu do-nicescrol">
+                <li class="sidebar-header">MAIN NAVIGATION</li>
+                <li>
+                    <a asp-controller="setting" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Color" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Rəng</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Material" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Materiallar</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Category" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Kateqoriyalar</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Slider" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Sliderlər</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Product" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Məhsullar</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Market" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Mağazalar</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="RemovableVIP" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>VIP Məhsullar</span>
+                    </a>
+                </li>
+                <li>
+                    <a  asp-controller="RemovableFront" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>İrəli Çəkilmiş Məhsullar</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="RemovablePremium" asp-action="index" asp-area="manage">
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Premium Məhsullar</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+        <!--End sidebar-wrapper-->
+
+        <div class="clearfix"></div>
+        <div class="content-wrapper">
+            @RenderBody()
+            <!--Start footer-->
+            <footer class="footer">
+                <div class="container">
+                    <div class="text-center">
+                        Copyright © 2018 Dashtreme Admin
+                    </div>
+                </div>
+            </footer>
+            <!--End footer-->
+            <!--start color switcher-->
+            <div class="right-sidebar">
+                <div class="switcher-icon">
+                    <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
+                </div>
+                <div class="right-sidebar-content">
+
+                    <p class="mb-0">Gaussion Texture</p>
+                    <hr>
+
+                    <ul class="switcher">
+                        <li id="theme1"></li>
+                        <li id="theme2"></li>
+                        <li id="theme3"></li>
+                        <li id="theme4"></li>
+                        <li id="theme5"></li>
+                        <li id="theme6"></li>
+                    </ul>
+
+                    <p class="mb-0">Gradient Background</p>
+                    <hr>
+
+                    <ul class="switcher">
+                        <li id="theme7"></li>
+                        <li id="theme8"></li>
+                        <li id="theme9"></li>
+                        <li id="theme10"></li>
+                        <li id="theme11"></li>
+                        <li id="theme12"></li>
+                        <li id="theme13"></li>
+                        <li id="theme14"></li>
+                        <li id="theme15"></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!--end color switcher-->
+
+        </div><!--End wrapper-->
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/manageassets/assets/js/jquery.min.js"></script>
+        <script src="~/manageassets/assets/js/popper.min.js"></script>
+        <script src="~/manageassets/assets/js/bootstrap.min.js"></script>
+
+        <!-- simplebar js -->
+        <script src="~/manageassets/assets/plugins/simplebar/js/simplebar.js"></script>
+        <!-- sidebar-menu js -->
+        <script src="~/manageassets/assets/js/sidebar-menu.js"></script>
+        <!-- loader scripts -->
+        <script src="~/manageassets/assets/js/jquery.loading-indicator.js"></script>
+        <!-- Custom scripts -->
+        <script src="~/manageassets/assets/js/app-script.js"></script>
+        <!-- Chart js -->
+
+        <script src="~/manageassets/assets/plugins/Chart.js/Chart.min.js"></script>
+
+        <!-- Index js -->
+        <script src="~/manageassets/assets/js/index.js"></script>
+        @RenderSection("Script",required:false)
+
+     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+
+        var Connection = new signalR.HubConnectionBuilder().withUrl("/DekorHub").build()
+
+        Connection.start()
+        $(".aop").click((e)=> {
+            e.preventDefault();
+           var id=$(e.currentTarget).data("id");
+            Connection.invoke("BlockUser",id)
+        })
+        //admin panelin
+ 
+  
+
+</script>
+
+
+
+</html>

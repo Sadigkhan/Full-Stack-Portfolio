@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Product>
+@{
+    int count = (ViewBag.PageIndex - 1) * 5;
+
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product item in Model)
+        {
+            @*DateTime now=DateTime.UtcNow.AddHours(4)*@
+           TimeSpan timeSpan = DateTime.UtcNow.AddHours(4) - item.VipPaymentDate.Value;
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>
+                    <img style="width:15%; height:100px" src="~/assets/images/@item.MainImage" alt="Alternate Text" />
+                </td>
+                <td>@item.Name</td>
+                @if (item.IsVip)
+                {
+                    <td>VIP</td>
+                }
+                else
+                {
+                    <td>VIP DEYIL</td>
+
+                }
+                @if ( timeSpan.TotalMinutes  > 1 && item.IsVip)
+                {
+                    <td>
+                        <a id="@(item.IsVip ? "deleteTag":"restoreTag")" class="btn btn-warning" asp-action="RemoveVip" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@item.Id">Remove VIP</a>
+                        @*<a id="@(item.IsVip ? "restoreTag":"deleteTag")" class="btn @(item.IsVip ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-action="@(color.IsDeleted ? "Restore":"Delete")" asp-route-id="@color.Id">@(color.IsDeleted ? "Restore":"Delete")</a>*@
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+

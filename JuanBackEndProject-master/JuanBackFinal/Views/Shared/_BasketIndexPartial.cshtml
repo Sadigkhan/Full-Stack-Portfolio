@@ -1,0 +1,82 @@
+﻿@model List<BasketVM>
+
+@{
+    double subTotal = 0;
+    double tax = 0;
+    double VAT = 0;
+}
+<div class="col-lg-12">
+    <!-- Cart Table Area -->
+    <div class="cart-table table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="pro-thumbnail">Thumbnail</th>
+                    <th class="pro-title">Product</th>
+                    <th class="pro-price">Price</th>
+                    <th class="pro-quantity">Quantity</th>
+                    <th class="pro-subtotal">Total</th>
+                    <th class="pro-remove">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (BasketVM item in Model)
+                {
+                    <tr>
+                        <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="~/assets/img/product/@item.Image" alt="Product" /></a></td>
+                        <td class="pro-title"><a href="#">@item.Name</a></td>
+                        <td class="pro-price"><span>$@item.Price</span></td>
+                        <td class="pro-quantity">
+                            
+                            <div class="pro-qty d-flex">
+                                <a asp-action="update" asp-controller="basket" asp-route-id="@item.ProductId"  class="dec qtybtn basketUpdate">-</a>
+                                <input class="basketItemCount" type="text" value="@item.Count">
+                                <a asp-action="update" asp-controller="basket" asp-route-id="@item.ProductId" class="inc qtybtn basketUpdate">+</a>
+                            </div>
+                            
+                        </td>
+                        <td class="pro-subtotal"><span>$@((item.Price*item.Count).ToString("0.00"))</span></td>
+                        <td ><a class="remove_item"  asp-action="delete" asp-route-id="@item.ProductId"><i class="fa fa-trash-o"></i></a></td>
+                    </tr>
+
+                    subTotal += (item.Price * item.Count);
+                    tax += item.ExTax * item.Count;
+                    VAT = subTotal / 100 * 20;
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+    <div class="col-lg-5 ml-auto">
+        <!-- Cart Calculation Area -->
+        <div class="cart-calculator-wrapper">
+            <div class="cart-calculate-items">
+                <h3>Cart Totals</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <td>Sub Total</td>
+                            <td>$@subTotal.ToString("0.00")</td>
+                        </tr>
+                        <tr>
+                            <td>VAT</td>
+                            <td>$@VAT.ToString("0.00")</td>
+                        </tr>
+                           <tr>
+                            <td>TAX</td>
+                            <td>$@tax.ToString("0.00")</td>
+                        </tr>
+                        <tr class="total">
+                            <td>Total</td>
+                            <td class="total-amount">$@((tax+VAT+subTotal).ToString("0.00"))</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <a asp-controller="order" asp-action="create" class="btn d-block">Proceed Checkout</a>
+        </div>
+    </div>

@@ -1,0 +1,22 @@
+﻿@model List<Category>
+
+@*<div class="form-group ">
+    <label></label>
+    <a hidden class="getSubs" asp-action="GetSub"></a>
+    <select  class="form-control getSecondary" id="ParentId" name="ParentId">
+        <option value="" selected>Choose...</option>
+        @foreach (var item in Model)
+
+        {
+            <option value="@item.Id" >@item.Name</option>
+        }
+    </select>
+    <span class="text-danger"></span>
+</div>*@
+<select name="CategoryId" class="form-control @*getsub*@" >
+                        
+                            @foreach (Category item in Model)
+                            {
+                                <option value="@item.Id" >@item.Name</option>
+                            }
+                    </select>

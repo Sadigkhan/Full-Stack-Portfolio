@@ -1,0 +1,68 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-lg-6 h3 mb-4 text-gray-800">
+        <h1>Category Update</h1>
+    </div>
+    @if (Model.CategoryImage != null)
+    {
+        <div class="col-lg-6">
+            <img style="width:50%" src="~/assets/images/@Model.CategoryImage" alt="Alternate Text" />
+        </div>
+    }
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="col-lg-12 mx-auto">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-check">
+                <input asp-for="IsMain" class="form-check-input" >
+                <label asp-for="IsMain" class="form-check-label"></label>
+                <span asp-validation-for="IsMain"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Category Name">
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group categoryFileInput d-none">
+                <label asp-for="CategoryImageFile"></label>
+                <input asp-for="CategoryImageFile" accept="image/*" class="form-control" placeholder="Choose Category Image">
+                <span asp-validation-for="CategoryImageFile"></span>
+            </div>
+            <div class="form-group categoryParentInput">
+                <label asp-for="ParentId"></label>
+                <select class="form-control" asp-for="ParentId" asp-items="@new SelectList(ViewBag.MainCategory, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="ParentId"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial">
+        <script src="~/manage/js/Custom.js"></script>
+        <script>
+            $("#IsMain").prop("checked", @Model.IsMain.ToString().ToLower());
+            if (@Model.IsMain.ToString().ToLower()) {
+                $(".categoryParentInput").addClass("d-none")
+                $(".categoryFileInput").removeClass("d-none")
+            } else {
+                $(".categoryParentInput").removeClass("d-none")
+                $(".categoryFileInput").addClass("d-none")
+            }
+            $(document).on("click", "#IsMain", function () {
+                if ($(this).prop("checked")) {
+                    $(".categoryParentInput").addClass("d-none")
+                    $(".categoryFileInput").removeClass("d-none")
+                } else {
+                    $(".categoryParentInput").removeClass("d-none")
+                    $(".categoryFileInput").addClass("d-none")
+                }
+            })
+        </script>
+}

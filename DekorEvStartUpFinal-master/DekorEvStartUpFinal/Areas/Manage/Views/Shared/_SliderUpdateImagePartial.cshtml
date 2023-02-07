@@ -1,0 +1,48 @@
+﻿@model Slider
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-11">
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="row">
+
+
+                <div class="form-group col-lg-4">
+                <label asp-for="LeftTopImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="LeftTopImageFile" placeholder="Enter LeftTopImageFile">
+                <span class="text-danger" asp-validation-for="LeftTopImageFile"></span>
+                <div class="col-lg-6 mt-3">
+                    <img style="width:50%" src="~/assets/images/@Model.LeftTopImage" alt="Alternate Text" />
+                </div>
+            </div>
+
+            
+
+            <div class="form-group  col-lg-4">
+                <label asp-for="LeftBottomImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="LeftBottomImageFile" placeholder="Enter LeftBottomImageFile">
+                <span class="text-danger" asp-validation-for="LeftBottomImageFile"></span>
+                <div class="col-lg-6 mt-3">
+                    <img style="width:50%" src="~/assets/images/@Model.LeftBottomImage" alt="Alternate Text" />
+                </div>
+            </div>
+
+         <div class="form-group  col-lg-4">
+                <label asp-for="RightMainImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="RightMainImageFile" placeholder="Enter RightMainImageFile">
+                <span class="text-danger" asp-validation-for="RightMainImageFile"></span>
+                <div class="col-lg-6 mt-3">
+                    <img style="width:50%" src="~/assets/images/@Model.RightMainImage" alt="Alternate Text" />
+                </div>
+            </div>
+
+               
+            </div>
+
+             <button type="submit" class="btn btn-primary mb-4 ">Update Slider</button>
+
+        
+        </form>
+    </div>
+</div>

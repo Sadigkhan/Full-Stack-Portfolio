@@ -1,0 +1,10 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Basket
+@model List<BasketVM>
+<!-- main wrapper start -->
+
+
+
+
+    <section id="Cart">
+           @await Html.PartialAsync("_BasketIndexPartial",Model)
+    </section>

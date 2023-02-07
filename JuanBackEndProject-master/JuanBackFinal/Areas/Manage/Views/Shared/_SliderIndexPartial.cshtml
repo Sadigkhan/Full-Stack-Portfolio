@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Slider>
+@{ 
+    int count = (ViewBag.PageIndex - 1)*5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Slider Image</th>
+            <th scope="col">Slider SubTitle</th>
+            <th scope="col">Slider Title</th>
+            <th scope="col">Slider Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Slider slider in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+                                    <td>
+                            <img  style="width:50%" src="~/assets/img/slider/@slider.SliderImage" alt="Alternate Text" />
+                        </td>
+            <td>@slider.Subtitle</td>
+            <td>@slider.Title</td>
+            <td>@slider.Description</td>
+            <td style="color:@(slider.IsDeleted ? "red":"green")">@(slider.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                @*<a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@publisher.Id">Detail</a>*@
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@slider.Id">Update</a>
+                <a id="@(slider.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(slider.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="@(slider.IsDeleted ? "Restore":"Delete")" asp-route-id="@slider.Id">@(slider.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

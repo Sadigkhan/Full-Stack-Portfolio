@@ -1,0 +1,119 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Compare
+@model List<CompareVM>
+<div class="container">
+    <div class="top">
+        <h2>Məhsul müqayisəsi</h2>
+        <h6>Müqayisə etmək üçün <span>@Model.Count</span> məhsul var</h6>
+    </div>
+    @if (Model.Count == 0)
+    {
+        <h1 style="color:red;">Müqayisə üçün heç bir məhsul seçilməyib</h1>
+    }
+    else
+    {
+        <div class="compare-box">
+            <div class="table-responsive">
+                <table class="table text-center table-compare">
+
+                    <tbody>
+                        <tr class="pr_image">
+                            <td class="text-muted font-sm fw-600 font-heading mw-200">Şəkli</td>
+                            @foreach (CompareVM item in Model)
+                            {
+
+
+                                if (Model.Count == 1)
+                                {
+                                    <td  class="row_img">
+                                        <img style="width:300px" src="~/assets/images/@item.Image" alt="compare-img">
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="width: @((100/Model.Count))%" class="row_img">
+                                        <img style="width: @((100/Model.Count))%" src="~/assets/images/@item.Image" alt="compare-img">
+                                    </td>
+                                }
+
+                            }
+
+
+                        </tr>
+                        <tr class="pr_title">
+                            <td class="text-muted font-sm fw-600 font-heading">Adı</td>
+
+                            @foreach (CompareVM item in Model)
+                            {
+                                <td class="product_name">
+                                    <h6><a href="shop-product-full.html" class="text-heading">@item.Name</a></h6>
+                                </td>
+                            }
+                        </tr>
+                        <tr class="pr_price">
+                            <td class="text-muted font-sm fw-600 font-heading">Qiyməti</td>
+
+                            @foreach (CompareVM item in Model)
+                            {
+                                <td class="product_price">
+                                    <h4 class="price text-brand">@item.Price AZN</h4>
+                                </td>
+                            }
+                        </tr>
+                        <tr class="pr_rating">
+                            <td class="text-muted font-sm fw-600 font-heading">Reytinqi</td>
+
+                            @foreach (CompareVM item in Model)
+                            {
+                                <td>
+                                    <div class="rating_wrap">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="rating_num">(@item.Count)</span>
+                                    </div>
+                                </td>
+                            }
+                        </tr>
+                        <tr class="description">
+                            <td class="text-muted font-sm fw-600 font-heading">Təsviri</td>
+
+                            @foreach (CompareVM item in Model)
+                            {
+                                <td class="row_text font-xs">
+                                    <p class="font-sm text-muted">@item.Description</p>
+                                </td>
+                            }
+                        </tr>
+                        @* <tr class="pr_stock">
+                            <td class="text-muted font-sm fw-600 font-heading">Mövcuddur</td>
+                            @foreach (CompareVM item in Model)
+                            {
+                            if (item.ProductCount > 0)
+                            {
+                            <td class="row_stock"><span class="stock-status in-stock mb-0">Bəli</span></td>
+                            }
+                            else
+                            {
+                            <td class="row_stock"><span class="stock-status in-stock mb-0">Xeyr</span></td>
+                            }
+
+                            }
+
+
+                            </tr>*@
+                        <tr class="pr_remove text-muted">
+                            <td class="text-muted font-md fw-600"></td>
+                            @foreach (var item in Model)
+                            {
+                                <td class="row_remove">
+                                    <a asp-controller="compare" asp-action="DeleteCompare" asp-route-id="@item.ProductId" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" class="text-muted deletecompare"><i class="fi-rs-trash mr-5"></i><span>Sil</span> </a>
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+</div>

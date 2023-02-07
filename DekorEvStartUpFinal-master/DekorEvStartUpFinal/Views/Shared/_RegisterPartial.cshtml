@@ -1,0 +1,81 @@
+﻿@model RegisterVM
+
+@if (ViewBag.IsMarket == true)
+{
+    <form method="post" enctype="multipart/form-data">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-box">
+            <input asp-for="FullName" type="text" placeholder=" Mağaza sahibin adı və soyadı">
+            <span class="text text-warning" asp-validation-for="FullName"></span>
+        </div>
+        <div class="form-box">
+            <input asp-for="UserName" type="text" placeholder="Mağaza adı">
+            <span class="text text-warning" asp-validation-for="UserName"></span>
+        </div>
+        <div class="form-box">
+            <input asp-for="Email" type="text" placeholder="E-poçt">
+            <span class="text text-warning" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-box">
+            <textarea style="width:100%; border:none;" asp-for="Description" placeholder="Mağaza haqqında ümumi məlumat"></textarea>
+            <span class="text text-warning" asp-validation-for="Description"></span>
+        </div>
+
+        <div class="form-box-profile">
+            <label style="width: 50%; font-size: 14px;" class="btn btn-primary text-light mt-3">
+                <i class="fa fa-image"></i> Profil şəkli yüklə<input type="file" style="display: none;" asp-for="UserImageFile">
+                 <span class="text text-warning" asp-validation-for="UserImageFile"></span>
+            </label>
+
+        </div>
+        <div class="form-box">
+            <input asp-for="Password" type="password" placeholder="Şifrə">
+            <span class="text text-warning" asp-validation-for="Password"></span>
+        </div>
+        <div class="form-box">
+            <input asp-for="ConfirmPassword" type="password" placeholder="Şifrəni Təkrarlayın">
+            <span class="text text-warning" asp-validation-for="ConfirmPassword"></span>
+        </div>
+
+        <div class="mt-3 d-flex align-items-center">
+            <input asp-for="Terms" type="checkbox">
+            <label style="font-size: 12px;padding-left: 5px;">Müqavilə şərtləri ilə razıyam</label>
+            <span class="text text-warning" asp-validation-for="Terms"></span>
+        </div>
+        <button>Qeydiyyatdan Keç</button>
+    </form>
+}
+else
+{
+    <form method="post" enctype="multipart/form-data">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-box">
+        <input asp-for="FullName" type="text" placeholder="Ad və soyad">
+        <span class="text text-warning" asp-validation-for="FullName"></span>
+    </div>
+    <div class="form-box">
+        <input asp-for="UserName" type="text" placeholder="Istifadəçi adı">
+        <span class="text text-warning" asp-validation-for="UserName"></span>
+    </div>
+    <div class="form-box">
+        <input asp-for="Email" type="text" placeholder="E-poçt">
+        <span class="text text-warning" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-box">
+        <input asp-for="Password" type="password" placeholder="Şifrə">
+        <span class="text text-warning" asp-validation-for="Password"></span>
+    </div>
+    <div class="form-box">
+        <input asp-for="ConfirmPassword" type="password" placeholder="Şifrəni Təkrarlayın">
+        <span class="text text-warning" asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <div class="mt-3 d-flex align-items-center">
+        <input asp-for="Terms" type="checkbox">
+        <label style="font-size: 12px;padding-left: 5px;">Müqavilə şərtləri ilə razıyam</label>
+        <span class="text text-warning" asp-validation-for="Terms"></span>
+    </div>
+    <button>Qeydiyyatdan Keç</button>
+</form>
+}

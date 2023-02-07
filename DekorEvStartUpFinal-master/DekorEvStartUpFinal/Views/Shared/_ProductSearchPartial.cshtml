@@ -1,0 +1,14 @@
+﻿@model List<Product>
+
+@foreach (Product item in Model)
+{
+    foreach (var prd in item.ProductColorMaterials)
+    {
+        
+        <li ><a style="color:black;" id="prod-search-list-link" asp-controller="Product" asp-action="Search" asp-route-query="@item.Name">@item.Name</a></li>
+        <li>   <img  src="~/assets/images/@prd.Image" alt=""></li>
+    }
+
+
+
+}

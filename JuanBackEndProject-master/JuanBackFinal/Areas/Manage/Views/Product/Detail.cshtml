@@ -1,0 +1,47 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Detail";
+}
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Product Detail</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/assets/img/product/@Model.MainImage" alt="Card image cap">
+            <div class="card-body">
+                <h4>Product Name:</h4>
+                <h5 class="card-title">@Model.Name</h5>
+                <hr />
+                 <h4>Product Category Name:</h4>
+                <h5 class="card-title">@Model.Category.Name</h5>
+                <hr />
+                 <h4>Product Color:</h4>
+                <h5 class="card-title">@string.Join(", ",Model.ProductColors.Select(p=>p.Color.Name))</h5>
+                <hr />
+                 <h4>Product Size:</h4>
+                <h5 class="card-title">@string.Join(", ",Model.ProductSizes.Select(p=>p.Size.Name))</h5>
+                <hr />
+                 <h4>Product Cost Price:</h4>
+                <h5 class="card-title">@Model.CostPrice</h5>
+                <hr />
+                 <h4>Product Sale Price:</h4>
+                <h5 class="card-title">@Model.SalePrice</h5>
+                <hr />
+                 <h4>Product DiscountPrice:</h4>
+                <h5 class="card-title">@Model.DiscountPrice</h5>
+                <hr />
+                 <h4>Product Description:</h4>
+                <h5 class="card-title">@Model.Description</h5>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <a class="btn btn-primary" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To Back</a>
+        </div>
+    </div>
+</div>

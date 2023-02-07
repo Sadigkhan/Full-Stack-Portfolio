@@ -1,0 +1,194 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<div id="Shop-wide">
+    <div class="container">
+        <div class="sw-top">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-6">
+
+                    <h1>@(ViewBag.CategoryName==null ? "Butun Mehsullar" : ViewBag.CategoryName)@* <span>@(ViewBag.CategoryName==null? ("("+Model.Count().ToString() +" "+ "məhsul)") :"("+ViewBag.RelatedProductsCount+" "+"məhsul)")</span>*@</h1>
+                </div>
+               @* <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+
+                    <select>
+                        <option value="0">Sırala</option>
+                        <option value="3">Yeni məhsullar</option>
+                        <option value="1">Endirimli məhsullar</option>
+                        <option value="2">Ucuzdan bahaya</option>
+                        <option value="4">Bahadan ucuza</option>
+                    </select>
+                    <button class="btn_filter "><i class="fa-solid fa-filter"></i> Filtrlə</button>
+                </div>*@
+            </div>
+        </div>
+        <div class="sw-filter">
+            <div class="left">
+                <div class="filter-box">
+                    <form asp-action="index" asp-controller="shop" method="get">
+                        <div class="search-input d-flex justify-content-between align-items-center">
+                            <input type="search" placeholder="Axtar...">
+                            <i class="fas fa-search"></i>
+                        </div>
+
+                        @if (ViewBag.CategoryName == null)
+                        {
+
+
+                            <div class="color-filter">
+                                <p>Bütün Alt Kateqoriyalar</p>
+                                <div class="color-list">
+                                    @foreach (Category item in ViewBag.SubCategories)
+                                    {
+                                        <label for="@item.Name"><input type="checkbox" name="categoryIds" value="@item.Id" id="@item.Name"> @item.Name</label>
+                                    }
+
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="color-filter">
+                                <p>Alt Kateqoriyalar</p>
+                                <div class="color-list">
+                                    @foreach (Category item in ViewBag.RelatedSubCategories)
+                                    {
+                                        <label for="@item.Name"><input type="checkbox" name="categoryIds" value="@item.Id" id="@item.Name"> @item.Name</label>
+                                    }
+
+                                </div>
+                            </div>
+
+                        }
+
+                        <div class="color-filter">
+                            <p>Rəng</p>
+                            <div class="color-list">
+                                @foreach (Color item in ViewBag.Colors)
+                                {
+                                    <label for="@item.Name"><input type="checkbox" name="colourIds" value="@item.Id"> @item.Name</label>
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="color-filter">
+                            <p>Material</p>
+                            <div class="color-list">
+                                @foreach (Material item in ViewBag.Materials)
+                                {
+                                    <label for="@item.Name"><input type="checkbox" name="materialIds" value="@item.Id"> @item.Name</label>
+                                }
+
+                            </div>
+                        </div>
+                        <button type="submit" class="shopWideFilter">Filter</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="vip-boxes">
+                    <div class="row g-3">
+                        @if (ViewBag.CategoryName == null)
+                        {
+                            @foreach (Product item in Model)
+                            {
+                                @foreach (var item2 in item.ProductColorMaterials)
+                                {
+                                    <div class="col-lg-3 col-6">
+                                        <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@item.Id" asp-route-colorId="@item2.ColorId" asp-route-materialId="@item2.MaterialId" >
+                                            <div data-id="1" class="vip-box">
+
+                                                <div class="box-top">
+                                                    @if (item.IsVip)
+                                                    {
+                                                        <span>VIP</span>
+                                                    }
+
+                                                    <img src="~/assets/images/@item2.Image" alt="">
+                                                </div>
+                                                <div class="box-bottom">
+                                                    <span>Mebel</span>
+                                                    <h6>@item.Name</h6>
+                                                    <div class="bb-price-cart d-flex justify-content-between align-items-center">
+                                                        @if (item.DiscountPrice > 0)
+                                                        {
+                                                             <del class="price" style="font-size:17px !important;">@item.SalePrice <span class="manat">₼</span></del>
+                                                            <span class="price" style="font-size:17px !important;">@item.DiscountPrice <span class="manat">₼</span></span>
+                                                           
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="price">@item.SalePrice <span class="manat">₼</span></span>
+                                                        }
+                                                        <a asp-controller="product" asp-action="AddBasket" asp-route-id="@item.Id" asp-route-colorId="@item2.ColorId" asp-route-materialId="@item2.MaterialId" class="add-basket-btn text-decoration-none">
+                                                           <i class="fa-solid fa-heart"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            @foreach (Product item in ViewBag.RelatedProducts)
+                            {
+                                @foreach (var item2 in item.ProductColorMaterials)
+                                {
+                                    <div class="col-lg-3 col-6">
+                                        <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@item.Id" asp-route-colorId="@item2.ColorId" asp-route-materialId="@item2.MaterialId">
+                                            <div data-id="1" class="vip-box">
+
+                                                <div class="box-top">
+                                                    @if (item.IsVip)
+                                                    {
+                                                        <span>VIP</span>
+                                                    }
+
+                                                    <img src="~/assets/images/@item2.Image" alt="">
+                                                </div>
+                                                <div class="box-bottom">
+                                                    <span>Mebel</span>
+                                                    <h6>@item.Name</h6>
+                                                    <div class="bb-price-cart d-flex justify-content-between align-items-center">
+                                                        @if (item.DiscountPrice > 0)
+                                                        {
+
+                                                            <del class="price">@item.SalePrice <span class="manat">₼</span></del>
+                                                            <span class="price">@item.DiscountPrice <span class="manat">₼</span></span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="price">@item.SalePrice <span class="manat">₼</span></span>
+                                                        }
+                                                        <a asp-controller="product" asp-action="AddBasket" asp-route-id="@item.Id" asp-route-colorId="@item2.ColorId" asp-route-materialId="@item2.MaterialId" class="add-basket-btn text-decoration-none">
+                                                           <i class="fa-solid fa-heart"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+
+                            }
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

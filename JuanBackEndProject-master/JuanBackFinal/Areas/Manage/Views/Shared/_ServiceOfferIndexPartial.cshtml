@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ServiceOffer>
+@{ 
+    int count = (ViewBag.PageIndex - 1)*5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Service Offer Image</th>
+            <th scope="col">Service Offer Title</th>
+            <th scope="col">Banner Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ServiceOffer serviceOffer in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+                                    <td>
+                            <img  style="width:50%" src="~/assets/img/banner/@serviceOffer.Image" alt="Alternate Text" />
+                        </td>
+           
+            <td>@serviceOffer.Title</td>
+             <td>@serviceOffer.Description</td>
+            <td style="color:@(serviceOffer.IsDeleted ? "red":"green")">@(serviceOffer.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                @*<a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@publisher.Id">Detail</a>*@
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@serviceOffer.Id">Update</a>
+                <a id="@(serviceOffer.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(serviceOffer.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="@(serviceOffer.IsDeleted ? "Restore":"Delete")" asp-route-id="@serviceOffer.Id">@(serviceOffer.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

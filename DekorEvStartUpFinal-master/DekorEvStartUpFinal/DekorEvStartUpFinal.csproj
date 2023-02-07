@@ -1,0 +1,258 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>81dda6dc-322b-4e09-b24a-6fce7f2b711e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20220526104710_BasketTableCreation.cs" />
+    <Compile Remove="Migrations\20220526104710_BasketTableCreation.Designer.cs" />
+    <Compile Remove="Migrations\20220601115911_Checker.cs" />
+    <Compile Remove="Migrations\20220601115911_Checker.Designer.cs" />
+    <Compile Remove="Migrations\20220601183017_AppUserIdInproductChangedToInt.cs" />
+    <Compile Remove="Migrations\20220601183017_AppUserIdInproductChangedToInt.Designer.cs" />
+    <Compile Remove="Migrations\20220601183131_AppUserIdInproductChangedToInt.cs" />
+    <Compile Remove="Migrations\20220601183131_AppUserIdInproductChangedToInt.Designer.cs" />
+    <Compile Remove="Migrations\20220601183358_AppUserIdInproductChangedToInt.cs" />
+    <Compile Remove="Migrations\20220601183358_AppUserIdInproductChangedToInt.Designer.cs" />
+    <Compile Remove="Migrations\20220601185134_Adad.cs" />
+    <Compile Remove="Migrations\20220601185134_Adad.Designer.cs" />
+    <Compile Remove="Migrations\20220610063617_ColorAndMaterialRemovedFromBasketModel.cs" />
+    <Compile Remove="Migrations\20220610063617_ColorAndMaterialRemovedFromBasketModel.Designer.cs" />
+    <Compile Remove="Migrations\20220610072457_asda.cs" />
+    <Compile Remove="Migrations\20220610072457_asda.Designer.cs" />
+    <Compile Remove="Migrations\20220610072533_asdasdasd.cs" />
+    <Compile Remove="Migrations\20220610072533_asdasdasd.Designer.cs" />
+    <Compile Remove="Migrations\20220610073619_DeletingUnwantedColumnsFromBasketTableWithCode.cs" />
+    <Compile Remove="Migrations\20220610073619_DeletingUnwantedColumnsFromBasketTableWithCode.Designer.cs" />
+    <Compile Remove="Migrations\20220610074245_asdads.cs" />
+    <Compile Remove="Migrations\20220610074245_asdads.Designer.cs" />
+    <Compile Remove="Migrations\20220610075344_test.cs" />
+    <Compile Remove="Migrations\20220610075344_test.Designer.cs" />
+    <Compile Remove="Migrations\20220610075440_test.cs" />
+    <Compile Remove="Migrations\20220610075440_test.Designer.cs" />
+    <Compile Remove="Migrations\20220610103109_UnwantedColumnsReversed.cs" />
+    <Compile Remove="Migrations\20220610103109_UnwantedColumnsReversed.Designer.cs" />
+    <Compile Remove="Migrations\20220610140838_test.cs" />
+    <Compile Remove="Migrations\20220610140838_test.Designer.cs" />
+    <Compile Remove="Migrations\20220625181624_ConfirmationByAdmin.cs" />
+    <Compile Remove="Migrations\20220625181624_ConfirmationByAdmin.Designer.cs" />
+    <Compile Remove="Migrations\20220625183450_COnfirmByAdmin.cs" />
+    <Compile Remove="Migrations\20220625183450_COnfirmByAdmin.Designer.cs" />
+    <Compile Remove="Migrations\20220629133208_test.cs" />
+    <Compile Remove="Migrations\20220629133208_test.Designer.cs" />
+    <Compile Remove="Migrations\20220705094011_IenumerableChangedToList.cs" />
+    <Compile Remove="Migrations\20220705094011_IenumerableChangedToList.Designer.cs" />
+    <Compile Remove="Migrations\20220712093849_realtimelogoutstart.cs" />
+    <Compile Remove="Migrations\20220712093849_realtimelogoutstart.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\assets\node_modules\%40swc\helpers\.vscode\settings.json" />
+    <Content Include="wwwroot\assets\node_modules\%40swc\helpers\package.json" />
+    <Content Include="wwwroot\assets\node_modules\.package-lock.json" />
+    <Content Include="wwwroot\assets\node_modules\dropzone\composer.json" />
+    <Content Include="wwwroot\assets\node_modules\dropzone\dist\basic.css" />
+    <Content Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.css" />
+    <Content Include="wwwroot\assets\node_modules\dropzone\package.json" />
+    <Content Include="wwwroot\assets\node_modules\dropzone\src\preview-template.html" />
+    <Content Include="wwwroot\assets\node_modules\just-extend\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Manage\Data\" />
+    <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Areas\Market\Data\" />
+    <Folder Include="Areas\Market\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\index.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_apply_decorated_descriptor.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_array_without_holes.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_array_with_holes.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_assert_this_initialized.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_async_generator_delegate.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_async_iterator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_async_to_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_await_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_await_value.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_call_check.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_name_tdz_error.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_private_field_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_private_field_loose_base.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_private_field_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_private_method_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_private_method_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_static_private_field_spec_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_class_static_private_field_spec_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_construct.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_create_class.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_create_super.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_decorate.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_defaults.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_define_enumerable_properties.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_define_property.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_extends.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_get_prototype_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_inherits.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_inherits_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_initializer_define_property.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_initializer_warning_helper.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_instanceof.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_interop_require_default.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_interop_require_wildcard.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_is_native_function.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_is_native_reflect_construct.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_iterable_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_iterable_to_array_limit.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_iterable_to_array_limit_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_jsx.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_new_arrow_check.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_non_iterable_rest.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_non_iterable_spread.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_object_spread.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_object_without_properties.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_object_without_properties_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_possible_constructor_return.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_read_only_error.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_set_prototype_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_skip_first_generator_next.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_sliced_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_sliced_to_array_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_super_prop_base.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_tagged_template_literal.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_tagged_template_literal_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_throw.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_to_consumable_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_to_primitive.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_to_property_key.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_type_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_wrap_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\lib\_wrap_native_super.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\scripts\gen.sh" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\scripts\generator.sh" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\index.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_apply_decorated_descriptor.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_array_without_holes.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_array_with_holes.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_assert_this_initialized.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_async_generator_delegate.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_async_iterator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_async_to_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_await_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_await_value.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_call_check.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_name_tdz_error.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_private_field_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_private_field_loose_base.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_private_field_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_private_method_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_private_method_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_static_private_field_spec_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_class_static_private_field_spec_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_construct.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_create_class.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_create_super.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_decorate.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_defaults.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_define_enumerable_properties.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_define_property.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_extends.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_get.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_get_prototype_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_inherits.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_inherits_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_initializer_define_property.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_initializer_warning_helper.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_instanceof.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_interop_require_default.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_interop_require_wildcard.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_is_native_function.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_is_native_reflect_construct.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_iterable_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_iterable_to_array_limit.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_iterable_to_array_limit_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_jsx.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_new_arrow_check.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_non_iterable_rest.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_non_iterable_spread.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_object_spread.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_object_without_properties.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_object_without_properties_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_possible_constructor_return.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_read_only_error.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_set.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_set_prototype_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_skip_first_generator_next.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_sliced_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_sliced_to_array_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_super_prop_base.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_tagged_template_literal.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_tagged_template_literal_loose.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_throw.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_to_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_to_consumable_array.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_to_primitive.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_to_property_key.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_type_of.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_wrap_async_generator.js" />
+    <None Include="wwwroot\assets\node_modules\%40swc\helpers\src\_wrap_native_super.js" />
+    <None Include="wwwroot\assets\node_modules\dropzone\CHANGELOG.md" />
+    <None Include="wwwroot\assets\node_modules\dropzone\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\basic.css.map" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone-min.js" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone-min.js.map" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.css.map" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.js" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.js.map" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.mjs" />
+    <None Include="wwwroot\assets\node_modules\dropzone\dist\dropzone.mjs.map" />
+    <None Include="wwwroot\assets\node_modules\dropzone\LICENSE" />
+    <None Include="wwwroot\assets\node_modules\dropzone\README.md" />
+    <None Include="wwwroot\assets\node_modules\dropzone\src\basic.scss" />
+    <None Include="wwwroot\assets\node_modules\dropzone\src\dropzone.js" />
+    <None Include="wwwroot\assets\node_modules\dropzone\src\dropzone.scss" />
+    <None Include="wwwroot\assets\node_modules\dropzone\src\emitter.js" />
+    <None Include="wwwroot\assets\node_modules\dropzone\src\options.js" />
+    <None Include="wwwroot\assets\node_modules\just-extend\index.esm.js" />
+    <None Include="wwwroot\assets\node_modules\just-extend\index.js" />
+    <None Include="wwwroot\assets\node_modules\just-extend\LICENSE" />
+    <None Include="wwwroot\assets\node_modules\just-extend\README.md" />
+    <None Include="wwwroot\assets\node_modules\just-extend\rollup.config.js" />
+    <None Include="wwwroot\assets\css\style.css.map" />
+    <None Include="wwwroot\assets\css\style.scss" />
+    <None Include="wwwroot\assets\css\_add.scss" />
+    <None Include="wwwroot\assets\css\_cart.scss" />
+    <None Include="wwwroot\assets\css\_product.scss" />
+    <None Include="wwwroot\assets\css\_profile.scss" />
+    <None Include="wwwroot\assets\css\_reset.scss" />
+    <None Include="wwwroot\assets\css\_static.scss" />
+    <None Include="wwwroot\assets\css\_store.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\assets\node_modules\just-extend\index.d.ts" />
+    <TypeScriptCompile Include="wwwroot\assets\node_modules\just-extend\index.tests.ts" />
+  </ItemGroup>
+
+</Project>

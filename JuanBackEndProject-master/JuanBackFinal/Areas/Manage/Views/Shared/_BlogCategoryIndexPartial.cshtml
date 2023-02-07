@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BlogCategory>
+@{ 
+    int count = (ViewBag.PageIndex - 1)*5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Blog's Count</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BlogCategory blogCategory in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+            <td>@blogCategory.Name</td>
+            <td>@blogCategory.BlogToCategories.Count()</td>
+            <td style="color:@(blogCategory.IsDeleted ? "red":"green")">@(blogCategory.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@blogCategory.Id">Update</a>
+                <a id="@(blogCategory.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(blogCategory.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="@(blogCategory.IsDeleted ? "Restore":"Delete")" asp-route-id="@blogCategory.Id">@(blogCategory.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

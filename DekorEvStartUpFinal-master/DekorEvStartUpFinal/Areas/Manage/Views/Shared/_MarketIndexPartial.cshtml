@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AppUser>
+@{
+    int count = (ViewBag.PageIndex - 1) * 5;
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Mağazanın Şəkili</th>
+            <th scope="col">Mağaza adı</th>
+            <th scope="col">Mağazanın yerləşdiyi şəhər</th>
+            <th scope="col">Mağazanın yerləşdiyi ünvan</th>
+            <th scope="col">Mağazanın Əlaqə Nömrəsi</th>
+            <th scope="col">Mağazanın E-Poçt Ünvanı</th>
+            <th scope="col">E-Poçtun Təsdiqlənməsi</th>
+            <th scope="col">Mağazanın Təsdiqlənməsi</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AppUser appUser in Model)
+        {
+            count++;
+
+            <tr>
+                <th scope="row">@count</th>
+                <td>
+                    <img class="product-img" style="width:50%" src="~/assets/images/@appUser.UserImage" alt="Alternate Text" />
+                </td>
+                <td>@appUser.UserName</td>
+                <td>@appUser.City</td>
+                <td>@appUser.Adress</td>
+                <td>@appUser.PhoneNumber</td>
+                <td>@appUser.Email</td>
+                @if (appUser.EmailConfirmed)
+                {
+                    <td><span class="bg-success">E-poçt Təsdiqlənib</span></td>
+                }
+                else
+                {
+                    <td><span class="bg-danger">E-poçt Təsdiqlənməyib</span></td>
+                }
+
+                @if (@appUser.isConfirmed)
+                {
+                    <td><span class="bg-success">Admin Tərəfindən Təsdiqlənib</span></td>
+                }
+                else
+                {
+                    <td><span class="bg-danger">Admin Tərəfindən Təsdiqlənməyib</span></td>
+                }
+
+                <td style="color:@(appUser.isConfirmed ? "green":"red")">@(!appUser.isConfirmed ? "DeActive":"Active")</td>
+                <td>
+                    @*<a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@appUser.Id">Detail</a>*@
+                    <a data-id="@appUser.Id" id="@(appUser.isConfirmed ? "deleteTag":"restoreTag")" class="btn @(appUser.isConfirmed ? "btn-danger":"btn-primary") aop" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-action="@(appUser.isConfirmed ? "Deactivate":"Activate")" asp-route-id="@appUser.Id">@(appUser.isConfirmed ? "Deactivate":"Activate")</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

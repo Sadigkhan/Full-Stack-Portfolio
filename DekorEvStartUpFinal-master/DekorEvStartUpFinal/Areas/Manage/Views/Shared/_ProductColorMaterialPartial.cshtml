@@ -1,0 +1,129 @@
+﻿@model Product
+@if (Model?.ProductColorMaterials?.Count() > 0)
+{
+    @for (int i = 0; i < Model.ProductColorMaterials.Count(); i++)
+    {
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label>Select Color</label>
+                <select name="ColorIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Colors, nameof(Color.Id), nameof(Color.Name), Model.ProductColorMaterials.ElementAt(i).Color.Id)">
+                </select>
+
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Material</label>
+                <select name="MaterialIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Materials, nameof(Material.Id), nameof(Material.Name),Model.ProductColorMaterials.ElementAt(i).Material.Id)">
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Count</label>
+                <input name="Counts[]" asp-for="@Model.ProductColorMaterials.ElementAt(i).Count" class="form-control" placeholder="Enter Count">
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Image</label>
+                <input asp-for="ImageFiles" class="form-control imageFile" data-id="@i" type="file" placeholder="Choose ImageFile">
+                <img style=" position: absolute;right: 0;top : 0;max-width:150px; height:100%;object-fit: contain;" src="~/assets/images/@Model?.ProductColorMaterials?.ElementAt(i).Image" />
+                <input style="visibility:hidden" id="WhichImg" name="WhichImg" type="number" value="i" />
+                <span class="text-danger" asp-validation-for="ImageFiles"></span>
+            </div>
+            <a href="" class="btn btn-primary removeItem">Remove</a>
+        </div>
+    }
+}
+else
+{
+    if (Model?.ColorIds?.Count() > 0)
+    {
+        @for (int i = 0; i < Model.ColorIds.Count(); i++)
+        {
+
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <label>Select Color</label>
+                    <select name="ColorIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Colors, nameof(Color.Id), nameof(Color.Name), Model.ColorIds[i])">
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label>Material</label>
+                    <select name="MaterialIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Materials, nameof(Material.Id), nameof(Material.Name),Model.MaterialIds[i])">
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label>Count</label>
+                    <input name="Counts[]" asp-for="@Model.Counts[i]" class="form-control" placeholder="Enter Count">
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label>Image</label>
+                    <input asp-for="ImageFiles" class="form-control imageFile" data-id="@i" type="file" placeholder="Choose ImageFile">
+                    <img style=" position: absolute;right: 0;top : 0;max-width:150px; height:100%;object-fit: contain;" src="~/assets/images/@Model?.ProductColorMaterials?.ElementAt(i).Image" />
+                    <input  style="visibility:hidden" id="WhichImg" name="WhichImg" type="number" value="i" />
+                    <span class="text-danger" asp-validation-for="ImageFiles"></span>
+                </div>
+                <a href="" class="btn btn-primary removeItem">Remove</a>
+            </div>
+
+        }
+    }
+
+    else
+    {
+        <div class="row">
+            <div class="form-group col-lg-3">
+                <label>Select Color</label>
+                <select name="ColorIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Colors, nameof(Color.Id), nameof(Color.Name))">
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Material</label>
+                <select name="MaterialIds[]" class="form-control" asp-items="@new SelectList(ViewBag.Materials, nameof(Material.Id), nameof(Material.Name))">
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Count</label>
+                <input name="Counts[]" class="form-control" placeholder="Enter Count">
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>Image</label>
+                <input asp-for="ImageFiles" class="form-control imageFile" type="file" placeholder="Choose ImageFile">
+                <img style=" position: absolute;right: 0;top : 0;max-width:150px; height:100%;object-fit: contain;" src="" />
+                <input  style="visibility:hidden" id="WhichImg" name="WhichImg" type="number" value="i" />
+                <span class="text-danger" asp-validation-for="ImageFiles"></span>
+            </div>
+            <a href="" class="btn btn-primary removeItem">Remove</a>
+        </div>
+
+    }
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        if ($(".inputContainerForadd").children(".row").length < 2) {
+            $(".removeItem").remove();
+        }
+        $(document).on("click", ".removeItem", function (e) {
+            e.preventDefault();
+            $(this).parent().remove();
+
+            if ($(".inputContainerForadd").children(".row").length < 2) {
+                $(".removeItem").remove();
+            }
+        })
+        $(document).on("change", ".imageFile", function (e) {
+            var i = $(this).attr("data-id");
+            $(this).next().next().val(i)
+            $(this).next().attr("src",URL.createObjectURL(e.target.files[0]));
+        })
+    })
+
+</script>

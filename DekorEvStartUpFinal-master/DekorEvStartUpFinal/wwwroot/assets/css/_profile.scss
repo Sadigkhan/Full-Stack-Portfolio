@@ -1,0 +1,94 @@
+#User-profile{
+    background-color: #efefef;
+    padding-bottom: 2rem;
+    .user-all{
+        background-color: #fff;
+        padding: 15px;
+        justify-content: space-between;
+        .all{
+            display: flex;
+            .left{
+                width: 27%;
+                border-right: 1px solid #c5c5c5;
+                padding-right: 20px;
+                .profile-img{
+                    height: 250px;
+                    img{
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+                }
+                .other-details-user{
+                    background-color: #efefef;
+                    border-radius: 4px;
+                    margin: 20px 0 8px;
+                    padding: 8px;
+                    border: 1px solid #c5c5c5;
+                    i{
+                        span,a{
+                            color: #333e48;
+                            font-weight: normal;
+                            padding-left: 6px;
+                            font-size: 14px;
+                        }
+                        
+                    }
+                    .seem-count{
+                        color: #fff;
+                        background-color: #e6a247;
+                        padding: 2px 5px;
+                        border-radius: 4px;
+                    }
+                }
+            }
+            .right{
+                width: 75%;
+                padding-left: 20px;
+                .user-name{
+                    color: #e6a247;
+                }
+                .edit-details{
+                    margin-top: 25px;
+                    form{
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        .form-box-profile{
+                            margin-bottom: 16px;
+                            width: 47%;
+                            label{
+                                display: block;
+                                color: #333e48;
+                                margin: 0;
+                            }
+                            input,select{
+                                width: 95%;
+                                border-radius: 4px;
+                                height: 40px;
+                                padding-left: 5px;
+                                box-shadow: inset 1px 1px 1px 1px #e8e8e8;
+                                border: 1px solid #e8e8e8;
+                            }
+                            button{
+                                background-color: #e6a247;
+                                color: #fff;
+                                padding: 12px 4rem;
+                                font-size: 14px;
+                                border-radius: 6px;
+                                border: 1px solid #e6a247;
+                                transition: .4s;
+                                &:hover{
+                                    background-color: #e6a247;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// User-profile

@@ -1,0 +1,70 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Create Blog</h1>
+    </div>
+</div>
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" placeholder="Enter Title">
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" placeholder="Enter Price">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="BlogImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="BlogImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="BlogImageFile"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label asp-for="PublisherId"></label>
+                <select class="form-control" asp-for="PublisherId" asp-items="@new SelectList(ViewBag.Publishers, nameof(Publisher.Id), nameof(Publisher.PublisherName))">
+                    <option value="" selected>Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="PublisherId"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TagIds"></label>
+                <select style="background-color:white" class="form-control" asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Name))">
+                    <option value="" >Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="TagIds"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogCategoryIds"></label>
+                <select style="background-color:white" class="form-control" asp-for="BlogCategoryIds" asp-items="@new SelectList(ViewBag.BlogCategories, nameof(BlogCategory.Id), nameof(BlogCategory.Name))">
+                    <option value="" >Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="BlogCategoryIds"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial">
+}

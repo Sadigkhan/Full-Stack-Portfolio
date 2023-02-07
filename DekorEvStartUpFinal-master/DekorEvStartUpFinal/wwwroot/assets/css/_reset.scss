@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+}
+
+
+
+@font-face {
+    font-family: HelveticaRegular;
+    src: url(/fonts/HelveticaNowDisplay-Regular.ttf);
+}
+
+
+@font-face {
+    font-family: HelveticaBold;
+    src: url(/fonts/HelveticaNowDisplay-Bold.ttf);
+}
+
+@font-face {
+    font-family: HelveticaExtra;
+    src: url(/fonts/HelveticaNowDisplay-ExtBlk.ttf);
+}
+input,select,textarea,button{
+    outline: none;
+}
+
+label{
+    user-select: none;
+}
+
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}

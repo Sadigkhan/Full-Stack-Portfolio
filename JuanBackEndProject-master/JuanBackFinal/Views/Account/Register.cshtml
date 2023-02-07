@@ -1,0 +1,14 @@
+﻿@model RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="col-lg-12">
+    <div class="login-reg-form-wrap signup-form">
+        <h2>Singup Form</h2>
+       @await Html.PartialAsync("_RegisterPartial",Model)
+
+    </div>
+</div>
+

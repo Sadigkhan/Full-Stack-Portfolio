@@ -1,0 +1,45 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Create Slider</h1>
+    </div>
+</div>
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label asp-for="LeftTopImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="LeftTopImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="LeftTopImageFile"></span>
+            </div>
+
+                  <div class="form-group">
+                <label asp-for="LeftBottomImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="LeftBottomImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="LeftBottomImageFile"></span>
+            </div>
+
+                  <div class="form-group">
+                <label asp-for="RightMainImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="RightMainImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="RightMainImageFile"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial">
+}

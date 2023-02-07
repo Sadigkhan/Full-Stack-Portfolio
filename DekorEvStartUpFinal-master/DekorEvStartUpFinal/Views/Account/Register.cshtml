@@ -1,0 +1,32 @@
+﻿@model RegisterVM
+  
+  
+<section id="Store-type">
+        <div class="container ">
+            <div class="st-area" style="width:50%;margin:2rem auto">
+                <h5>Qeydiyyat forması</h5>
+                <form action="">
+                    <div class="row">
+                        <div class="col-lg-6 col-6">
+                            <a asp-controller="account" asp-action="RegisterAsStore">
+                                <div class="st-store text-center">
+                                    <img class="img-fluid" src="~/assets/images/shops.png" alt="">
+                                    <p>Mağaza kimi</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-6">
+                            <a asp-controller="account" asp-action="RegisterAsMember">
+                                <div class="st-seller text-center">
+                                    <img class="img-fluid" src="~/assets/images/agent.png" alt="">
+                                    <p>İstifadəçi kimi</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+

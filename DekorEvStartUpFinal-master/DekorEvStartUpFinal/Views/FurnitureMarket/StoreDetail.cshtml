@@ -1,0 +1,93 @@
+﻿@using DekorEvStartUpFinal.ViewModels.Market
+@model MarketDetailVM
+@{
+    ViewData["Title"] = "StoreDetail";
+}
+
+<section id="Store-details">
+    <div class="container">
+        <div class="sd-info d-flex justify-content-between align-items-center">
+            <div class="col-lg-6 col-12">
+                <div class="sd-left">
+                    <img src="~/assets/images/@Model.User.UserImage" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="sd-right">
+                    <h2>@Model.User.UserName</h2>
+                    <p>@Model.User.Description</p>
+                    @if (Model.User.ViewCount != null)
+                    {
+                        <span class="store-looking">
+                            <img src="~/assets/images/visibility.png" alt="">
+                            @Model.User.ViewCount.Count
+                        </span>
+                    }
+
+                    <div class="store-icons">
+                        <i class="fa-solid fa-location-dot">
+                            <span>@Model.User.Adress</span>
+                        </i>
+                    </div>
+                    <div class="store-icons">
+                        <i class="fa-solid fa-phone-volume">
+                            <span>@Model.User.PhoneNumber</span>
+                        </i>
+                    </div>
+                    <div class="store-icons">
+                        <i class="fa-solid fa-clock">
+                            <span>Bazar ertəsi-Cümə: 09:00-18:00; Şənbə: 10:00-16:00</span>
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="store-products">
+            <h3>MAĞAZANIN MƏHSULLARI</h3>
+            <div class="row g-4">
+@foreach (Product product in Model.Products)
+{
+
+    @foreach (var item in product.ProductColorMaterials)
+   {
+        <div class="col-lg-3 col-6 box">
+        <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId">
+            <div class="vip-box">
+                <div class="box-top">
+                   @if (product.IsVip)
+                  {
+                       <span>VIP</span>
+                  }
+                    <img src="~/assets/images/@item.Image" alt="">
+                </div>
+                <div class="box-bottom">
+                    <span>Mebel</span>
+                    <h6>@product.Name</h6>
+                    <div class="bb-price-cart d-flex justify-content-between align-items-center">
+                        @if (product.DiscountPrice > 0)
+                        {
+                            <span class="price">@product.DiscountPrice <span class="manat">₼</span></span>
+                            <del class="price">@product.SalePrice <span class="manat">₼</span></del>
+                        }
+                        else
+                        {
+                            <span class="price">@product.SalePrice <span class="manat">₼</span></span>
+                        }
+                        <a asp-controller="product" asp-action="AddBasket" asp-route-id="@product.Id" asp-route-page="List" asp-route-colorId="@item.ColorId" asp-route-materialId="@item.MaterialId" class="add-basket-btn text-decoration-none">
+                           <i class="fa-solid fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+   }
+   
+}
+
+
+            </div>
+        </div>
+    </div>
+</section>
+

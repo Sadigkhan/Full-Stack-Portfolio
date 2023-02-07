@@ -1,0 +1,15 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<section id="About">
+    <div class="container">
+        <h3>Dekorev.az nədir?</h3>
+        <p>@Html.Raw(Model.AboutUs)</p>
+        <div class="text-center">
+            <img src="~/assets/images/@Model.AboutUsImage" alt="">
+        </div>
+    </div>
+</section>

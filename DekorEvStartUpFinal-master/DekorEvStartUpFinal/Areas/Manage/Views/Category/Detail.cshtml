@@ -1,0 +1,36 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+    <div class="col-lg-6 h3 mb-4 text-gray-800 mx-auto">
+        <h1>Category Detail</h1>
+    </div>
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">Category-Name</h5>
+                <p>@Model.Name</p>
+                @if (Model.IsMain)
+                {
+                    <h5 class="card-title font-weight-bold">Category Image</h5>
+                    <img class="card-img-top" style="width:50%" src="~/assets/images/@Model.CategoryImage" alt="Card image cap">
+                }
+                
+                
+                @if (Model.IsMain)
+                {
+                    <h5 class="card-title font-weight-bold">Sub-Categories</h5>
+                    @foreach (var child in Model.Children)
+                    {
+                        <p>@child.Name</p>
+                    }
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Product Delete</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Product MainImage:</h3>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/assets/img/product/@Model.MainImage" alt="Card image cap">
+            <div class="card-body">
+                <h3>Product Name:</h3>
+                <h5 class="card-title">@Model.Name</h5>
+                <h3>Product Category Name:</h3>
+                <h5 class="card-title">@Model.Category.Name</h5>
+                <h3>Product Cost Price:</h3>
+                <h5 class="card-title">@Model.CostPrice</h5>
+                <h3>Product Sale Price:</h3>
+                <h5 class="card-title">@Model.SalePrice</h5>
+                <h3>Product Discount Price:</h3>
+                <h5 class="card-title">@Model.DiscountPrice</h5>
+                <h3>Product Color:</h3>
+                <h5 class="card-title">@string.Join(", ",Model.ProductColors.Select(p=>p.Color.Name))</h5>
+                <h3>Product Size:</h3>
+                <h5 class="card-title">@string.Join(", ",Model.ProductSizes.Select(p=>p.Size.Name))</h5>
+                <h3>Product Count:</h3>
+                <h5 class="card-title">@Model.Count</h5>
+                <h3>Product Description:</h3>
+                <h5 class="card-title">@Model.Description</h5>
+               
+                
+                
+                
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <a class="btn btn-primary" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To List</a>
+            <a class="btn btn-danger" asp-action="DeleteProduct" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@Model.Id">Delete</a>
+        </div>
+    </div>
+</div>

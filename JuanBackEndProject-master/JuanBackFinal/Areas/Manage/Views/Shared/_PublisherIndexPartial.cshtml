@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Publisher>
+@{ 
+    int count = (ViewBag.PageIndex - 1)*5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Publisher Image</th>
+            <th scope="col">Publisher Name</th>
+            <th scope="col">Publisher Position</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Publisher publisher in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+                                    <td>
+                            <img  style="width:50%" src="~/assets/img/blog/@publisher.PublisherImage" alt="Alternate Text" />
+                        </td>
+            <td>@publisher.PublisherName</td>
+            <td>@publisher.PublisherPosition</td>
+            <td style="color:@(publisher.IsDeleted ? "red":"green")">@(publisher.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                @*<a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@publisher.Id">Detail</a>*@
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@publisher.Id">Update</a>
+                <a id="@(publisher.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(publisher.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="@(publisher.IsDeleted ? "Restore":"Delete")" asp-route-id="@publisher.Id">@(publisher.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

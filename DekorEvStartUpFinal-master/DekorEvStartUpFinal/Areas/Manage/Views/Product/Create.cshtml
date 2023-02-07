@@ -1,0 +1,127 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Create Product</h1>
+    </div>
+</div>
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name" placeholder="Enter Title">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostPrice"></label>
+                <input class="form-control" asp-for="CostPrice" placeholder="Enter CostPrice">
+                <span class="text-danger" asp-validation-for="CostPrice"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountPrice"></label>
+                <input class="form-control" asp-for="DiscountPrice" placeholder="Enter DiscountPrice">
+                <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="SalePrice"></label>
+                <input class="form-control" asp-for="SalePrice" placeholder="Enter SalePrice">
+                <span class="text-danger" asp-validation-for="SalePrice"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description" placeholder="Enter Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <a hidden class="getSubs" asp-action="GetSub"></a>
+                <select class="form-control getsub"  asp-items="@new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="CategoryId"></span>
+            </div>
+            <div class="ctg">
+
+            </div>
+             <div class="form-check">
+                <input class="form-check-input" asp-for="IsVip" placeholder="Enter IsVip">
+                <label class="form-check-label" asp-for="IsVip"></label>
+                <span class="text-danger" asp-validation-for="IsVip"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="IsPremium" placeholder="Enter IsPremium">
+                <label class="form-check-label" asp-for="IsPremium"></label>
+                <span class="text-danger" asp-validation-for="IsPremium"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="IsFronted" placeholder="Enter IsFronted">
+                <label class="form-check-label" asp-for="IsFronted"></label>
+                <span class="text-danger" asp-validation-for="IsFronted"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="IsNew" placeholder="Enter IsNew">
+                <label class="form-check-label" asp-for="IsNew"></label>
+                <span class="text-danger" asp-validation-for="IsNew"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="IsBestSeller" placeholder="Enter IsBestSeller">
+                <label class="form-check-label" asp-for="IsBestSeller"></label>
+                <span class="text-danger" asp-validation-for="IsBestSeller"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="IsDeliverable" placeholder="Enter IsDeliverable">
+                <label class="form-check-label" asp-for="IsDeliverable"></label>
+                <span class="text-danger" asp-validation-for="IsDeliverable"></span>
+            </div>
+
+            <div class="inputContaine">
+                <div class="inputContainerForadd">
+                    @await Html.PartialAsync("_ProductColorMaterialPartial")
+                </div>
+                <div class="addinputbutton mb-4">
+                    <a asp-action="GetFormColoRMaterialCount" class="btn btn-primary addbtn w-25">Add</a>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-25">Create</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-warning" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+@section Script{
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        if ($(".inputContainerForadd").children(".row").length < 2) {
+            $(".removeItem").remove();
+        }
+            $(document).on("click", ".addbtn", function (e) {
+                e.preventDefault();
+                fetch($(this).attr("href")).then(response => response.text()).then(data => $(".inputContainerForadd").append(data));
+
+                if ($(".inputContainerForadd").children(".row").length < 2 && $(".inputContainerForadd").children(".row").length >= 1) {
+                    $(".inputContainerForadd .row").first().append(`<a href="" class="btn btn-primary removeItem">Remove</a>`)
+                }
+            })
+    </script>
+
+
+
+<script>
+       $(document).on("change",".getsub",function(e){
+        e.preventDefault();
+        let url =$(".getSubs").attr("href");
+        let SubId=$(this).val();
+        fetch(url+"?subId="+SubId).then(res=>{return res.text()}).then(data=>{$(".ctg").html(data)})
+    })
+</script>
+}

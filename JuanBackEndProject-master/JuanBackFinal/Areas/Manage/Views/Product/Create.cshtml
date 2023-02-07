@@ -1,0 +1,97 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Create Product</h1>
+    </div>
+</div>
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name" placeholder="Enter Title">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostPrice"></label>
+                <input class="form-control" asp-for="CostPrice" placeholder="Enter Price">
+                <span class="text-danger" asp-validation-for="CostPrice"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalePrice"></label>
+                <input class="form-control" asp-for="SalePrice" placeholder="Enter ExTax">
+                <span class="text-danger" asp-validation-for="SalePrice"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountPrice"></label>
+                <input class="form-control" asp-for="DiscountPrice" placeholder="Enter DiscountPrice">
+                <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" placeholder="Enter Description">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Count"></label>
+                <input class="form-control" asp-for="Count" placeholder="Enter Count">
+                <span class="text-danger" asp-validation-for="Count"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="MainImageFile" placeholder="Enter MainImage">
+                <span class="text-danger" asp-validation-for="MainImageFile"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductimageFiles"></label>
+                <input class="form-control" accept="image/*" asp-for="ProductimageFiles" placeholder="Enter ProductImagesFile">
+                <span class="text-danger" asp-validation-for="ProductimageFiles"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select class="form-control" asp-for="CategoryId" asp-items="@new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="CategoryId"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorIds"></label>
+                <select style="background-color:white" class="form-control" asp-for="ColorIds" asp-items="@new SelectList(ViewBag.Colors, nameof(Color.Id), nameof(Color.Name))">
+                    <option value="" >Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="ColorIds"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeIds"></label>
+                <select style="background-color:white" class="form-control" asp-for="SizeIds" asp-items="@new SelectList(ViewBag.Sizes, nameof(Size.Id), nameof(Size.Name))">
+                    <option  value="" >Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="SizeIds"></span>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="TopSeller" placeholder="Enter IsTopSeller">
+                <label class="form-check-label" asp-for="TopSeller"></label>
+                <span class="text-danger" asp-validation-for="TopSeller"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationFormScriptPartial">
+}

@@ -1,0 +1,63 @@
+﻿@model MemberUpdateVM
+<form asp-action="Edit" asp-controller="Account" method="post">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="single-input-item">
+                <label asp-for="FullName" >Full Name</label>
+                <input asp-for="FullName" placeholder="Ful Name">
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Email" ></label>
+        <input asp-for="Email" placeholder="email">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="UserName" ></label>
+        <input asp-for="UserName" placeholder="username">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Address" ></label>
+        <input asp-for="Address" placeholder="Adress">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="PhoneNumber" ></label>
+        <input asp-for="PhoneNumber" placeholder="PhoneNumber">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Country" ></label>
+        <input asp-for="Country" placeholder="country">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="State" ></label>
+        <input asp-for="State" placeholder="State">
+    </div>
+    <div class="single-input-item">
+        <label asp-for="ZipCode" ></label>
+        <input asp-for="ZipCode" placeholder="ZipCode">
+    </div>
+    <fieldset>
+        <legend>Password change</legend>
+        <div class="single-input-item">
+            <label asp-for="CurrentPassword"></label>
+            <input asp-for="CurrentPassword" placeholder="CurrentPassword">
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-input-item">
+                    <label asp-for="Password" ></label>
+                    <input asp-for="Password" placeholder="Password">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-input-item">
+                    <label asp-for="ConfirmPassword" ></label>
+                    <input asp-for="ConfirmPassword" placeholder="ConfirmPassword">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="single-input-item">
+        <button class="check-btn sqr-btn ">Save Changes</button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Category>
+@{
+    int count = (ViewBag.PageIndex - 1) * 5;
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            @*<th scope="col">Product Count</th>*@
+            <th scope="col">Main Status</th>
+            <th scope="col">Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Category category in Model)
+        {
+            count++;
+        <tr>
+            <th scope="row">@count</th>
+            <td>@category.Name</td>
+            @*<td>@category.Products.Count()</td>*@
+            <td style="color:@(category.IsMain ? "white":"red")">@(category.IsMain ? "Category":"Sub-Category")</td>
+            <td style="color:@(category.IsDeleted ? "red":"white")">@(category.IsDeleted ? "DeActive":"Active")</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-route-id="@category.Id">Detail</a>
+                <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-route-id="@category.Id">Update</a>
+                <a id="@(category.IsDeleted ? "restoreTag":"deleteTag")" class="btn @(category.IsDeleted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-isMainRoute="@ViewBag.IsMain" asp-route-page="@ViewBag.PageIndex" asp-action="@(category.IsDeleted ? "Restore":"Delete")" asp-route-id="@category.Id">@(category.IsDeleted ? "Restore":"Delete")</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

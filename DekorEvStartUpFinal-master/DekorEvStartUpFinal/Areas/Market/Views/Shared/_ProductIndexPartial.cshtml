@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Product>
+@{
+    int count = (ViewBag.PageIndex - 1) * 5;
+
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Product-Code</th>
+            <th scope="col">Count</th>
+            <th scope="col">Cost Price</th>
+            <th scope="col">Sale Price</th>
+            <th scope="col">Discount Price</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Status</th>
+            <th scope="col"> Vip Status</th>
+            <th scope="col"> İrəli Çəkilmə Statusu</th>
+            <th scope="col"> Premium Status</th>
+            <th scope="col">Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product product in Model)
+        {
+            count++;
+
+            <tr>
+                <th scope="row">@count</th>
+                <td>
+                    <img class="product-img" style="width:50%" src="~/assets/images/@product.MainImage" alt="Alternate Text" />
+                </td>
+                <td>@product.Name</td>
+                <td>@product.ProductCode</td>
+                <td>@product.Count</td>
+                <td>@product.CostPrice</td>
+                <td>@product.SalePrice</td>
+                <td>@product.DiscountPrice</td>
+                <td>@product.Category.Name</td>
+
+                <td style="color:@(product.IsDeleted ? "red":"green")">@(product.IsDeleted ? "DeActive":"Active")</td>
+                <td style="color:@(product.IsVip ? "white":"red")">@(product.IsVip ? "VIP":"VIP Deyil")</td>
+                <td style="color:@(product.IsFronted ? "white":"red")">@(product.IsFronted ? "İrəli çəkilib":"İrəli çəkilməyib")</td>
+                <td style="color:@(product.IsPremium ? "white":"red")">@(product.IsPremium ? "Premium":"Premium Deyil")</td>
+
+                <td>
+                    <a class="btn btn-primary" asp-action="Detail" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@product.Id">Detail</a>
+                    <a class="btn btn-warning" asp-action="Update" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@product.Id">Update</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-route-id="@product.Id">Delete</a>
+                    @if (product.IsVip==false)
+                    {
+                    <a id="@(product.IsVip ? "restoreTag":"deleteTag")" class="btn @(product.IsVip ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="MakeVip" asp-route-id="@product.Id">Vip Et</a>
+                    }
+                      @if (product.IsPremium==false)
+                    {
+                    <a id="@(product.IsPremium ? "restoreTag":"deleteTag")" class="btn @(product.IsPremium ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="MakePremium" asp-route-id="@product.Id">Premium Et</a>
+                    }
+
+                    @if (product.IsFronted==false)
+                   {
+                    <a id="@(product.IsFronted ? "restoreTag":"deleteTag")" class="btn @(product.IsFronted ? "btn-primary":"btn-danger")" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex" asp-action="MakeFronted" asp-route-id="@product.Id">İrəli Çək</a>
+                   }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

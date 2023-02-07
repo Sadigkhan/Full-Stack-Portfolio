@@ -1,0 +1,52 @@
+﻿@model Blog
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" placeholder="Enter Title">
+                <span class="text-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" placeholder="Enter Price">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+           <div class="form-group">
+                <label asp-for="PublisherId"></label>
+                <select class="form-control" asp-for="PublisherId" asp-items="@new SelectList(ViewBag.Publishers, nameof(Publisher.Id), nameof(Publisher.PublisherName))">
+                    <option value="" >Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="PublisherId"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TagIds"></label>
+                <select class="form-control" asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Name))">
+                    <option value="">Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="TagIds"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogCategoryIds"></label>
+                <select class="form-control" asp-for="BlogCategoryIds" asp-items="@new SelectList(ViewBag.BlogCategories, nameof(BlogCategory.Id), nameof(BlogCategory.Name))">
+                    <option value="">Choose...</option>
+                </select>
+                <span class="text-danger" asp-validation-for="BlogCategoryIds"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogImageFile"></label>
+                <input class="form-control" accept="image/*" asp-for="BlogImageFile" placeholder="Enter New Blog Image">
+                <span class="text-danger" asp-validation-for="BlogImageFile"></span>
+                <div class="col-lg-6">
+                    <img style="width:50%" src="~/assets/img/blog/@Model.BlogImage" alt="Alternate Text" />
+                </div>
+            </div>
+             
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
