@@ -1,0 +1,189 @@
+﻿@model CategoryVM
+@{
+    ViewData["Title"] = "ProductList";
+   
+}
+
+<div class="styles_category-list container-fluid">
+    <div class="category-list-main">
+        <div class="styles_desktopPanel">
+            <div class="category-list-header d-none d-lg-block col-lg-12">
+                <div class="category-list-header-text-div col-lg-8 col-12">
+                    <h1 class="category-list-header-text">@Model.Category.Name</h1>
+                </div>
+
+            </div>
+            <div class="crumbs_wrapper col-lg-12">
+                <div class="crumbs_wrapper-routes d-none d-lg-block">
+                    <a asp-controller="home" asp-action="index" style="text-decoration:none">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-angle-right"></i>
+                    @if (Model.Category.ParentId != null)
+                    {
+                        <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.Parent.Id">
+                            <span>@Model.Category.Parent.Name</span>
+                        </a>
+                        <i class="fa-solid fa-angle-right"></i>
+                    }
+                    <a style="cursor:pointer">
+                        <span>@Model.Category.Name</span>
+                    </a>
+
+
+                </div>
+
+                <div class="crumbs_wrapper-routes-mob d-block d-lg-none">
+                    @if (Model.Category.ParentId != null)
+                    {
+                        <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.ParentId">
+                            <i class="fa-solid fa-angle-left"></i>
+                            <span>
+                                @Model.Category.Parent.Name
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="home" asp-action="index">
+                            <i class="fa-solid fa-angle-left"></i>
+                            <span>
+                                Əsas
+                            </span>
+                        </a>
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="category-list-content justify-content-between">
+
+            @foreach (Category category in Model.Categories)
+            {
+                <div class="styles_categoryCard col-lg-3 col-6">
+                    <div class="styles_categoryCard-items">
+                        @if (category.Children.Count() > 0)
+                        {
+
+                            <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@category.Id" class="styles_imageWrapper">
+                                <span class="styles_imageWrapper-span">
+                                    <img class="styles_imageWrapper-img" src="~/User/assets/img/SubCtgImg/@category.ImageUrl" alt="Alternate Text" />
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="product" asp-action="productlist" asp-route-id="@category.Id" asp-route-keyfrom="ctg" class="styles_imageWrapper">
+                                <span class="styles_imageWrapper-span">
+                                    <img class="styles_imageWrapper-img" src="~/User/assets/img/SubCtgImg/@category.ImageUrl" alt="Alternate Text" />
+                                </span>
+                            </a>
+                        }
+
+                        <div class="styles_categoryName">
+                            <span class="styles_nameSelect">
+                                @if (category.Children.Count() > 0)
+                                {
+                                    <a class="styles_title" asp-controller="category" asp-action="getsubcategory" asp-route-id="@category.Id">
+                                        <span class="styles_titleInner">
+                                            @category.Name
+                                        </span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="styles_title" asp-controller="product" asp-action="productlist" asp-route-id="@category.Id" asp-route-keyfrom="ctg">
+                                        <span class="styles_titleInner">
+                                            @category.Name
+                                        </span>
+                                    </a>
+                                }
+
+
+                            </span>
+
+                        </div>
+                        <div class="styles_arrowWrapper">
+                            <svg class="styles_arrowWrapper-svg" xmlns="http://www.w3.org/2000/svg" width="5.527" height="8.948" viewBox="0 0 5.527 8.948"><g id="prefix__Layer_2" transform="translate(.006 .004)"><g id="prefix__Layer_1" transform="translate(-.006 -.004)"><path id="prefix__Path_1552" d="M.744 8.943a.745.745 0 0 1-.529-1.274l3.205-3.2L.215 1.274A.748.748 0 0 1 1.273.215l4.249 4.256-4.249 4.256a.745.745 0 0 1-.529.216z" transform="translate(.006 .004)" style="fill: rgb(213, 213, 213);"></path></g></g></svg>
+                        </div>
+                        @if (category.Children.Count() > 0)
+                        {
+                            <div class="styles_productsPopup">
+                                @foreach (Category categoryChild in category.Children)
+                                {
+                                    <a asp-controller="product" asp-action="productlist" asp-route-id="@categoryChild.Id" asp-route-keyfrom="ctg" class="styles_productName">
+                                        <span class="styles_productNameInner">@categoryChild.Name</span>
+                                    </a>
+                                }
+
+                            </div>
+                        }
+                        else if (category.CategoryBrands.Count() > 0)
+                        {
+                            <div class="styles_productsPopup">
+                                @foreach (CategoryBrand categoryBrand in category.CategoryBrands)
+                                {
+                                    <a asp-controller="product" asp-action="ProductList" asp-route-id="@categoryBrand.Id" asp-route-keyfrom="brand" class="styles_productName">
+                                        <span class="styles_productNameInner">@categoryBrand.Brand.Name</span>
+                                    </a>
+                                }
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+    @foreach (Category categoryForPro in Model.Categories.Where(x=>x.Products.Count()>0))
+    {
+        <section class="discount-list mb-5">
+            <div class="section-header mt-5">
+                <h2 class="section-header-text">@categoryForPro.Name</h2>
+                <a asp-controller="product" asp-action="productlist" asp-route-id="@categoryForPro.Id" asp-route-keyfrom="ctg" class="alldiscount-btn">
+                    <button class="alldiscount-btn-item">
+                        <span class="alldiscount-btn-text">Bütün @categoryForPro.Name</span>
+                        <div class="alldiscount-btn-svg">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="22" height="10" viewBox="0 0 22 10"><g><g><g><g><path fill="#191919" d="M16.71.294a1.004 1.004 0 0 0-1.42 1.42l2.3 2.29H1a1 1 0 0 0 0 2h16.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.7-4.71z"></path></g></g></g></g></svg>
+                        </div>
+                    </button>
+                </a>
+            </div>
+            <div class="section-content-discountPro-items mb-5 ">
+
+                <input id="productCount" hidden type="text" name="name" value="@categoryForPro.Products.Count()" />
+                <div class="section-content-discountPro static dispro-dinamic">
+                    @await Html.PartialAsync("_GetProductsPartial",Model.Products.Where(x=>x.CategoryId==categoryForPro.Id).OrderByDescending(x=>x.Price).Take(4) )
+                </div>
+                <div class="section-content-discountPro  dispro-static">
+
+                </div>
+
+                @if (categoryForPro.Products.Count() > 4)
+                {
+
+                    <a asp-controller="product" asp-action="LoadMoreProducts" asp-route-key="smilarCtg" asp-route-ctg="@categoryForPro.Id"  class="pro-load-more-btn mb-5">
+                    <span class="pro-load-more-btn-text">Daha çox göstər</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="5" viewBox="0 0 26 5"><path fill="#bebebe" d="M.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM10.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM20.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z"></path></svg>
+
+                    </a>
+
+
+
+                }
+            </div>
+        </section>
+    }
+
+</div>
+
+
+
+
+

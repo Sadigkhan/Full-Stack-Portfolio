@@ -1,0 +1,26 @@
+﻿
+<div class="side-right-auth-tab">
+    <div class="side-right-auth-tab-switcher">
+        <button class="side-right-auth-tab-login-btn side-right-auth-tab-btn active" type="button">
+            <span class="side-right-auth-tab-login-text">Giriş</span>
+        </button>
+        <div class="left-w-r"></div>
+        <div class="side-right-auth-tab-center "></div>
+        <div class="left-w-l"></div>
+        <button class="side-right-auth-tab-reg-btn side-right-auth-tab-btn" type="button">
+            <span class="side-right-auth-tab-reg-text">Qeydiyyat</span>
+        </button>
+    </div>
+
+
+</div>
+<div class="side-right-form-section">
+    <p class="styles_errorText"></p>
+    <p class="styles_succesText"></p>
+    <div class="form-fix">
+        
+            @await Html.PartialAsync("_LoginPartial", new LoginVM())
+        
+
+    </div>
+</div>

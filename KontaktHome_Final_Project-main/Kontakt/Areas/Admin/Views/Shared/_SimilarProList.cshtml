@@ -1,0 +1,27 @@
+﻿
+@model List<Product>
+@{ 
+    var TitleAdd = "";
+}
+<div class="form-group">
+    <label>Similar Product</label>
+    <select class="form-control detailInput similarproduct deactive" id="ProductId" name="ProductId">
+        <option value="" selected>Choose...</option>
+        @foreach (Product item in Model)
+        {
+
+            TitleAdd = string.Join(" ", item.ProductDetails.Where(x=>x.DetailKey.ForTitle).Select(p => p.DetailValue.Name));
+
+
+                <option value="@item.Id">
+                    @item.Title @TitleAdd
+
+                   
+                </option>
+            
+
+
+
+        }
+    </select>
+</div>

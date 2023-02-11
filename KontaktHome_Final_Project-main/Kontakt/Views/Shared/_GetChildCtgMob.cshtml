@@ -1,0 +1,23 @@
+﻿@model List<Category>
+@if (Model.Count() > 0)
+{
+    <ul class="main-category">
+        @foreach (Category ctg in Model)
+        {
+            <li class="main-category-item">
+                <a asp-controller="product" asp-action="getproduct" asp-route-id="@ctg.Id" class=" main-category-item-btn">
+                    <div class="main-category-item-img">
+                        <img src="~/user/assets/img/subctgimg/@ctg.ImageUrl" alt="">
+                    </div>
+                    <span class="main-category-item-text">@ctg.Name</span>
+
+                </a>
+
+            </li>
+        }
+
+
+    </ul>
+}
+
+

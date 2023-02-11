@@ -1,0 +1,59 @@
+﻿@model CategoryBrand
+@{
+    ViewData["Title"] = "BrandVsCategoryCreate";
+}
+
+<div class="row">
+    <div class="col-lg-12 h3 mb-4 text-gray-800">
+        <h5>Brand Connect Category</h5>
+    </div>
+
+    <div class="col-lg-6 mx-auto box-form">
+        @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group categoryParentInput">
+                <label asp-for="Brand"></label>
+                <select class="form-control" asp-for="BrandId" asp-items="@new SelectList(ViewBag.Brand, nameof(Brand.Id), nameof(Brand.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+
+                <span class="text-danger" asp-validation-for="Brand"></span>
+            </div>
+            <div class="form-group categoryParentInput">
+                <label asp-for="Category">Main Category </label>
+                <select class="form-control searchSubCtgBtn" asp-items="@new SelectList(ViewBag.MainCategory, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+
+                <span class="text-danger" asp-validation-for="Category"></span>
+            </div>
+            <div class="SubCtgList">
+
+            </div>
+
+            <div class="form-group categoryFileInput ">
+                <label asp-for="ImageFile"></label>
+                <input asp-for="ImageFile" accept="image/*" class="form-control" id="formFile" placeholder="Enter email">
+                <span class="text-danger" asp-validation-for="ImageFile"></span>
+
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-primary" asp-action="BrandVsCategory" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To List</a>
+                <button type="submit" class="btn btn-success">Connect</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+@section Script{
+    <partial name="_ValidationPartial">
+        <script src="~/admin/assets/dist/js/Search.js" asp-append-version="true"></script>
+
+}
+

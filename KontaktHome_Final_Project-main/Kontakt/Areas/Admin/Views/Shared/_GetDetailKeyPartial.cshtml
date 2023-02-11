@@ -1,0 +1,13 @@
+﻿@model List<CategoryDetailKey>
+
+<div class="form-group">
+    <label>Please choose a Detailkey</label>
+    <select class="form-control detailInput detailkeylist deactive" id="DetailKeyId" name="DetailKeyId">
+        <option value="" selected>Choose...</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.DetailKey.Id">@item.DetailKey.Name</option>
+        }
+    </select>
+    
+</div>

@@ -1,0 +1,90 @@
+﻿@model UserAuthUpdateVM
+<div class="modal-contents">
+    <div class="styles_title">
+        <div class="styles_leftSide col-lg-9 col-sm-6 col-md-6 col-12">
+            <svg class="styles_headerIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23"><path fill="#c1c1c1" d="M16.27 7.745a4.649 4.649 0 1 1-9.297 0 4.649 4.649 0 0 1 9.297 0zm2.325 0a6.973 6.973 0 1 0-13.946 0 6.973 6.973 0 0 0 13.946 0z"></path><path fill="#c1c1c1" d="M2.731 22.26a9.297 9.297 0 0 1 17.781 0h2.731A11.924 11.924 0 0 0 0 22.26z"></path></svg>
+            <h4 class="styles_leftText">Giriş məlumatları</h4>
+        </div>
+        <div class="styles_rightSide col-lg-3 col-sm-6 col-md-6 col-12 justify-content-between">
+            <button type="button" class="styles_rightSide-btn-save account-auth-edit">
+                <span class="styles_rightSide-btn-save-text ">Yadda saxla</span>
+            </button>
+            <button class="styles_rightSide-btn-close">
+                <span class="styles_rightSide-btn-save-text">Bağlamaq</span>
+            </button>
+
+        </div>
+    </div>
+    <div class="styles_body">
+        <div class="text-danger login-validation-summary mb-2"></div>
+
+        <form>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Şifrə :*
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="CurrentPassword" class="styles_input" placeholder="Şifrə">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        E-poçt :*
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="Email" class="styles_input" placeholder="E-poçt">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Yeni Şifrə :*
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="Password" class="styles_input" placeholder="Yeni Şifrə ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Yeni Şifrə təkrarı : *
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="ConfirmPassword" class="styles_input" placeholder="Yeni Şifrə təkrarı ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

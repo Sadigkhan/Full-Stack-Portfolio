@@ -1,0 +1,38 @@
+﻿@model List<ProductDetail>
+@{ 
+    var TitleAdd = string.Join(" ", Model.Where(x => x.DetailKey.ForTitle).OrderByDescending(x=>x.DetailKey.UpdatedAt).Select(p => p.DetailValue.Name));
+
+
+}
+<section class="pro-general-info">
+    <div class="product-specs">
+        <h2 class="product-specs-header">
+            <strong class="product-specs-text">Texniki xüsusiyyətlər</strong>&nbsp;
+            <span class="product-specs-val">@(ViewBag.Title +" "+ TitleAdd)</span>
+        </h2>
+        <h3 class="product-specs-title">Parametrlər</h3>
+        <div class="product-specs-items">
+
+            @foreach (ProductDetail productDetail in Model)
+            {
+                <div class="product-spec-item col-lg-6 col-12">
+                    <div class="product-spec-item-left">
+                        <span>@productDetail.DetailKey.Name</span>
+                    </div>
+                    <div class="product-spec-item-center">
+                        
+                    </div>
+                    <div class="product-spec-item-right">
+                        <span>@productDetail.DetailValue.Name</span>
+                    </div>
+                </div>
+            }
+
+
+
+
+        </div>
+        
+    </div>
+</section>
+

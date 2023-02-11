@@ -1,0 +1,50 @@
+﻿@model LoginVM
+<div class="signIn-form">
+    <div  class="text-danger login-validation-summary"></div>
+    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+    <form method="post" asp-controller="account" asp-action="ProfilUpdate">
+        <div class="styles_inputComponent">
+            <div class="styles_inputBlock">
+                <div class="styles_inputWrapper">
+                    <div class="styles_inputInner">
+                        <input asp-for="Email" list="" placeholder="Email" type="email" class="styles_input login-input" autocomplete="off" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="styles_inputComponent">
+            <div class="styles_inputBlock">
+                <div class="styles_inputWrapper">
+                    <div class="styles_inputInner">
+                        <input asp-for="Password" list="" placeholder="Şifrə" type="password" class="styles_input inp-pswrd login-input" autocomplete="off" value="">
+                    </div>
+                    <button class="styles_passwordVisibility" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye active" viewBox="0 0 16 16"> <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" /> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" /> </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16"> <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" fill="red"></path> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" fill="red"></path> </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="styles_underForm">
+            <div class="styles_rememberWrap">
+                <button class="remember-btn rem-btn" type="button">
+                    <input asp-for="RememberMe" class="styles_input_check" value="" type="checkbox">
+                    <svg class="styles_input_check-icon d-none" xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8"><path fill="#e32300" d="M4.023 7.829a.48.48 0 0 1-.68 0L.624 5.11a.722.722 0 0 1 0-1.021l.34-.34a.722.722 0 0 1 1.02 0l1.698 1.696L8.267.862a.722.722 0 0 1 1.021 0l.34.34a.722.722 0 0 1 0 1.02z"></path></svg>
+                </button>
+                <button class="remember-text-btn rem-btn" type="button">
+                    <span class="remember-text-btn-text">
+                        Məni yadda saxla
+                    </span>
+                </button>
+            </div>
+            <button type="button" class="styles_forget-btn forgotpasswor-btn">
+                <span class="styles_forget-btn-text">
+                    Parolu unutmusunuz?
+                </span>
+            </button>
+        </div>
+        <button disabled="disabled" class="next-btn-style next-btn-login " type="submit">
+            <span class="next-btn-text">Daxil ol</span>
+        </button>
+    </form>
+</div>

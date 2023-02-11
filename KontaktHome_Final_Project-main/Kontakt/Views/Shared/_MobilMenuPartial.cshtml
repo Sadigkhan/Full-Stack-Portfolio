@@ -1,0 +1,67 @@
+﻿@model List<Category>
+<div class="mobil-sidebar-items row">
+    <div class="mobil-link">
+        <div class="link-items row justify-content-between">
+            <ul class="col-12 link-list">
+                <li class="link-item">
+                    <a asp-controller="home" asp-action="index"><img style="margin-right:1rem" src="~/User/assets/img/setting/home-icon.svg" alt="Alternate Text" />Əsas</a>
+                </li>
+                <li class="link-item">
+                    @if (ViewBag.AppUser == "true")
+                    {
+                        <a href="#" class="authorizedUserBtn-mob">
+                            <i class="fa-regular fa-user"></i>Hesab
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="user-btn-mob">
+                            <i class="fa-regular fa-user"></i>Giriş/Qeydiyyat
+                        </a>
+                    }
+
+                </li>
+                <li class="link-item wish-cart-mini">
+                    <a href="#"><i class="fa-regular fa-heart"></i>İstək siyahısı</a>
+                </li>
+                <li class="link-item shopping-cart-mini">
+                    <a href="#">
+                    <img style="margin-right:1rem" src="~/User/assets/img/setting/cart-icon.svg" alt="Alternate Text" />
+                    Səbət</a>
+                </li>
+                <li class="link-item">
+                    <a href="#">Aylıq ödəniş</a>
+                </li>
+
+
+
+            </ul>
+        </div>
+        <hr />
+        <div class="kt-text text-center">
+            <p>Kataloq</p>
+        </div>
+        <hr />
+        <div class="ctglist">
+            <ul>
+                @foreach (var category in @Model.Where(x => x.IsMain))
+                {
+                    <li class="main-category-item">
+                        <a data-id="@category.Id" asp-controller="Category" asp-action="GetSubCategory" asp-route-id="@category.Id" class="mobil-main-ctg-btn main-category-item-btn">
+                            <div class="main-category-item-img">
+                                <img src="~/user/assets/img/MainCtgImg/@category.ImageUrl" alt="">
+                            </div>
+                            <span class="main-category-item-text">@category.Name</span>
+                            <i class=" main-category-item-icon fa-solid fa-angle-right"></i>
+                        </a>
+
+                        <div class="mobil-sublist">
+
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

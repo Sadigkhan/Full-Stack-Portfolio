@@ -1,0 +1,40 @@
+﻿@model Product
+@{ 
+    var categoryDetailKeys = ViewBag.Details as IEnumerable<CategoryDetailKey>;
+    var ProDetailList = ViewBag.ProDetail as IEnumerable<ProductDetail>;
+ }
+
+@foreach (CategoryDetailKey categoryDetailKey in categoryDetailKeys)
+{
+    if (categoryDetailKey.DetailKey.DetailValues.Where(x => /*x.BrandId == ViewBag.BrandId &&*/ x.CategoryId == categoryDetailKey.CategoryId).Count() > 0)
+    {
+        <div class="form-group  detailColumn col-lg-3 d-block ">
+            <label>@categoryDetailKey.DetailKey.Name</label>
+            <select class="form-control detailInput2 " name="DetailIds" id="@categoryDetailKey.DetailKey.Id">
+                <option value="" selected>Choose...</option>
+                @foreach (DetailValue detailValue in categoryDetailKey.DetailKey.DetailValues)
+                {
+
+
+                    if (detailValue.CategoryId == categoryDetailKey.CategoryId /*&& detailValue.BrandId == ViewBag.BrandId*/)
+                    {
+                        if (Model.ProductDetails.Any(x => x.DetailValueId == detailValue.Id))
+                        {
+                            <option selected value="@detailValue.Id">@detailValue.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@detailValue.Id">@detailValue.Name</option>
+                        }
+
+
+                    }
+
+                }
+
+            </select>
+            @*<a asp-controller="Detail" asp-action="ValueCreate" target="_blank" class="btn btn-success btn-circle mb-2 mr-1 mt-2 " style="color:white"><i class="fas fa-plus"></i></a>*@
+        </div>
+    }
+
+}

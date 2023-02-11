@@ -1,0 +1,74 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+    <div class="col-lg-6 h3 mb-4 text-gray-800">
+        <h1>Category Detail</h1>
+    </div>
+    <div class="col-lg-8 mx-auto ">
+        <div class="card box-form">
+            <div class="card-img-top text-center pt-1">
+                <h5 class="card-title font-weight-bold">Category Image</h5>
+                @if (Model.ImageUrl != null)
+                {
+                    if (Model.IsMain)
+                    {
+                        <img class="card-img-top" style="max-width:10%; object-fit:contain" src="~/User/assets/img/MainCtgImg/@Model.ImageUrl" alt="Card image cap">
+                    }
+                    else
+                    {
+                        <img class="card-img-top" style="max-width:25%; object-fit:contain" src="~/User/assets/img/SubCtgImg/@Model.ImageUrl" alt="Card image cap">
+                    }
+
+                }
+                else
+                {
+                    <span class="text-danger">Main image silinib</span>
+                }
+            </div>
+            <div class="card-body text-center">
+                <hr />
+                <h5 class="card-title font-weight-bold">Title</h5>
+                <p class="p-2" style="font-size:1rem; border:1px solid; border-radius:5px; display:inline-block;  font-weight:600">@Model.Name</p>
+            </div>
+            <div class="card-footer">
+                @if (Model.IsMain)
+                {
+                    <h5 class="card-title font-weight-bold">Category Type</h5>
+                    <p>Main Category</p>
+                    <hr />
+                    <h5 class="card-title font-weight-bold">Sub Categories</h5>
+
+                    <p style="font-weight:500; font-size:1rem">
+                        @string.Join(", ", Model.Children.Select(x => x.Name))
+                    </p>
+                }
+                else
+                {
+                    <h5 class="card-title font-weight-bold">Category Type</h5>
+                    <p>Sub Category</p>
+                    <hr />
+                    <h5 class="card-title font-weight-bold">Parent Category Name</h5>
+                    <p>@Model.Parent.Name</p>
+                    <hr />
+
+                    <h5 class="card-title font-weight-bold">Product Count</h5>
+                    <p>@Model.Products.Count()</p>
+                    <hr />
+                    <h5 class="card-title font-weight-bold">Brand List</h5>
+
+                    <p style="font-weight:500; font-size:1rem">
+                        @string.Join(", ", Model.CategoryBrands.Select(x => x.Brand.Name))
+                    </p>
+                }
+
+
+            </div>
+            <a class="btn btn-primary" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To List</a>
+        </div>
+    </div>
+</div>
+
+

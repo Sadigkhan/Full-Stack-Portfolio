@@ -1,0 +1,28 @@
+﻿@model Product
+
+@{ 
+    var TitleAdd = string.Join(" ", Model.ProductDetails.Where(x => x.DetailKey.ForTitle).OrderByDescending(x => x.DetailKey.UpdatedAt).Select(p => p.DetailValue.Name));
+  }
+<section class="pro-general-info">
+    <div class="product-specs">
+        <h2 class="product-specs-header">
+            <span class="product-specs-val">@Model.Title @TitleAdd</span>
+        </h2>
+        <h3 class="product-specs-title">Təsvir:</h3>
+        <div class="product-specs-items">
+
+              <div class="product-spec-item col-lg-6 col-12">
+                    <div class="product-spec-item-left">
+                        <span style="font-size:1rem;line-height:22px;">@Model.Description</span>
+                    </div>
+
+               </div>
+            
+
+
+
+
+        </div>
+
+    </div>
+</section>

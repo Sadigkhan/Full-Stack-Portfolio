@@ -1,0 +1,69 @@
+﻿
+@model Category
+@{ ViewData["Title"] = "Create"; }
+
+<div class="row">
+    <div class="col-lg-12 h3 mb-4 text-gray-800">
+        <h1>Category Create</h1>
+    </div>
+    <div class="col-lg-6 p-4  mx-auto box-form">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-check">
+                <input asp-for="IsMain" class="form-check-input" placeholder="Enter email">
+                <label asp-for="IsMain" class="form-check-label"></label>
+                <span class="text-danger" asp-validation-for="IsMain"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Category Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group categoryFileInput ">
+                <label asp-for="CategoryImage"></label>
+                <input asp-for="CategoryImage" accept="image/*" class="form-control" id="formFile" placeholder="Enter email">
+                <span class="text-danger" asp-validation-for="CategoryImage"></span>
+            </div>
+            @*<div class="form-group categoryParentInput">
+                <label asp-for="ParentId"></label>
+                <select class="form-control" asp-for="ParentId" asp-items="@new SelectList(ViewBag.MainCategory, nameof(Category.Id), nameof(Category.Name))">
+                     <option value="" selected>Choose...</option>
+                </select>
+            
+                <span class="text-danger" asp-validation-for="ParentId"></span>
+            </div>*@
+
+            <div class="form-group categoryParentInput">
+                <label >Parent Category </label>
+                <select  asp-for="ParentId" class="form-control searchParentSubCtgBtn" asp-items="@new SelectList(ViewBag.MainCategory, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+
+                
+            </div>
+            <div class="SubCtgList">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationPartial">
+        <script>
+            $("#IsMain").prop("checked", false);
+            $(document).on("click", "#IsMain", function () {
+                if ($(this).prop("checked")) {
+                    $(".categoryParentInput").addClass("d-none")
+                    $(".categoryFileInput").removeClass("d-none")
+                } else {
+                    $(".categoryParentInput").removeClass("d-none")
+
+                }
+            })
+        </script>
+        <script src="~/admin/assets/dist/js/Search.js" asp-append-version="true"></script>
+
+    }

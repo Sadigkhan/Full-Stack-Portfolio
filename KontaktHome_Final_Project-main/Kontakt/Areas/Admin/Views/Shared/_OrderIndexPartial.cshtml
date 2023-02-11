@@ -1,0 +1,177 @@
+﻿
+
+@model IEnumerable<Order>
+@{ int count = (ViewBag.PageIndex - 1) * 8; }
+
+@foreach (Order order in Model)
+{
+
+    <div class="Order-list-body">
+        <div class="styles_ordersGrid">
+            <div class="styles_panelTitle">
+                <div class="styles_orderTitle">
+                    <div class="styles_statusInfo">
+                        <span class="styles_status-text">@order.Status</span>
+                    </div>
+                </div>
+                <span class="styles_panelInner styles_panelInner-addres">Ünvan</span>
+                <span class="styles_panelInner styles_panelInner-delivery">Sifariş tarixi:</span>
+                <span class="styles_panelInner styles_panelInner-price">Qiymət:</span>
+            </div>
+            <div class="styles_panelBody">
+                <div class="styles_bodyInner styles_orderBody">
+                    @foreach (OrderItem orderItem in order.OrderItems.Take(2))
+                    {
+
+                        <div class="styles_productsWrap">
+                            <figure class="styles_imageWrap-figure">
+                                <span class="styles_imageWrap-img-span">
+                                    <img class="styles_imageWrap-img" src="~/User/assets/img/ProductImg/@orderItem.Product.MainImage" alt="Alternate Text" />
+
+                                </span>
+                            </figure>
+                        </div>
+
+
+                    }
+                    @if ((order.OrderItems.Count() - 2) > 0)
+                    {
+                        <span class="styles_maxElements">+@(order.OrderItems.Count()-2)</span>
+                    }
+
+
+                </div>
+                <div class="styles_bodyInner styles_addressBody">
+                    <address class="styles_adress">@order.Country, @order.City,<br>@order.State,@order.AppUser.PhoneNumber</address>
+                </div>
+                <div class="styles_bodyInner styles_deliveryBody">
+                    <span class="styles_delivey-date">@order.CreatedAt</span>
+                </div>
+                <div class="styles_bodyInner styles_priceBody">
+                    <div class="styles_priceWrapper">
+                        <div class="styles_priceWrapper-text">
+                            <span class="styles_priceWrapper-text-main">
+                                <h4 class="styles_priceWrapper-text-main-text">@((Math.Truncate(order.TotalPrice)))</h4>
+                            </span>
+
+                            <span class="styles_sup">
+                                @if (((int)(((order.TotalPrice) - (int)(order.TotalPrice)) * 100)) > 0)
+                                {
+                                    <span class="styles_sub-text">.@((int)(((order.TotalPrice) - (int)(order.TotalPrice)) * 100))</span>
+                                }
+
+                            </span>
+
+
+                        </div>
+                        <svg class="price-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" asp-controller="order" asp-action="updateOrder" asp-route-id="@order.Id" class="styles-order-view-btn">
+            <svg class="styles-order-view-btn-svg" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="#171717" d="M.694 1.49A.926.926 0 0 1 2.277.831L6.25 4.813 10.221.832a.93.93 0 1 1 1.315 1.315L6.249 7.424.963 2.147a.926.926 0 0 1-.269-.658z"></path></svg>
+        </button>
+    </div>
+
+}
+<div class="col-lg-12 d-flex pt-3 justify-content-center " style="background-color: #e4e5e7">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageIndex > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="1" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex-1)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= @ViewBag.PageCount; i++)
+            {
+                if (i == @ViewBag.PageIndex || i == @ViewBag.PageIndex - 1 || i == @ViewBag.PageIndex + 1)
+                {
+                    if (i == @ViewBag.PageIndex)
+                    {
+                        <li class="page-item active"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == 1 && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i+1)" asp-route-status="@ViewBag.Status">@(i+1)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == @ViewBag.PageCount && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i-1)" asp-route-status="@ViewBag.Status">@(i-1)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i) </a></li>
+                    }
+                }
+
+
+            }
+
+            @if (ViewBag.PageIndex < ViewBag.PageCount)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex+1)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageCount)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link red" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link " aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+

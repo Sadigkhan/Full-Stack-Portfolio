@@ -1,0 +1,557 @@
+﻿@inject LayoutService layoutService
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<AppUser> userManager;
+@{
+
+    List<Category> Categories = await layoutService.GetCategory();
+    List<BasketVM> basketVMs = await layoutService.GetBasket();
+    List<WishVM> wishVMs = await layoutService.GetWish();
+
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        appUser = userManager.Users.FirstOrDefault(u => u.UserName == User.Identity.Name && !u.isAdmin);
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link rel="stylesheet" href="~/User/assets/css/set/600.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/User/assets/css/set/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/user/assets/css/Slick.css">
+    <link rel="stylesheet" href="~/user/assets/css/main.css">
+    @*<link rel="shortcut icon" href="~/User/assets/img/setting/komptelbaku-apkmini.jpeg">*@
+    @RenderSection("Style", required: false)
+    <title>Test Ucun</title>
+</head>
+<body class="body">
+    @if (appUser != null)
+    {
+        <input id="useridentity" type="hidden" name="name" value="true" />
+    }
+    else
+    {
+        <input id="useridentity" type="hidden" name="name" value="false" />
+    }
+    <div class="overlay "></div>
+    <div class="overlay-right">
+
+    </div>
+    <div class="side">
+
+        <div class="MainCtg">
+
+        </div>
+        <div class="SubCtg">
+
+        </div>
+
+        <div class="BrandList">
+        </div>
+
+    </div>
+    <div class="side-right ">
+        <div class="side-right-inner">
+            <div class="side-right-inner-content">
+                <svg class="side-right-close-btn side-close-btn" xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17"><g><g><g><g><path fill="#191919" d="M1.645 16.832a1.166 1.166 0 0 1-.828-.35 1.166 1.166 0 0 1 0-1.644L15.173.493a1.166 1.166 0 0 1 1.633 0 1.166 1.166 0 0 1 0 1.656L2.473 16.482a1.166 1.166 0 0 1-.828.35z"></path></g><g><path fill="#191919" d="M15.99 16.832a1.166 1.166 0 0 1-.817-.338L.817 2.15A1.171 1.171 0 0 1 2.473.493L16.806 14.85a1.166 1.166 0 0 1-.817 1.982z"></path></g></g></g></g></svg>
+                <div class="dinamic-section">
+
+
+                </div>
+                @if (appUser != null)
+                {
+                    <div class="logout-section">
+                        <a asp-controller="Account" asp-action="logout" class="styles_logOut">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19"><path fill="none" stroke="#dd2917" stroke-linecap="round" stroke-miterlimit="20" stroke-width="2" d="M14.657 4.93a7.66 7.66 0 1 1-10.83 0M9.247 11V1"></path></svg>
+                            <span class="styles_logOut-text">
+                                Hesabdan çıxmaq
+                            </span>
+                        </a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Desktop Header -->
+    <header class="header-area d-none d-md-none d-lg-flex">
+        <div class="container-fluid">
+            <div class="header-top row  align-items-center justify-content-between">
+                <div class="header-left col-lg-3  d-flex align-items-center justify-content-between">
+                    <div class="logo-item col-lg-6">
+                        <a asp-controller="home" asp-action="index">@*<img src="~/user/assets/img/setting/komptelbaku-apk.jpeg" alt="">*@</a>
+                    </div>
+                    <div class="Menubtn col-lg-6">
+                        <a id="Menubtn" asp-controller="Category" asp-action="GetMainCategory" class=" d-flex align-items-center">
+                            <i class="fa-solid fa-bars "></i>
+                            <span>Menyu</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="header-search col-lg-5 d-none d-lg-block">
+                    <div class="search-bar d-flex align-items-center justify-content-between">
+                        <i class="fa fa-search"></i>
+                        <input type="text" name="" id="pro-search-input">
+
+                        <button style="visibility:hidden" class="searchDelete"><i class="fa-solid fa-x"></i></button>
+                        <button style="visibility:hidden" type="submit" class="searchbtn">Axtarış</button>
+
+                    </div>
+
+                </div>
+                <div class="search-section d-none">
+
+                </div>
+                <div class="header-action col-lg-3  d-flex align-items-center">
+
+                    @if (appUser == null)
+                    {
+                        <div class="top-action top-user col-lg-4 position-relative">
+
+                            <a class="user-btn" href="">
+                                <i class="fa-regular fa-user"></i>
+                                <div class="user-info position-absolute">
+                                    <h1>Xoş gəlmisiniz!</h1>
+                                    <p>Tövsiyələr, Şəxsi bonuslar və endirimlər əldə etmək üçün qeydiyyatdan keçin və ya daxil olun.</p>
+                                </div>
+                            </a>
+
+
+
+
+
+                        </div>
+                        <div class="top-action top-heart col-lg-4">
+                            <a href="" class="wish-cart-mini">
+                                <i class="fa-regular fa-heart"></i>
+                                @if (wishVMs.Count > 0)
+                                {
+                                    <sup class="heartCount wishCount">@wishVMs.Count</sup>
+                                }
+                                else
+                                {
+                                    <sup class="heartCount wishCount"></sup>
+                                }
+
+
+                            </a>
+                        </div>
+                        <div class="top-action top-cart col-lg-4">
+                            <a href="" class="shopping-cart-mini">
+                                @*<i class="fa-solid fa-shopping-cart"></i>*@
+                                <img style="margin-right:1rem" src="~/User/assets/img/setting/cart-icon.svg" alt="Alternate Text" />
+                                @if (basketVMs.Count > 0)
+                                {
+                                    <sup class="heartCount basketCount">@basketVMs.Count</sup>
+                                }
+                                else
+                                {
+                                    <sup class="heartCount basketCount"></sup>
+                                }
+                            </a>
+                        </div>
+                    }
+
+                    else
+                    {
+                        <div class="top-action top-action-identy top-user col-lg-6 position-relative">
+
+                            <span class="styles_authorizedUserWrap">
+                                <button type="button" class="styles_authorizedUserBtn authorizedUserBtn">
+                                    @if (appUser.Image == null)
+                                    {
+                                        <img src="~/User/assets/img/userimg/icone-utilisateur-rouge.png" alt="avatar" class="styles_gravatar user-img">
+
+                                    }
+                                    else
+                                    {
+                                        <img src="~/User/assets/img/userimg/@appUser.Image" alt="avatar" class="styles_gravatar user-img">
+
+                                    }
+                                    <h3 class="styles_userName">@appUser.Name @appUser.SurName </h3>
+                                </button>
+                                <button type="button" class="styles_arrowDown authorizedUserBtn">
+                                    <svg class="user-arrowDownSVG" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                        <path fill="#171717" d="M.694 1.49A.926.926 0 0 1 2.277.831L6.25 4.813 10.221.832a.93.93 0 1 1 1.315 1.315L6.249 7.424.963 2.147a.926.926 0 0 1-.269-.658z"></path>
+                                    </svg>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="top-action top-action-identy top-heart col-lg-3">
+                            
+                            <a href="" class="wish-cart-mini">
+                                <i class="fa-regular fa-heart"></i>
+                                @if (wishVMs.Count > 0)
+                                {
+                                    <sup class="heartCount wishCount">@wishVMs.Count</sup>
+                                }
+                                else
+                                {
+                                    <sup class="heartCount wishCount"></sup>
+                                }
+
+
+                            </a>
+                        </div>
+                        <div class="top-action top-action-identy top-cart col-lg-3">
+                            <a href="" class="shopping-cart-mini">
+                                <i class="fa-solid fa-shopping-cart"></i>
+                                @if (basketVMs.Count > 0)
+                                {
+                                    <sup class="heartCount basketCount">@basketVMs.Count</sup>
+                                }
+                                else
+                                {
+                                    <sup class="heartCount basketCount"></sup>
+                                }
+                            </a>
+                        </div>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+    <!-- Mobile Header -->
+    <header class="mobil-header-area d-flex d-sm-flex d-lg-none">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="logo col-12 ">
+                    <a asp-controller="home" asp-action="index">@*<img src="~/user/assets/img/setting/komptelbaku-apk.jpeg" alt="">*@</a>
+                </div>
+                <div id="navbar" class=" mob-nav col-12 d-flex justify-content-between align-items-center">
+                    <div class="left Menubtn col-2">
+                        <a href="" id="Mob-Menubtn" class=" d-flex align-items-center">
+                            <i class="fa-solid fa-bars "></i>
+                            <span class="d-none d-md-block d-sm-block">Menyu</span>
+                        </a>
+                    </div>
+                    <div class="mob-header-search col-8">
+                        <div class="search-bar">
+                            <i class="fa fa-search"></i>
+                            <input type="text" name="" id="mob-pro-search-input" placeholder="Məhsul üzrə axtarış">
+                        </div>
+
+                    </div>
+                    <div class="mob-user top-action right col-2">
+                        @if (appUser == null)
+                        {
+                            <a class="user-btn">
+                                <i class="fa-regular fa-user"></i>
+
+                            </a>
+                        }
+                        else
+                        {
+                            <button type="button" class="styles_authorizedUserBtn authorizedUserBtn">
+                                @if (appUser.Image == null)
+                                {
+                                    <img src="~/User/assets/img/userimg/icone-utilisateur-rouge.png" alt="avatar" class="styles_gravatar user-img">
+
+                                }
+                                else
+                                {
+                                    <img src="~/User/assets/img/userimg/@appUser.Image" alt="avatar" class="styles_gravatar user-img">
+
+                                }
+                                @*<h3 class="styles_userName">@appUser.Name @appUser.SurName </h3>*@
+                            </button>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="search-section-mob d-none">
+                
+            </div>
+        </div>
+       
+    </header>
+    
+    @RenderBody()
+    <footer>
+        <!-- Mobil footer nav -->
+        <div class="mobil-footer-area d-flex d-sm-flex d-lg-none ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-between text-center">
+                    <div class="nav-icon col-3" style=" padding: 1rem 0 0rem;">
+                        <a asp-controller="home" asp-action="index">
+                            <i class="fa-solid fa-house"></i>
+                            <span>Əsas səhifə</span>
+                        </a>
+
+                    </div>
+                    <div class="nav-icon col-3"style=" padding: 1rem 0 0rem;">
+                        <a class="wish-cart-mini" style="cursor:pointer">
+                            <i class="fa-regular fa-heart">
+                                @if (wishVMs.Count > 0)
+                                {
+                                    <sub class="wishCount">@wishVMs.Count</sub>
+                                }
+                                else
+                                {
+                                    <sub class="wishCount"></sub>
+                                }
+                            </i>
+                            <span>İstək</span>
+
+                        </a>
+
+                    </div>
+
+                    <div class="nav-icon col-3" style=" padding: 1rem 0 0rem;">
+                        <a class="shopping-cart-mini" href="">
+
+                            <i class="">
+                                <svg style="filter: brightness(0) saturate(100%) invert(41%) sepia(0%) saturate(1179%) hue-rotate(157deg) brightness(100%) contrast(91%);" class="styles_buttonBody-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18"><path fill="#bebebe" d="M6.235 5.626l1.52-3.308a.137.137 0 0 1 .113-.067h5.085a.1.1 0 0 1 .1.067l1.522 3.308zm-3.304 2.25h15.005c.09.083.12.211.079.326l-1.316 7.368a.296.296 0 0 1-.09.18H4.235a.238.238 0 0 1-.101-.18L2.829 8.202a.335.335 0 0 1 .102-.326zm13.7 10.123a2.397 2.397 0 0 0 2.318-2.036l1.316-7.367a2.6 2.6 0 0 0-.563-2.138 2.247 2.247 0 0 0-1.755-.832H17.1l-1.897-4.23a2.394 2.394 0 0 0-2.25-1.394H7.868a2.37 2.37 0 0 0-2.159 1.394l-1.945 4.23h-.833a2.25 2.25 0 0 0-1.8.832 2.634 2.634 0 0 0-.552 2.138l1.43 7.367A2.395 2.395 0 0 0 4.256 18z"></path></svg>
+
+                                @if (basketVMs.Count > 0)
+                                {
+                                    <sub class="basketCount">@basketVMs.Count</sub>
+                                }
+                                else
+                                {
+                                    <sub class="basketCount"></sub>
+                                }
+
+                            </i>
+                            <span>Səbət</span>
+                        </a>
+
+                    </div>
+                    <div class="nav-icon col-3" style=" padding: 1rem 0 0rem;">
+                        @if (appUser == null)
+                        {
+                            <a href="" class="user-btn">
+                                <i class="fa-regular fa-user"></i>
+                                <span>Hesab</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="" class="authorizedUserBtn">
+                                <i class="fa-regular fa-user"></i>
+                                <span>Hesab</span>
+                            </a>
+                        }
+
+
+                    </div>
+                </div>
+                <div class="row mobil-sidebar">
+                    <div class="container">
+
+                        @await Html.PartialAsync("_MobilMenuPartial", Categories)
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-area">
+            <div class="footer-Wrapper">
+                <button class="footer-up-btn">
+                    <img src="~/User/assets/img/setting/up-arrow.svg" class="footer-upicon" alt="Alternate Text" />
+
+                </button>
+                <span class="footer-up-btn-text">Yuxarı</span>
+            </div>
+            <div class="footer-center ">
+                <div class="footer-center-contentItem">
+                    <h3 class="contentHeader">Məlumat</h3>
+                    <ul class="linksList">
+                        <li>
+                            <a href="questions-answers-az">
+                                <span class="colorLink link">Tez-tez verilən suallar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Saytın istifadə şərtləri</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-contentItem">
+                    <h3 class="contentHeader">Şirkətlər</h3>
+                    <ul class="linksList">
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Şirkət haqqında</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Şirkətin xəbərləri</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Mağazalarımız</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Xidmətlər</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Vakansiyalar&nbsp;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Konfidensiallıq siyasəti</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-contentItem">
+                    <h3 class="contentHeader">Müştərilər üçün</h3>
+                    <ul class="linksList">
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Hissə-hissə ödənişinə dair tələblər</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Aylıq ödənişlərin üsulları</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Əlaqə</span>
+                                <span class="colorLink link">*6060</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="colorLink link">Biz xəritədə</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left col-lg-8 col-12 " style="visibility:hidden">
+                    <h4 class="contentHeader">Abunə olun:</h4>
+                    <form class="subscribeForm" action="/" method="post">
+                        <div class="input-group-items d-flex ">
+                            <div class="input-groupb col-lg-6 col-12">
+                                <input type="email" placeholder="Sizin Email" name="name" value="" />
+                            </div>
+                            <div class="input-btn col-lg-2 col-12">
+                                <button type="submit">Abunə olmaq</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="footer-bottom-right col-lg-4 col-12">
+                    <h4 class="contentHeader">Biz sosial şəbəkələrdə:</h4>
+                    <div class="social-link">
+                        <ul class="social-link-list">
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/fb.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/yt.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/inst.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/linkedin.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/whatsapp.png" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/telegram.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/tiktok.png" alt="Alternate Text" />
+                                </a>
+                            </li>
+                            <li class="social-link-list-item">
+                                <a href="#">
+                                    <img src="~/User/assets/img/setting/twitter.svg" alt="Alternate Text" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h4 class="contentHeader">Ödəniş sistemləri</h4>
+                    <div class="social-link">
+                        <ul class="social-link-list">
+                            <li class="social-link-list-item">
+
+                                <img src="~/User/assets/img/setting/mc.svg" alt="Alternate Text" />
+
+                            </li>
+                            <li class="social-link-list-item">
+
+                                <img src="~/User/assets/img/setting/visa_icon.png" alt="Alternate Text" />
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </footer>
+
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script type="text/javascript" src="~/User/assets/js/Jquery.js"></script>
+    <script type="text/javascript" src="~/User/assets/js/SlickMin.js"></script>
+    <script type="text/javascript" src="~/User/assets/js/Slick.js"></script>
+    <script src="~/user/assets/js/main.js"></script>
+    @RenderSection("Script", required: false)
+</body>
+
+</html>
+

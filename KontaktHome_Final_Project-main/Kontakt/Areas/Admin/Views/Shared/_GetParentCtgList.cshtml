@@ -1,0 +1,19 @@
+﻿
+
+@model List<Category>
+
+<div class="form-group">
+    <label>Sub Category </label>
+    <select class="form-control detailInput deactive  parentselect" id="ParentId" name="ParentId">
+        <option value="" selected>Choose...</option>
+        @foreach (var item in Model)
+        {
+            if (!item.IsDeleted)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+
+        }
+    </select>
+</div>
+

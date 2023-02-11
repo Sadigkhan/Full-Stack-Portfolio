@@ -1,0 +1,164 @@
+﻿@model Product
+
+@{ 
+    var categoryDetailKeys = ViewBag.Details as IEnumerable<CategoryDetailKey>;
+    var ProDetailList = ViewBag.ProDetail as IEnumerable<ProductDetail>;
+}
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+<div class="row justify-content-lg-center">
+    <div class="col-lg-8  box-form ">
+        <div class="forImg mb-2">
+            <div class="col-lg-12 ">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        @if (Model.ProductImages.Count() > 0)
+                        {
+                            @foreach (var productImage in Model.ProductImages)
+                            {
+                                <div class="col-lg-2 ">
+                                    <div class="ImgBox box-form mb-2" style="padding:0!important">
+                                        <img style="max-width:100%;" src="~/User/assets/img/ProductImg/@productImage.Image" alt="Alternate Text" />
+                                    </div>
+                                    @if (Model.ProductImages.Count() > 1)
+                                    {
+                                        <div class="text-center">
+                                        <a class="btn btn-danger" id="deleteImage" asp-action="DeleteImage" asp-route-id="@productImage.Id" style="font-size:0.7rem; opacity:0.9">Delete</a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+        </div>
+        
+    </div>
+        </div>
+        <div class="forForm">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input class="form-control" asp-for="Title" placeholder="Enter Title">
+                    <span class="text-danger" asp-validation-for="Title"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input class="form-control" asp-for="Price" placeholder="Enter Price">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountPrice"></label>
+                    <input class="form-control" asp-for="DiscountPrice" placeholder="Enter DiscountPrice">
+                    <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea class="form-control" asp-for="Description" placeholder="Enter Description"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Count"></label>
+                    <input class="form-control" asp-for="Count" placeholder="Enter Count">
+                    <span class="text-danger" asp-validation-for="Count"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MainImageFile"></label>
+                    <input class="form-control" accept="image/jpeg" asp-for="MainImageFile" placeholder="Enter MainImage">
+                    <img style="object-fit:contain; max-width:120px;min-width:120px; border:2px solid gray; border-radius:5px" src="~/User/assets/img/ProductImg/@Model.MainImage" alt="Alternate Text" />
+                    <span class="text-danger" asp-validation-for="MainImageFile"></span>
+                </div>
+                @if (Model.ProductImages.Count() < 5)
+                {
+            <div class="form-group">
+                <label asp-for="ProductImagesFile"></label>
+                <input class="form-control" accept="image/jpeg" asp-for="ProductImagesFile" placeholder="Enter ProductImagesFile">
+                <span class="text-danger" asp-validation-for="ProductImagesFile"></span>
+            </div>}
+
+
+
+                <div class="form-group">
+                    <label asp-for="TagIds"></label>
+                    <select class="form-control" asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Name))">
+                    </select>
+                    <span class="text-danger" asp-validation-for="TagIds"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category</label>
+                    <select class="form-control deactive detailInput searchBrandBtn" asp-for="CategoryId" asp-items="@new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name))">
+                        <option value="" selected>Choose...</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                </div>
+
+
+                <div class="BrandList">
+                    <div class="form-group">
+                        <label asp-for="BrandId"></label>
+                        <select class="form-control detailInput deactive searchDetailBtn" id="BrandId" name="BrandId">
+                            <option value="">Choose...</option>
+                            @foreach (var item in ViewBag.Brands)
+                            {
+                                if (Model.BrandId == item.BrandId)
+                                {
+                                    <option selected value="@item.BrandId">@item.Brand.Name</option>
+                                 }
+                                else
+                                {
+                                    <option value="@item.BrandId">@item.Brand.Name</option>
+                                }
+
+                            }
+                        </select>
+                        <span class="text-danger" asp-validation-for="BrandId"></span>
+                    </div>
+                </div>
+                <div class="DetailList  align-items-center justify-content-between">
+
+                    @foreach (CategoryDetailKey categoryDetailKey in categoryDetailKeys)
+                    {
+                        if (categoryDetailKey.DetailKey.DetailValues.Where(x => /*x.BrandId == ViewBag.BrandId &&*/ x.CategoryId == categoryDetailKey.CategoryId).Count() > 0)
+                        {
+                            <div class="form-group  detailColumn col-lg-3 d-block ">
+                                <label>@categoryDetailKey.DetailKey.Name</label>
+                                <select class="form-control detailInput2 " name="DetailIds" id="@categoryDetailKey.DetailKey.Id">
+                                    <option value="" selected>Choose...</option>
+                                    @foreach (DetailValue detailValue in categoryDetailKey.DetailKey.DetailValues)
+                                    {
+
+
+                                        if (detailValue.CategoryId == categoryDetailKey.CategoryId /*&& detailValue.BrandId == ViewBag.BrandId*/)
+                                        {
+                                            if (Model.ProductDetails.Any(x => x.DetailValueId == detailValue.Id))
+                                            {
+                                                <option selected value="@detailValue.Id">@detailValue.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option  value="@detailValue.Id">@detailValue.Name</option>
+                                            }
+
+
+                                        }
+
+                                    }
+
+                                </select>
+                                @*<a asp-controller="Detail" asp-action="ValueCreate" target="_blank" class="btn btn-success btn-circle mb-2 mr-1 mt-2 " style="color:white"><i class="fas fa-plus"></i></a>*@
+                            </div>
+                        }
+
+                    }
+
+                </div>
+
+                <a class="btn btn-danger" asp-action="Index">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+

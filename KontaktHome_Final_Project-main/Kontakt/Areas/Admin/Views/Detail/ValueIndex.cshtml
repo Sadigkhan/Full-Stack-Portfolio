@@ -1,0 +1,71 @@
+﻿
+
+@model IEnumerable<DetailValue>
+@{
+    ViewData["Title"] = "ValueIndex";
+}
+<div class="row justify-content-between align-items-center ">
+    <div class="col-lg-4 h3 mb-4 text-gray-800">
+        <h1>Detail Value list</h1>
+    </div>
+
+    <div class="col-lg-2 h3 mb-4 text-gray-800">
+        <a asp-controller="Detail" asp-action="ValueCreate" asp-area="admin" asp-route-page="@ViewBag.PageIndex" asp-route-status="@ViewBag.Status" class="btn btn-success " style="color:white">Create new Detail Value</a>
+    </div>
+</div>
+
+<div class="d-flex align-items-center text-center mb-2">
+    <div class="col-lg-2">
+        <label>Search by value</label>
+        <input type="text" class="inpName form-control inpVal mx-2" name="name" value="" placeholder="Enter  Value" />
+        <a hidden asp-controller="Detail" data-status="@ViewBag.Status" asp-action="PageChangeValue" class="SearchBtn">content</a>
+    </div>
+    <div class="col-lg-2">
+        <label>Search by Detail Key</label>
+        <input type="text" class="inpNameDetailKey form-control mx-2 inpVal" name="name" value="" placeholder="Enter DetailKey" />
+    </div>
+    <div class="col-lg-2">
+        <label>Search by Category Name</label>
+        <input type="text" class="inpNameCtg form-control mx-2 inpVal" name="name" value="" placeholder="Enter Category name" />
+    </div>
+    <div class="col-lg-2">
+        <label>Search by Brand Name</label>
+        <input type="text" class="inpNameBrand form-control mx-2 inpVal" name="name" value="" placeholder="Enter Brand name" />
+    </div>
+    <div class="col-lg-2 text-gray-800 ">
+        <label>Select by  Delete status</label>
+        <select class="form-control Status StatusChange" name="status">
+            <option selected>All</option>
+            <option value="false">Active</option>
+            <option value="true">Deleted</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="row  box-list TableList">
+    @await Html.PartialAsync("_DetailValueIndex", Model)
+</div>
+
+@section Script{
+    <script src="~/admin/assets/dist/js/sweetalert2.all.min.js"></script>
+    <script src="~/admin/assets/dist/js/Custom.js" asp-append-version="true"></script>
+    <script src="~/admin/assets/dist/js/Pagination.js" asp-append-version="true"></script>
+    <script>
+
+    </script>
+}
+
+@section Style{
+    <link href="~/admin/assets/dist/css/sweetalert2.min.css" rel="stylesheet" />
+}
+
+
+
+
+
+
+
+
+
+

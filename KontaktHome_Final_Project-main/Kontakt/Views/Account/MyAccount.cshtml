@@ -1,0 +1,227 @@
+﻿@model UserProfileVM
+@{
+    ViewData["Title"] = "MyAccount";
+}
+<input type="hidden" class="my-account-to" name="name" value="@ViewBag.to" />
+<div class="my-account">
+    <div class="styles_accountTitle align-items-center">
+        <div class="styles_accountAvatar d-none  d-lg-block">
+            <div class="styles_image">
+                @if (Model.Member.Image != null)
+                {
+                    <img class="user-img" src="~/User/assets/img/userimg/@Model.Member.Image" alt="Alternate Text" />
+                }
+                else
+                {
+                    <img class="user-img" src="~/User/assets/img/userimg/icone-utilisateur-rouge.png" alt="Alternate Text" />
+                }
+            </div>
+            <button type="button" class="styles_edit my-account-img-edit-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#d8d8d8" d="M0 12.016v2.965h2.965l8.748-8.748-2.965-2.965zM13.998 2.83L12.152.982a.792.792 0 0 0-1.12 0L9.587 2.43l2.965 2.965 1.447-1.447a.792.792 0 0 0 0-1.119z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="styles_accountAvatar d-block d-lg-none">
+            <div class="styles_image">
+                @if (Model.Member.Image != null)
+                {
+                    <img class="user-img" src="~/User/assets/img/userimg/@Model.Member.Image" alt="Alternate Text" />
+                }
+                else
+                {
+                    <img class="user-img" src="~/User/assets/img/userimg/icone-utilisateur-rouge.png" alt="Alternate Text" />
+                }
+            </div>
+            <button type="button" class="styles_edit my-account-img-edit-btn" style="left: 64px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                    <path fill="#d8d8d8" d="M0 12.016v2.965h2.965l8.748-8.748-2.965-2.965zM13.998 2.83L12.152.982a.792.792 0 0 0-1.12 0L9.587 2.43l2.965 2.965 1.447-1.447a.792.792 0 0 0 0-1.119z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="crumbs_wrapper col-lg-12">
+            <div class="crumbs_wrapper-routes d-none d-lg-block">
+                <a asp-controller="home" asp-action="index" style="text-decoration:none">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <i class="fa-solid fa-angle-right"></i>
+                <a asp-controller="account" asp-action="myaccount">
+
+                    <span>Mənim Hesabım</span>
+                </a>
+
+            </div>
+            <div class="title-text d-none d-lg-block">
+                <h1>Mənim Hesabım</h1>
+            </div>
+            <div class="crumbs_wrapper-routes-mob d-block d-lg-none">
+                <a asp-controller="home" asp-action="index">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>
+                        Əsas
+                    </span>
+                </a>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="my-account-content ">
+        <div class="my-account-content-left col-lg-2 col-12">
+            <div class="my-account-content-left-content">
+                <ul class="styles_navInner">
+                    @if (ViewBag.to == null)
+                    {
+                        <li class="styles_navItem active">
+                            <a class="styles_navLink styles_navLink-btn " asp-controller="account" asp-action="myaccount" asp-route-from="account">
+                                <span class="styles_navItemIcon">
+                                    <img class="styles_accountIcon" src="~/User/assets/img/setting/accountInfo_1.svg" alt="Alternate Text" />
+                                </span>
+                                <span class="styles_navItemText">
+                                    <h6 class="styles_inherit-text">
+                                        <span class="styles_inherit-text-span">Mənim Hesabım</span>
+                                    </h6>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="styles_navItem @(ViewBag.to=="account" ? "active" :"")">
+                            <a class="styles_navLink styles_navLink-btn " asp-controller="account" asp-action="myaccount" asp-route-from="account">
+                                <span class="styles_navItemIcon">
+                                    <img class="styles_accountIcon" src="~/User/assets/img/setting/accountInfo_1.svg" alt="Alternate Text" />
+                                </span>
+                                <span class="styles_navItemText">
+                                    <h6 class="styles_inherit-text">
+                                        <span class="styles_inherit-text-span">Mənim Hesabım</span>
+                                    </h6>
+                                </span>
+                            </a>
+                        </li>
+                    }
+
+                    <li class="styles_navItem @(ViewBag.to=="order" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn" asp-controller="account" asp-action="myaccount" asp-route-from="order" asp-route-to="order">
+                            <span class="styles_navItemIcon">
+                                <img class="styles_accountIcon" src="~/User/assets/img/setting/accountInfo_2.svg" alt="Alternate Text" />
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">Mənim sifarişlərim</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="styles_navItem @(ViewBag.to=="compare" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn" asp-controller="account" asp-action="myaccount" asp-route-from="compare">
+                            <span class="styles_navItemIcon">
+                                <svg style="filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(89%) contrast(104%);" class="styles_buttonBody-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18"><path fill="#bebebe" d="M6.235 5.626l1.52-3.308a.137.137 0 0 1 .113-.067h5.085a.1.1 0 0 1 .1.067l1.522 3.308zm-3.304 2.25h15.005c.09.083.12.211.079.326l-1.316 7.368a.296.296 0 0 1-.09.18H4.235a.238.238 0 0 1-.101-.18L2.829 8.202a.335.335 0 0 1 .102-.326zm13.7 10.123a2.397 2.397 0 0 0 2.318-2.036l1.316-7.367a2.6 2.6 0 0 0-.563-2.138 2.247 2.247 0 0 0-1.755-.832H17.1l-1.897-4.23a2.394 2.394 0 0 0-2.25-1.394H7.868a2.37 2.37 0 0 0-2.159 1.394l-1.945 4.23h-.833a2.25 2.25 0 0 0-1.8.832 2.634 2.634 0 0 0-.552 2.138l1.43 7.367A2.395 2.395 0 0 0 4.256 18z"></path></svg>
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">Mənim Səbətim</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="styles_navItem @(ViewBag.to=="favorite" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn" asp-controller="account" asp-action="myaccount" asp-route-from="favorite">
+                            <span class="styles_navItemIcon">
+                                <img class="styles_accountIcon" src="~/User/assets/img/setting/accountInfo_3.svg" alt="Alternate Text" />
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">İstək siyahısı</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="styles_navItem @(ViewBag.to=="comment" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn" asp-controller="account" asp-action="myaccount" asp-route-from="comment">
+                            <span class="styles_navItemIcon">
+                                <img class="styles_accountIcon" src="~/User/assets/img/setting/accountInfo_7.svg" alt="Alternate Text" />
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">Mənim rəylərim</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="styles_navItem @(ViewBag.to=="view" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn likebtn" asp-controller="account" asp-action="myaccount" asp-route-from="view">
+                            <span class="styles_navItemIcon">
+                                <svg class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">Bəyəndiyim məhsullar</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="styles_navItem @(ViewBag.to=="dislike" ? "active" :"")">
+                        <a class="styles_navLink styles_navLink-btn dislikebtn" asp-controller="account" asp-action="myaccount" asp-route-from="dislike">
+                            <span class="styles_navItemIcon">
+                                <svg style="transform: scaleY(-1)" class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </span>
+                            <span class="styles_navItemText">
+                                <h6 class="styles_inherit-text">
+                                    <span class="styles_inherit-text-span">Bəyənmədiyim məhsullar</span>
+                                </h6>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="my-account-content-right mt-5 col-lg-10 col-12" style="padding:0px">
+            <div class="my-account-content-right-content">
+                @if (ViewBag.to == null)
+                {
+                    @await Html.PartialAsync("_MyAccountPartial", Model)
+                }
+
+
+                @if (@ViewBag.to == "account")
+                {
+                    @await Html.PartialAsync("_MyAccountPartial", Model)
+                }
+                else if (@ViewBag.to == "order")
+                {
+                    @await Html.PartialAsync("_MyOrdersPartial", Model)
+                }
+                else if (@ViewBag.to == "favorite")
+                {
+                    @await Html.PartialAsync("_MyFavoritePartial", Model.WishVMs)
+                }
+                else if (@ViewBag.to == "compare")
+                {
+                    @await Html.PartialAsync("_MyComparePartial", Model.BasketVMs)
+                }
+                else if (@ViewBag.to == "view")
+                {
+                    @await Html.PartialAsync("_MyViewPartial", Model.LikeVMs)
+                }
+                else if (@ViewBag.to == "comment")
+                {
+                    @await Html.PartialAsync("_MyCommentPartial", Model.Reviews)
+                }
+                else if (@ViewBag.to == "dislike")
+                {
+                    @await Html.PartialAsync("_MyDislikePartial", Model.DisLikeVMs)
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content-edit">
+        
+    </div>
+
+</div>

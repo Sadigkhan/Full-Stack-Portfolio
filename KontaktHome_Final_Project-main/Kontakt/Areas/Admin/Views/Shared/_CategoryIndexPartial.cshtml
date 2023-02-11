@@ -1,0 +1,201 @@
+﻿
+
+@model IEnumerable<Category>
+@{ int count = (ViewBag.PageIndex - 1) * 5;
+    int mainPro = 0;
+    }
+
+<div class="col-lg-12 table-list">
+    <table class="table table-striped  ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Products Count</th>
+                <th scope="col">Main Category Name</th>
+                <th scope="col">Delete Status</th>
+                <th scope="col">Setting</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Category category in Model)
+            {
+                count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td style="vertical-align: inherit; vertical-align: middle">
+                    @if (category.ImageUrl != null)
+                    {
+                        if (category.IsMain)
+                        {
+                            <img class="img-fluid img-thumbnail" src="~/User/assets/img/MainCtgImg/@category.ImageUrl" alt="Alternate Text" style="max-width:120px;max-height:120px; object-fit:contain " />
+                        }
+                        else
+                        {
+                            <img class="img-fluid img-thumbnail" src="~/User/assets/img/SubCtgImg/@category.ImageUrl" alt="Alternate Text" style="max-width:120px;max-height:120px; object-fit:contain " />
+                        }
+
+                    }
+                    else
+                    {
+                        <span class="text-danger">Empty</span>
+                    }
+                </td>
+                <td style="vertical-align: inherit; vertical-align: middle ">@category.Name</td>
+                <td style="vertical-align: inherit; vertical-align: middle ">
+                    @if (category.IsMain)
+                    {
+                        @("Main")
+                    }
+                    else
+                    {
+                        @("Sub")
+                    }
+                </td>
+                @if (category.IsMain)
+                {
+                    @(mainPro=0)
+                    <td style="vertical-align: inherit; vertical-align: middle ">
+
+                        @foreach (var item in category.Children)
+                        {
+                            mainPro += item.Products.Count();
+
+                        }
+                        @mainPro
+                    </td>
+
+                }
+                else
+                {
+                    <td style="vertical-align: inherit; vertical-align: middle ">@category.Products.Where(x => !x.IsDeleted).Count()</td>
+
+                }
+                @if (!category.IsMain)
+                {
+                    <td style="vertical-align: inherit; vertical-align: middle ">@category.Parent.Name</td>
+                }
+                else
+                {
+                    <td style="vertical-align: inherit; vertical-align: middle ">---</td>
+                }
+
+                <td style=" vertical-align: inherit; vertical-align: middle  ;color:@(category.IsDeleted ? "red" :"green")">@(category.IsDeleted ? "DeActive":"Active")</td>
+                <td style="vertical-align: inherit; vertical-align: middle ">
+                    <a class="btn btn-info" asp-action="Detail" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status" asp-route-TypeStatus="@ViewBag.TypeStatus" asp-route-page="@ViewBag.PageIndex">Detail</a>
+                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status" asp-route-TypeStatus="@ViewBag.TypeStatus" asp-route-page="@ViewBag.PageIndex">Update</a>
+                    @if (category.IsDeleted)
+                    {
+                        <a class="btn btn-primary restore" asp-action="DeleteRestore" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status" asp-route-TypeStatus="@ViewBag.TypeStatus" asp-route-page="@ViewBag.PageIndex">Restore</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger delete" asp-action="DeleteRestore" asp-route-id="@category.Id" asp-route-status="@ViewBag.Status" asp-route-TypeStatus="@ViewBag.TypeStatus" asp-route-page="@ViewBag.PageIndex">Delete</a>
+                    }
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-lg-12 d-flex pt-3 justify-content-center " style="background-color: #e4e5e7">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageIndex > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="1" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex-1)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= @ViewBag.PageCount; i++)
+            {
+                if (i == @ViewBag.PageIndex || i == @ViewBag.PageIndex - 1 || i == @ViewBag.PageIndex + 1)
+                {
+                    if (i == @ViewBag.PageIndex)
+                    {
+                        <li class="page-item active"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == 1 && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i+1)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i+1)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == @ViewBag.PageCount && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i-1)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i-1)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i)</a></li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus">@(i) </a></li>
+                    }
+                }
+
+
+            }
+
+            @if (ViewBag.PageIndex < ViewBag.PageCount)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex+1)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageCount)" asp-route-status="@ViewBag.Status"  asp-route-TypeStatus="@ViewBag.TypeStatus" aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link red" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link " aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<CategoryBrand>
+@if (Model.Count() > 0)
+{
+<ul class="main-category">
+    <li class="main-category-item for-mobil">
+        <a class=" main-category-item-btn" asp-controller="product" asp-action="ProductList" asp-route-id="@ViewBag.PerntId" asp-route-keyfrom="ctg">
+
+            <span class="main-category-item-text text-center" style="color:red">Bütün Brandlar</span>
+        </a>
+    </li>
+    @foreach (CategoryBrand brand in Model)
+    {
+        <li class="main-category-item" >
+            <a asp-controller="product" asp-action="ProductList" asp-route-id="@brand.Id" asp-route-keyfrom="brand" class=" main-category-item-btn">
+                <div class="main-category-item-img">
+                    <img src="~/user/assets/img/brandImg/@brand.ImageUrl" alt="">
+                </div>
+                <span class="main-category-item-text">@brand.Brand.Name</span>
+
+            </a>
+
+        </li>
+    }
+
+
+</ul>
+}
+

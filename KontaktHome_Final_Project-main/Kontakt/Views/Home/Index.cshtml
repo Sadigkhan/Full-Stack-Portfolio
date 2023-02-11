@@ -1,0 +1,265 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+    int proCount = 0;
+    int parentId = 0;
+    List<Category> ctgList = new List<Category>();
+    List<Product> proList = new List<Product>();
+    double disPro = 0;
+}
+
+<main class="my-3 mb-5">
+    <div class="overlayHome"></div>
+
+    <input hidden id="for-reset" name="name" value="@ViewBag.reset" />
+    <input hidden id="for-reset-id" name="name" value="@ViewBag.id" />
+    <input hidden id="for-reset-token" name="name" value="@ViewBag.token" />
+
+
+    <div class="container-fluid main-box">
+        <div class="info row">
+            <div class="home-info d-none d-lg-flex col-12 col-lg-12">
+                <div class="col-lg-3 info-endirim">
+                    <a href="">
+                        Endirim
+                    </a>
+                </div>
+                <div class="col-lg-9 info-odenis">
+                    <a href="https://www.million.az/attributes/KontaktHome">
+                        Aylıq ödəniş
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="home-introGroup  row col-12 col-lg-12 mt-3 justify-content-between pb-5">
+            <div class="col-lg-3 d-none d-lg-block intro-left home-menu">
+                <div class="sidebarHome active">
+                    <div class="sidebarHome-inner">
+                        <ul class="mainHome-category">
+                            @foreach (Category category in Model.Categories.Where(x => x.IsMain))
+                            {
+                                <li class="mainHome-category-item ">
+                                    <a data-id="@category.Id" asp-controller="Category" asp-action="GetSubCategory" asp-route-id="@category.Id" class="mainHome-ctg-btn  mainHome-category-item-btn">
+                                        <div class="mainHome-category-item-img">
+                                            <img src="~/user/assets/img/MainCtgImg/@category.ImageUrl" alt="">
+                                        </div>
+                                        <span class="mainHome-category-item-text">@category.Name</span>
+                                        <i class=" mainHome-category-item-icon fa-solid fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="HomeSubList">
+
+
+                </div>
+                <div class="HomeBrandList">
+
+                </div>
+
+            </div>
+            <div class="col-lg-9  intro-right">
+
+                <div class="responsive1">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <img style="max-height:600px" src="~/User/assets/img/BannerImg/s222.jpg" alt="/" />
+                    }
+
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        <section class="mobilmin-sidebar d-lg-none  ">
+            <div class="mobilmin-sidebar-inner">
+
+
+                @foreach (Category category in Model.Categories.Where(x => x.IsMain).Take(8))
+                {
+                    <div class="mobilmin-sidebar-inner-items col-6">
+
+                        <a data-id="@category.Id" asp-controller="Category" asp-action="GetSubCategory" asp-route-id="@category.Id" class="mobilmin-sidebar-inner-item">
+                            <div class="mobilmin-sidebar-img-div">
+                                <div class="mobilmin-sidebar-img-div2">
+                                    <span class="mobilmin-sidebar-img-span">
+                                        <img class="mobilmin-sidebar-img" src="~/user/assets/img/MainCtgImg/@category.ImageUrl" alt="">
+                                    </span>
+                                </div>
+
+
+                            </div>
+                            <div class="mobilmin-sidebar-text-div">
+                                <span class="mainHome-category-item-text">@category.Name</span>
+
+                            </div>
+
+                        </a>
+                    </div>
+                }
+
+
+            </div>
+            <div class="mobilCatalog">
+                <button class="mobilCatalog-btn" id="Mob-Menubtn" type="button">
+                    <span class="mobilCatalog-style">
+                        <svg class="mobilCatalog-style-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path fill="#171717" d="M9.78 2.44v4.89a2.45 2.45 0 0 1-2.45 2.45H2.44A2.45 2.45 0 0 1 0 7.33V2.44A2.45 2.45 0 0 1 2.44 0h4.89a2.45 2.45 0 0 1 2.45 2.44zM7.33 2H2.44a.44.44 0 0 0-.44.44v4.89a.45.45 0 0 0 .44.45h4.89a.46.46 0 0 0 .45-.45V2.44A.45.45 0 0 0 7.33 2M9.78 14.67v4.89A2.45 2.45 0 0 1 7.33 22H2.44A2.45 2.45 0 0 1 0 19.56v-4.89a2.45 2.45 0 0 1 2.44-2.45h4.89a2.45 2.45 0 0 1 2.45 2.45zm-2.45-.45H2.44a.45.45 0 0 0-.44.45v4.89c0 .243.197.44.44.44h4.89a.45.45 0 0 0 .45-.44v-4.89a.46.46 0 0 0-.45-.45M22 2.44v4.89a2.45 2.45 0 0 1-2.44 2.45h-4.89a2.45 2.45 0 0 1-2.45-2.45V2.44A2.45 2.45 0 0 1 14.67 0h4.89A2.45 2.45 0 0 1 22 2.44zM19.56 2h-4.89a.45.45 0 0 0-.45.44v4.89a.46.46 0 0 0 .45.45h4.89a.45.45 0 0 0 .44-.45V2.44a.44.44 0 0 0-.44-.44M19.56 12.22A2.45 2.45 0 0 1 22 14.67v4.89A2.45 2.45 0 0 1 19.56 22h-4.89a2.45 2.45 0 0 1-2.45-2.44v-4.89a2.45 2.45 0 0 1 2.45-2.45zm0 2h-4.89a.46.46 0 0 0-.45.45v4.89a.45.45 0 0 0 .45.44h4.89a.44.44 0 0 0 .44-.44v-4.89a.45.45 0 0 0-.44-.45"></path></svg>
+                        <span class="mobilCatalog-style-text">Məhsul kataloqu</span>
+                    </span>
+                </button>
+            </div>
+        </section>
+        <section class="leader mb-5">
+            <div class="section-header mt-5">
+                <h2 class="section-header-text">Satış liderləri</h2>
+            </div>
+            <div class="section-tab">
+                <div class="section-tab-items">
+                    <a asp-controller="product" asp-action="GetProducts" class="section-tab-btn tabBtnActive">
+                        <span class="section-tab-btn-text">Top 20</span>
+                    </a>
+                    @foreach (var MainCategory in Model.Categories.Where(c => c.IsMain).Take(8))
+                    {
+                        Category subcategory = null;
+
+                        foreach (var item in MainCategory.Children)
+                        {
+                            if (proCount < item.Products.Count())
+                            {
+                                proCount = item.Products.Count();
+                                subcategory = item;
+                            }
+                        }
+
+                        if (proCount > 0)
+                        {
+                            <a asp-controller="product" asp-action="GetProducts" asp-route-id="@subcategory?.Id" class="section-tab-btn">
+                                <span class="section-tab-btn-text">@subcategory?.Name</span>
+                            </a>
+                        }
+
+                        proCount = 0;
+                    }
+
+
+                </div>
+
+            </div>
+            <div class="section-content justify-content-between  mb-5 ">
+
+                @await Html.PartialAsync("_GetProductsPartial", Model.Products)
+
+            </div>
+        </section>
+        <section class="discount-list mb-5">
+            <div class="section-header mt-5">
+                <h2 class="section-header-text">Endirim təklifləri</h2>
+                @*<a asp-controller="product" asp-action="GetProducts" asp-route-id="1" class="alldiscount-btn">
+                    <button class="alldiscount-btn-item">
+                        <span class="alldiscount-btn-text">Bütün Endirim təklifləri</span>
+                        <div class="alldiscount-btn-svg">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="22" height="10" viewBox="0 0 22 10"><g><g><g><g><path fill="#191919" d="M16.71.294a1.004 1.004 0 0 0-1.42 1.42l2.3 2.29H1a1 1 0 0 0 0 2h16.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.7-4.71z"></path></g></g></g></g></svg>
+                        </div>
+                    </button>
+                </a>*@
+            </div>
+            <div class="section-content-discountPro-items mb-5 ">
+
+                <input id="productCount" hidden type="text" name="name" value="@ViewBag.DisProCount" />
+                <div class="section-content-discountPro static dispro-dinamic">
+                    @await Html.PartialAsync("_GetProductsPartial", Model.DisProducts)
+                </div>
+                <div class="section-content-discountPro  dispro-static">
+
+                </div>
+
+                @if (@ViewBag.DisProCount > 4)
+                {
+
+                    <a asp-controller="product" asp-action="LoadMoreProducts" asp-route-test="disc" class="pro-load-more-btn mb-5">
+                        <span class="pro-load-more-btn-text">Daha çox göstər</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="5" viewBox="0 0 26 5"><path fill="#bebebe" d="M.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM10.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM20.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z"></path></svg>
+
+                    </a>
+
+
+
+                }
+            </div>
+        </section>
+
+        <section class="partnyor-list mt-5">
+            <div class="section-header ">
+                <h2 class="section-header-text">Partnyorlar</h2>
+            </div>
+            <div class="section-content-partnyor mb-5 ">
+                <div class="responsive banner-items">
+                    @foreach (Brand brand in Model.Brands)
+                    {
+                        <div class="banner-item">
+                            <div class="banner-item-logo">
+                                <span class="banner-item-logo-span">
+                                    <img class="banner-item-logo-span-img" src="~/User/assets/img/BrandImg/@brand.ImageUrl" alt="Alternate Text" />
+
+                                </span>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                <img class="scrollIcon" src="https://kontakt.az/svg/scroll-icon.svg" alt="Scroll icon">
+            </div>
+        </section>
+
+        <section class="reklam-tv">
+            <div class="section-header">
+                <h2 class="section-header-text">Reklam TV</h2>
+                <a asp-controller="product" asp-action="GetProducts" asp-route-id="1" class="alltv-btn">
+                    <span class="alltv-btn-text">YouTube</span>
+                    <span class="alltv-btn-sub">1</span>
+                </a>
+
+            </div>
+            <div class="section-content-tv mt-2">
+                <div class="section-content-tv-video col-lg-9 col-12">
+                    <iframe class="section-content-tv-video-item" width="560" height="315" src="https://www.youtube.com/embed/jD4_S4_Jx1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="section-content-videolist col-lg-3 col-12">
+                    <ul class="section-content-videolist-items">
+                        <li class="section-content-videolist-item">
+                            <a href="#" class="tvlist-btn active" data-link="https://www.youtube.com/embed/jD4_S4_Jx1M">
+                                <span class="section-content-videolist-item-text">Şeş-qoşa kampaniyası</span>
+                            </a>
+                        </li>
+                        <li class="section-content-videolist-item">
+                            <a href="#" class="tvlist-btn" data-link="https://www.youtube.com/embed/E2-ULHcAmQs">
+                                <span class="section-content-videolist-item-text">Kontakt-dan 2-ci avtomobilin açarları</span>
+                            </a>
+                        </li>
+                        <li class="section-content-videolist-item">
+                            <a href="#" class="tvlist-btn" data-link="https://www.youtube.com/embed/IfSWkV29qDQ">
+                                <span class="section-content-videolist-item-text">Möhtəşəm bir günlük AXŞAM BAZARI</span>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</main>
+
+

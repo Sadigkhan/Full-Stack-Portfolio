@@ -1,0 +1,70 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLoginLayout.cshtml";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">For Admin Login</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-area="default" asp-controller="home" asp-action="index">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- login register wrapper start -->
+    <div class="login-register-wrapper section-padding">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row justify-content-center">
+                    <!-- Login Content Start -->
+                    <div class="col-lg-6">
+                        <div class="login-reg-form-wrap">
+                            <h2>Sign In</h2>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <form method="post">
+                                <div class="single-input-item">
+                                    <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter Email...">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="single-input-item">
+                                    <input asp-for="Password" class="form-control form-control-lg" placeholder="Enter Password...">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="single-input-item">
+                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                        <div class="remember-meta d-flex">
+                                            <div class="custom-control custom-checkbox" style="margin-right:5px">
+                                                <input asp-for="RememberMe" type="checkbox" class="custom-control-input" id="rememberMe">
+
+                                            </div>
+                                            <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-input-item">
+                                    <button type="submit" class="btn">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Login Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login register wrapper end -->
+</main>
+

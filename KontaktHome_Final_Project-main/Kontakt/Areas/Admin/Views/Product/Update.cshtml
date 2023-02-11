@@ -1,0 +1,20 @@
+﻿@model Product
+@{ ViewData["Title"] = "Update"; }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Update Product</h1>
+    </div>
+</div>
+<div class="productupdate">
+    @await Html.PartialAsync("_ProductUpdatePartial", Model)
+</div>
+
+
+@section Script{
+    <partial name="_ValidationPartial">
+        <script src="~/Admin/assets/dist/js/Custom.js"></script>
+        <script src="~/Admin/assets/dist/js/Search.js"></script>
+}
+
+

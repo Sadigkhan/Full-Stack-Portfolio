@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20220626154226_user.cs" />
+    <Compile Remove="Migrations\20220626154226_user.Designer.cs" />
+    <Compile Remove="Migrations\20220626154902_usertest.cs" />
+    <Compile Remove="Migrations\20220626154902_usertest.Designer.cs" />
+    <Compile Remove="Migrations\20220702072606_formaily.cs" />
+    <Compile Remove="Migrations\20220702072606_formaily.Designer.cs" />
+    <Compile Remove="Migrations\20220712080955_fortitlrdetailkey.cs" />
+    <Compile Remove="Migrations\20220712080955_fortitlrdetailkey.Designer.cs" />
+    <Compile Remove="Migrations\20220712081014_fortitlrdetailkey.cs" />
+    <Compile Remove="Migrations\20220712081014_fortitlrdetailkey.Designer.cs" />
+    <Compile Remove="Migrations\20220712081131_fortitlrdetailkey.cs" />
+    <Compile Remove="Migrations\20220712081131_fortitlrdetailkey.Designer.cs" />
+    <Compile Remove="Migrations\20220715033850_detailvaldeletebrand.cs" />
+    <Compile Remove="Migrations\20220715033850_detailvaldeletebrand.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\User\assets\img\MainCtgImg\" />
+    <Folder Include="wwwroot\User\assets\img\BrandImg\" />
+    <Folder Include="wwwroot\User\assets\img\SubCtgImg\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Admin\assets\dist\css\Order.css">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Order.scss</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\Admin\assets\dist\css\Order.scss">
+      <Generator>SassTranspiler</Generator>
+      <LastGenOutput>Order.css</LastGenOutput>
+    </Content>
+    <Content Update="wwwroot\User\assets\css\main.css">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\User\assets\css\main.scss">
+      <Generator>SassTranspiler</Generator>
+      <LastGenOutput>main.css</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+</Project>

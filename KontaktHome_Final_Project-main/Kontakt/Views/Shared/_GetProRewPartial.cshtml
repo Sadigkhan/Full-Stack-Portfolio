@@ -1,0 +1,92 @@
+﻿@model List<Review>
+
+
+<div class="product-specs">
+    <h2 class="product-specs-header">
+        <strong class="product-specs-text">Haqqında rəylər</strong>&nbsp;
+        <span class="product-specs-val">@ViewBag.Title</span>
+    </h2>
+    <h3 class="product-specs-title">Rəylər</h3>
+    <div class="product-specs-items">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="product-rews col-lg-6 col-12">
+                    @foreach (Review review in Model)
+                    {
+                        <div class="product-rew-items col-lg-12 col-12">
+                            <div class="product-rew-items-box">
+                                @if (review.AppUser.UserName == User.Identity.Name)
+                                {
+                                    <button type="button" class="rew-delete" asp-controller="product" asp-action="DelReviews" asp-route-id="@review.Id">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                }
+                            
+                                <div class="user-img col-lg-3 col-6">
+                                    @if (review.AppUser.Image != null)
+                                    {
+                                        <img src="~/User/assets/img/userimg/@review.AppUser.Image" alt="Alternate Text" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/User/assets/img/userimg/Avatar-Profile-PNG.png" alt="Alternate Text" />
+                                    }
+
+                                </div>
+                                <div class="user-rew-info col-lg-3 col-6">
+                                    <div class="user-name">
+                                        <h5>@review.AppUser.Name @review.AppUser.SurName</h5>
+                                    </div>
+                                    <h5 class="styles_reviewText">Qiymətləndirmə</h5>
+                                    <div class="user-star">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if ((review.Star != null && review.Star > 0) && i <= review.Star)
+                                            {
+
+                                                <span class="star-rait"><i class="fas fa-star"></i></span>
+                                            }
+                                            else
+                                            {
+
+                                                <span class="star-notrait"><i class="fas fa-star"></i></span>
+                                            }
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="user-rew col-lg-6 col-12">
+                                    <h6 class="rew-title d-none d-lg-block">
+                                        Rəy
+                                    </h6>
+                                    <div class="rew-body">
+
+                                        <span class="rew-body-text">@review.Message</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="product-rews-write col-lg-6 col-12">
+                    <div class="product-rews-write-form">
+
+                    </div>
+
+                </div>
+                <button class="rew-write-btn rew-write-get-btn">
+                    <span class="rew-write-btn-body">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17"><path fill="none" stroke="#d8d8d8" stroke-miterlimit="20" stroke-width="2" d="M1 11.232v-8.86a1.48 1.48 0 0 1 1.55-1.37H15a1.48 1.48 0 0 1 1.5 1.37v8.86a1.48 1.48 0 0 1-1.5 1.37H5.17L1 15.002v-4.4"></path></svg>
+                        <span class="rew-write-btn-body-text">Rəy yazmaq</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

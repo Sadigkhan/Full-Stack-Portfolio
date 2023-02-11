@@ -1,0 +1,91 @@
+﻿
+@model Category
+@{ ViewData["Title"] = "Create"; }
+
+<div class="row">
+    <div class="col-lg-12 h3 mb-4 text-gray-800">
+        <h1>Update Create</h1>
+    </div>
+    
+    <div class="col-lg-6 mx-auto box-form">
+        @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+
+        <div class="card-img-top text-center pt-1">
+            <h5 class="card-title font-weight-bold">Category Image</h5>
+            @if (Model.ImageUrl != null)
+            {
+                if (Model.IsMain)
+                {
+                    <img class="card-img-top" style="max-width:10%; object-fit:contain" src="~/User/assets/img/MainCtgImg/@Model.ImageUrl" alt="Card image cap">
+                }
+                else
+                {
+                    <img class="card-img-top" style="max-width:25%; object-fit:contain" src="~/User/assets/img/SubCtgImg/@Model.ImageUrl" alt="Card image cap">
+                }
+
+            }
+            else
+            {
+                <span class="text-danger">Main image silinib</span>
+            }
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-check">
+                <input asp-for="IsMain" class="form-check-input" placeholder="Enter email">
+                <label asp-for="IsMain" class="form-check-label"></label>
+                <span class="text-danger" asp-validation-for="IsMain"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Category Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group categoryFileInput ">
+                <label asp-for="CategoryImage"></label>
+                <input asp-for="CategoryImage" accept="image/*" class="form-control" id="formFile" placeholder="Enter email">
+                <span class="text-danger" asp-validation-for="CategoryImage"></span>
+
+            </div>
+            <div class="form-group categoryParentInput">
+                <label asp-for="ParentId"></label>
+                <select class="form-control" asp-for="ParentId" asp-items="@new SelectList(ViewBag.MainCategory, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+
+                <span class="text-danger" asp-validation-for="ParentId"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-primary" asp-action="Index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Go To List</a>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationPartial">
+        <script>
+            $("#IsMain").prop("checked", @Model.IsMain.ToString().ToLower());
+            if (@Model.IsMain.ToString().ToLower()) {
+                $(".categoryParentInput").addClass("d-none")
+                $(".categoryFileInput").removeClass("d-none")
+            } else {
+                $(".categoryParentInput").removeClass("d-none")
+               
+            }
+            $(document).on("click", "#IsMain", function () {
+                if ($(this).prop("checked")) {
+                    $(".categoryParentInput").addClass("d-none")
+                    $(".categoryFileInput").removeClass("d-none")
+                } else {
+                    $(".categoryParentInput").removeClass("d-none")
+                    
+                }
+            })
+        </script>
+
+}
+

@@ -1,0 +1,30 @@
+﻿
+
+@model List<CategoryDetailKey>
+
+@foreach (var item in Model)
+{
+    if (item.DetailKey.DetailValues.Where(x => /*x.BrandId == ViewBag.BrandId &&*/ x.CategoryId==item.CategoryId).Count() > 0)
+    {
+        <div class="form-group  detailColumn col-lg-3 d-block ">
+            <label>@item.DetailKey.Name</label>
+            <select class="form-control detailInput deactive" name="DetailIds" id="@item.DetailKey.Id">
+                <option value="" selected>Choose...</option>
+                @foreach (var item2 in item.DetailKey.DetailValues)
+                {
+                    if (item2.CategoryId == item.CategoryId /*&& item2.BrandId == ViewBag.BrandId*/)
+                    {
+                        <option value="@item2.Id">@item2.Name</option>
+                    }
+
+                }
+
+            </select>
+            @*<a asp-controller="Detail" asp-action="ValueCreate" target="_blank" class="btn btn-success btn-circle mb-2 mr-1 mt-2 " style="color:white"><i class="fas fa-plus"></i></a>*@
+
+
+        </div>
+    }
+
+
+}

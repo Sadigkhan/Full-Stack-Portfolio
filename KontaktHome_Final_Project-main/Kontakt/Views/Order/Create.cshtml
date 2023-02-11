@@ -1,0 +1,203 @@
+﻿@model OrderVM
+<div class="styles_product-list container-fluid">
+    <div class="product-order-main">
+        <div class="styles_desktopPanel">
+
+            <div class="crumbs_wrapper col-lg-12">
+                <div class="crumbs_wrapper-routes d-none d-lg-block">
+                    <a asp-controller="home" asp-action="index" style="text-decoration:none">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <a asp-controller="order" asp-action="index">
+
+                        <span> Sifarişin qeydə alınması</span>
+                    </a>
+
+
+                </div>
+
+                <div class="crumbs_wrapper-routes-mob d-block d-lg-none">
+                    <a asp-controller="home" asp-action="index">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Əsas</span>
+                    </a>
+
+
+                </div>
+            </div>
+            <div class="product-order-header col-lg-12">
+               
+                <h1 class="product-order-header-text">Sifarişin qeydə alınması</h1>
+
+            </div>
+            <div class="styles_checkoutSection col-lg-12 justify-content-between">
+                <div class="col-lg-8 col-12 styles_checkoutSection-left">
+                    <div class="styles_checkoutSection-left-content">
+                        <div class="text-danger validation-summary-form mb-2"></div>
+                        <form>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Ad: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input disabled style="cursor:not-allowed; color:gray; font-style:italic" asp-for="Name" class="styles_input" placeholder="Ad">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Soyad: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input disabled style="cursor:not-allowed; color:gray; font-style:italic" asp-for="Surname" class="styles_input" placeholder="Soyad">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Telefon nömrəsi: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input disabled style="cursor:not-allowed; color:gray; font-style:italic" asp-for="Phone" class="styles_input" placeholder="Telefon nömrəsi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Ölkə: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input asp-for="Country" class="styles_input" placeholder="Ölkə">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Şəhər: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input asp-for="City" class="styles_input" placeholder="Şəhər">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Rayon: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input asp-for="State" class="styles_input" placeholder="Rayon">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Poçt kodu: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+                                                <input asp-for="ZipCode" class="styles_input" placeholder="Poçt kodu">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Ünvan: *
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent" style="height:100px">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+
+
+
+                                                <textarea asp-for="Address" class="styles_input" placeholder="Ünvan"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="styles_fieldWrap">
+                                <div class="styles_hintWrap">
+                                    <span class="styles_label">
+                                        Əlavə qeyd:
+                                    </span>
+                                </div>
+                                <div class="styles_inputComponent" style="height:100px">
+                                    <div class="styles_inputBlock">
+                                        <div class="styles_inputWrappe">
+                                            <div class="styles_inputInner">
+
+
+
+                                                <textarea asp-for="Note" class="styles_input" placeholder="Bizə bildirmək istədiyiniz əlavə bir qeydiniz var?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12 styles_checkoutSection-right">
+                    @await Html.PartialAsync("_GetOrderBasketPartial", Model.BasketVMs)
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>

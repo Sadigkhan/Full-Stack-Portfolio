@@ -1,0 +1,153 @@
+﻿
+@model UserVM
+@{ ViewData["Title"] = "Detail"; }
+
+<div class="container">
+    <div class="row justify-content-center box-form" style="height:600px;overflow-y:auto">
+        <div class="col-lg-10 bg-gray-200 p-3">
+            <div class="text-center">
+                @if (Model.Image != null)
+                {
+                    <img style=" max-width:240px;min-width:240px;max-height:240px;min-height:120px; border:2px solid gray; border-radius:5px" src="~/User/assets/img/userimg/@Model.Image" alt="Alternate Text" /> 
+                    }
+                else
+                {
+                    <img style=" max-width:240px;min-width:240px;max-height:240px;min-height:120px; border:2px solid gray; border-radius:5px" src="~/User/assets/img/userimg/Avatar-Profile-PNG.png" alt="Alternate Text" />
+                    }
+            </div>
+            <form asp-action="ProfilUpdate" asp-controller="Users" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="single-input-item">
+                    <label asp-for="ImageFile" class="required">Profile Image</label>
+                    <input asp-for="ImageFile" />
+                    <span class="text-danger" asp-validation-for="ImageFile"></span>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="single-input-item">
+                            <label for="first-name" class="required">First Name</label>
+                            <input asp-for="Name" placeholder="First Name" />
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-input-item">
+                            <label for="last-name" class="required">Last Name</label>
+                            <input asp-for="SurName" placeholder="Last Name" />
+                            <span class="text-danger" asp-validation-for="SurName"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-input-item">
+                            <label for="last-name" class="required">Parent Name</label>
+                            <input asp-for="ParentName" placeholder="Parent Name" />
+                            <span class="text-danger" asp-validation-for="ParentName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-input-item">
+                    <label for="display-name" class="required">Display Name</label>
+                    <input asp-for="UserName" style="cursor:no-drop" placeholder="Display Name" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="Role"></label>
+                    <select class="form-control" asp-for="Role">
+                        <option value="Admin">Admin</option>
+                        <option value="Maneger">Maneger</option>
+                        <option value="Publisher">Publisher</option>
+                        <option value="Member">Member</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Role"></span>
+                </div>
+                <div class="single-input-item">
+                    <label >Deleted Status</label>
+                    <select class="form-control" asp-for="IsDeleted">
+                        <option value="False">Active</option>
+                        <option value="True">Deactive</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Role"></span>
+                </div>
+                <div class="single-input-item">
+                    <label for="email" class="required">Email Addres</label>
+                    <input asp-for="Email" style="cursor:no-drop" placeholder="Email Address" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="PhoneNumber" class="required">Phone Number</label>
+                    <input asp-for="PhoneNumber" placeholder="Phone Number" />
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="Address" class="required">Addres</label>
+                    <input asp-for="Address" placeholder="Address" />
+                    <span class="text-danger" asp-validation-for="Address"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="Country" class="required">Country</label>
+                    <input asp-for="Country" placeholder="Country" />
+                    <span class="text-danger" asp-validation-for="Country"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="City" class="required">City</label>
+                    <input asp-for="City" placeholder="City" />
+                    <span class="text-danger" asp-validation-for="City"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="State" class="required">State</label>
+                    <input asp-for="State" placeholder="State" />
+                    <span class="text-danger" asp-validation-for="State"></span>
+                </div>
+                <div class="single-input-item">
+                    <label asp-for="ZipCode" class="required">ZipCode</label>
+                    <input asp-for="ZipCode" placeholder="ZipCode" />
+                    <span class="text-danger" asp-validation-for="ZipCode"></span>
+
+                </div>
+
+                <fieldset>
+
+                    <legend>Password change</legend>
+                    <div class="single-input-item">
+                        <label asp-for="CurrentPassword" class="required">Current Password</label>
+                        <input asp-for="CurrentPassword" placeholder="Current Password" />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <label for="new-pwd" class="required">New Password</label>
+                                <input asp-for="Password" placeholder="New Password" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <label for="confirm-pwd" class="required">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="single-input-item">
+                    <button class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Script{
+
+}
+@section Style{
+
+    <!--=== Main Style CSS ===-->
+    <link href="~/Admin/assets/dist/css/UserStyle.css" rel="stylesheet">
+}
+
+
+
+
+
+

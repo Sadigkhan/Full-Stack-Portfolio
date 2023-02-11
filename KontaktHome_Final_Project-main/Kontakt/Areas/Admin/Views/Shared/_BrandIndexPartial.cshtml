@@ -1,0 +1,152 @@
+﻿
+
+@model IEnumerable<Brand>
+@{ int count = (ViewBag.PageIndex - 1) * 8; }
+
+<div class="col-lg-12  table-list">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Brand Logo</th>
+                <th scope="col">Name</th>
+                <th scope="col">Delete Status</th>
+                <th scope="col">Setting</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Brand brand in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td style="vertical-align: inherit; vertical-align: middle">
+                        @if (brand.ImageUrl != null)
+                        {
+                            <img class="img-fluid img-thumbnail" src="~/User/assets/img/BrandImg/@brand.ImageUrl" alt="Alternate Text" style="max-width:32px;max-height:92px; object-fit:contain " />
+                        }
+                        else
+                        {
+                            <span class="text-danger">Empty</span>
+                        }
+                    </td>
+
+                    <td class="w-25" style="vertical-align: inherit; vertical-align: middle ">@brand.Name</td>
+
+                    <td class="w-25" style=" vertical-align: inherit; vertical-align: middle  ;color:@(brand.IsDeleted ? "red" :"green")">@(brand.IsDeleted ? "DeActive":"Active")</td>
+                    <td class="w-25" style="vertical-align: inherit; vertical-align: middle ">
+                        <a class="btn btn-info" asp-action="Detail" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Detail</a>
+                        <a class="btn btn-warning" asp-action="Update" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Update</a>
+                        @if (brand.IsDeleted)
+                        {
+                            <a class="btn btn-primary restore" asp-action="DeleteRestore" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Restore</a> }
+                        else
+                        {
+                            <a class="btn btn-danger delete" asp-action="DeleteRestore" asp-route-id="@brand.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Delete</a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-lg-12 d-flex pt-3 justify-content-center " style="background-color: #e4e5e7">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageIndex > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="1" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex-1)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous">
+                        @("<<")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link" aria-label="Previous">
+                        @("<")
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= @ViewBag.PageCount; i++)
+            {
+                if (i == @ViewBag.PageIndex || i == @ViewBag.PageIndex - 1 || i == @ViewBag.PageIndex + 1)
+                {
+                    if (i == @ViewBag.PageIndex)
+                    {
+                        <li class="page-item active"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == 1 && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i+1)" asp-route-status="@ViewBag.Status">@(i+1)</a></li>
+                    }
+                    else if (@ViewBag.PageIndex == @ViewBag.PageCount && @ViewBag.PageCount > 2)
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i-1)" asp-route-status="@ViewBag.Status">@(i-1)</a></li>
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i)</a></li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(i)" asp-route-status="@ViewBag.Status">@(i) </a></li>
+                    }
+                }
+
+
+            }
+
+            @if (ViewBag.PageIndex < ViewBag.PageCount)
+            {
+                <li class="page-item">
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageIndex+1)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link PageBtn" asp-action="PageChange" asp-route-page="@(ViewBag.PageCount)" asp-route-status="@ViewBag.Status" aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link red" aria-label="Previous">
+                        @(">")
+                    </a>
+                </li>
+
+                <li class="page-item">
+
+                    <a class="page-link " aria-label="Previous">
+                        @(">>")
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+

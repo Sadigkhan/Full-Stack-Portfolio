@@ -1,0 +1,31 @@
+﻿@model List<Category>
+
+@if (Model.Count() > 0)
+{
+    
+    <div class="sidebarHome subSidebarHome active">
+        <div class="sidebarHome-inner">
+            <ul class="mainHome-category">
+                
+                @foreach (Category category in Model)
+                {
+                    <li class="mainHome-category-item ">
+                        <a asp-controller="Product" asp-action="ProductList" asp-route-id="@category.Id" asp-route-keyfrom="ctg" data-id="@category.Id" class="subHome-ctg-btn  mainHome-category-item-btn">
+                            <div class="mainHome-category-item-img">
+                                <img src="~/user/assets/img/subctgimg/@category.ImageUrl" alt="">
+                            </div>
+                            <span class="mainHome-category-item-text">@category.Name</span>
+                            <i class=" mainHome-category-item-icon fa-solid fa-angle-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+
+}
+
+
+

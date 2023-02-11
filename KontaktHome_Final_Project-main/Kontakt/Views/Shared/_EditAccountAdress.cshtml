@@ -1,0 +1,109 @@
+﻿@model UserAdressUpdate
+<div class="modal-contents">
+    <div class="styles_title">
+        <div class="styles_leftSide col-lg-9 col-sm-6 col-md-6 col-12">
+            <svg class="styles_headerIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23"><path fill="#c1c1c1" d="M16.27 7.745a4.649 4.649 0 1 1-9.297 0 4.649 4.649 0 0 1 9.297 0zm2.325 0a6.973 6.973 0 1 0-13.946 0 6.973 6.973 0 0 0 13.946 0z"></path><path fill="#c1c1c1" d="M2.731 22.26a9.297 9.297 0 0 1 17.781 0h2.731A11.924 11.924 0 0 0 0 22.26z"></path></svg>
+            <h4 class="styles_leftText">Ünvan məlumatları</h4>
+        </div>
+        <div class="styles_rightSide col-lg-3 col-sm-6 col-md-6 col-12 justify-content-between">
+            <button type="button" class="styles_rightSide-btn-save account-adress-edit">
+                <span class="styles_rightSide-btn-save-text ">Yadda saxla</span>
+            </button>
+            <button class="styles_rightSide-btn-close">
+                <span class="styles_rightSide-btn-save-text">Bağlamaq</span>
+            </button>
+
+        </div>
+    </div>
+    <div class="styles_body">
+        <div class="text-danger login-validation-summary mb-2"></div>
+      
+        <form method="post" asp-controller="account" asp-action="ProfilUpdate" id="info-edit">
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Ölkə: 
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="Country" class="styles_input" placeholder="Ölkə">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Şəhər: 
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="City" class="styles_input" placeholder="Şəhər">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Rayon:
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="State" class="styles_input" placeholder="Rayon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Poçt kodu:
+                    </span>
+                </div>
+                <div class="styles_inputComponent">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                <input asp-for="ZipCode" class="styles_input" placeholder="Poçt kodu">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_fieldWrap">
+                <div class="styles_hintWrap">
+                    <span class="styles_label">
+                        Ünvan:
+                    </span>
+                </div>
+                <div class="styles_inputComponent" style="height:100px">
+                    <div class="styles_inputBlock">
+                        <div class="styles_inputWrappe">
+                            <div class="styles_inputInner">
+                                
+
+
+                                <textarea asp-for="Address" class="styles_input" placeholder="Ünvan"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,217 @@
+﻿@model List<Product>
+
+@{
+    var Title = "";
+}
+@foreach (var product in Model)
+{
+    Title = product.Title + " " + string.Join(" ", product.ProductDetails.OrderByDescending(x => x.DetailKey.UpdatedAt).Where(x => x.DetailKey.ForTitle).Select(p => p.DetailValue.Name));
+    <div class="pro-cart col-lg-3 col-6 col-md-6 col-sm-6">
+        <div class="ProCardItems">
+            @if (product.DiscountPrice > 0)
+            {
+                <div class="percentPrice">
+                    <span class="percentPrice-item">- @((100 - ((product.DiscountPrice / product.Price) * 100)).ToString("0")) %</span>
+                </div>
+            }
+
+            <div class="mobAction d-lg-none  d-block">
+                <button class="mobAction-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="29" viewBox="0 0 7 29"><path fill="#d8d8d8" d="M0 3.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0zM0 14.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0zM0 25.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path></svg>
+                </button>
+                <div class="mobAction-items d-none">
+                    <ul class="mobAction-item-list">
+                        <li class="mobAction-item">
+
+                            <button class="mobAction-item-sec add-wish-list" asp-action="AddWishlist" asp-controller="Product" asp-route-id="@product.Id">
+                                <span class=""><svg class="mobAction-item-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 23"><g><g><g><path fill="#afafaf" d="M10.926 4.097l.447.353.503.495.56-.495.391-.353a4.83 4.83 0 0 1 6.798.055 4.953 4.953 0 0 1 .109 6.868l-7.858 7.982-7.83-7.954a4.956 4.956 0 0 1-.84-5.311 4.863 4.863 0 0 1 4.476-2.911 4.865 4.865 0 0 1 3.244 1.271zm10.863 8.83a7.805 7.805 0 0 0 1.305-8.344C21.857 1.785 19.104-.011 16.071 0a7.536 7.536 0 0 0-4.195 1.286A7.536 7.536 0 0 0 7.682 0C4.64-.002 1.884 1.81.655 4.622a7.819 7.819 0 0 0 1.35 8.361L11.877 23z"></path></g></g></g></svg></span>
+                                <span class="mobAction-item-text">Seçilmişlərə</span>
+                            </button>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button class="mobAction-item-beyen add-like-list" asp-action="AddLikelist" asp-controller="Product" asp-route-id="@product.Id">
+                                    <span class=""><svg style="transform: scaleY(-1)" class="mobAction-item-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg></span>
+                                    <span class="mobAction-item-text">Bəyənmək</span>
+                                </button>
+                                <button class="mobAction-item-muqaise add-Dislike-list" asp-action="AddDisLikelist" asp-controller="Product" asp-route-id="@product.Id">
+                                    <span class=""><svg class="mobAction-item-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg></span>
+                                    <span class="mobAction-item-text">Bəyənməmək</span>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="mobAction-item-beyen user-btn">
+                                    <span class=""><svg style="transform: scaleY(-1)" class="mobAction-item-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg></span>
+                                    <span class="mobAction-item-text">Bəyənmək</span>
+                                </button>
+                                <button class="mobAction-item-muqaise user-btn">
+                                    <span class=""><svg class="mobAction-item-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg></span>
+                                    <span class="mobAction-item-text">Bəyənməmək</span>
+                                </button>
+                            }
+
+
+
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="pro-cart-top">
+                <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">
+                    <img src="~/User/assets/img/ProductImg/@product.MainImage" alt="Alternate Text" />
+
+                </a>
+            </div>
+            <div class="pro-cart-bottom">
+                <div class="pro-name">
+                    @if (@Title.Length > 40)
+                    {
+                        if (@Title.Length > 68)
+                        {
+                            <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">@Title.Substring(0, 68) ...</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">@Title </a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">@Title </a>
+                        <a style="visibility:hidden; display:block" href="#">test</a>
+                    }
+
+
+
+
+                </div>
+                <div class="pro-price-block">
+                    <div class="pro-credit">
+                        <span class="styles_tips__eJATx">@((product.Price / 18).ToString("0.0")) ₼ 0% 18 ay</span>
+                    </div>
+
+                    @if (product.DiscountPrice > 0)
+                    {
+                        <div class="pro-price">
+                            <div class="pro-price-items">
+                                <h4>@(Math.Truncate(product.Price))</h4>
+                                @if ((int)((product.Price - (int)product.Price) * 100) > 0)
+                                {
+                                    <sub>.@((int)((product.Price - (int)product.Price) * 100))</sub>
+                                }
+
+                                <svg class="priceSvg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                            </div>
+
+                        </div>
+                        <div class="pro-Disprice">
+                            <div class="pro-Disprice-items">
+                                <h4>@(Math.Truncate(product.DiscountPrice))</h4>
+                                @if ((int)((product.DiscountPrice - (int)product.DiscountPrice) * 100) > 0)
+                                {
+                                    <sub>.@((int)((product.DiscountPrice - (int)product.DiscountPrice) * 100))</sub>
+                                }
+
+                                <svg class="priceSvg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="pro-price " style="visibility:hidden">
+                            <div class="pro-price-items">
+                                <h4>1</h4>
+                                <sub>1</sub>
+                                <svg class="priceSvg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                            </div>
+
+                        </div>
+
+                        <div class="pro-Disprice">
+                            <div class="pro-Disprice-items">
+                                <h4 style="color:black">@(Math.Truncate(product.Price))</h4>
+                                @if ((int)((product.Price - (int)product.Price) * 100) > 0)
+                                {
+                                    <sub style="color:black">.@((int)((product.Price - (int)product.Price) * 100))</sub>
+                                }
+
+                                <svg class="priceSvg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                <div class="addCart">
+                    @if (product.Count > 0)
+                    {
+                        <button class="AddToCartBtn" asp-action="AddBasket" asp-controller="Product" asp-route-id="@product.Id" data-id="@product.Id">
+                            <svg class="addCartSvg" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18"><path fill="#ccd5e6" d="M17.478 8.201l-1.316 7.368a.292.292 0 0 1-.09.18H3.698a.236.236 0 0 1-.1-.18L2.291 8.201a.337.337 0 0 1 .102-.326h15.005c.09.083.12.212.079.326zM16.094 18a2.396 2.396 0 0 0 2.318-2.036l1.316-7.368a2.598 2.598 0 0 0-.563-2.137 2.25 2.25 0 0 0-1.754-.833H2.394a2.25 2.25 0 0 0-1.8.833 2.632 2.632 0 0 0-.551 2.137l1.428 7.368A2.396 2.396 0 0 0 3.721 18h12.373z"></path><path fill="#ccd5e6" d="M15.79 7.875c-.441 0-.842-.26-1.023-.663l-2.25-4.894a.101.101 0 0 0-.1-.067H7.331a.135.135 0 0 0-.113.067L4.97 7.212a1.125 1.125 0 0 1-2.047-.923l2.25-4.893A2.373 2.373 0 0 1 7.332 0h5.084a2.396 2.396 0 0 1 2.25 1.395l2.193 4.893a1.125 1.125 0 0 1-1.068 1.586z"></path></svg>
+                            <span class="addCartText">Səbətə əlavə et</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button disabled class="AddToCartBtn proDisabled">
+                            <svg class="addCartSvg" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18"><path fill="#ccd5e6" d="M17.478 8.201l-1.316 7.368a.292.292 0 0 1-.09.18H3.698a.236.236 0 0 1-.1-.18L2.291 8.201a.337.337 0 0 1 .102-.326h15.005c.09.083.12.212.079.326zM16.094 18a2.396 2.396 0 0 0 2.318-2.036l1.316-7.368a2.598 2.598 0 0 0-.563-2.137 2.25 2.25 0 0 0-1.754-.833H2.394a2.25 2.25 0 0 0-1.8.833 2.632 2.632 0 0 0-.551 2.137l1.428 7.368A2.396 2.396 0 0 0 3.721 18h12.373z"></path><path fill="#ccd5e6" d="M15.79 7.875c-.441 0-.842-.26-1.023-.663l-2.25-4.894a.101.101 0 0 0-.1-.067H7.331a.135.135 0 0 0-.113.067L4.97 7.212a1.125 1.125 0 0 1-2.047-.923l2.25-4.893A2.373 2.373 0 0 1 7.332 0h5.084a2.396 2.396 0 0 1 2.25 1.395l2.193 4.893a1.125 1.125 0 0 1-1.068 1.586z"></path></svg>
+                            <span class="addCartText">Mövcud deyil</span>
+                        </button>
+                    }
+
+                </div>
+
+            </div>
+            <div class="pro-action d-none d-lg-block">
+                <div class="pro-action-items">
+                    <div class="pro-action-item">
+
+                        <button class="pro-action-btn add-wish-list" asp-action="AddWishlist" asp-controller="Product" asp-route-id="@product.Id">
+                            <svg class="pro-action-btn-icon " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 23"><g><g><g><path fill="#afafaf" d="M10.926 4.097l.447.353.503.495.56-.495.391-.353a4.83 4.83 0 0 1 6.798.055 4.953 4.953 0 0 1 .109 6.868l-7.858 7.982-7.83-7.954a4.956 4.956 0 0 1-.84-5.311 4.863 4.863 0 0 1 4.476-2.911 4.865 4.865 0 0 1 3.244 1.271zm10.863 8.83a7.805 7.805 0 0 0 1.305-8.344C21.857 1.785 19.104-.011 16.071 0a7.536 7.536 0 0 0-4.195 1.286A7.536 7.536 0 0 0 7.682 0C4.64-.002 1.884 1.81.655 4.622a7.819 7.819 0 0 0 1.35 8.361L11.877 23z"></path></g></g></g></svg>
+                        </button>
+
+
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="pro-action-item">
+                            <button class="pro-action-btn add-Dislike-list" asp-action="AddDisLikelist" asp-controller="Product" asp-route-id="@product.Id">
+                                <svg style="transform: scaleY(-1)" class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </button>
+                        </div>
+                        <div class="pro-action-item">
+                            <button class="pro-action-btn add-like-list" asp-action="AddLikelist" asp-controller="Product" asp-route-id="@product.Id">
+                                <svg class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="pro-action-item">
+                            <button class="pro-action-btn user-btn">
+                                <svg style="transform: scaleY(-1)" class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </button>
+                        </div>
+                        <div class="pro-action-item">
+                            <button class="pro-action-btn user-btn">
+                                <svg class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                            </button>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+

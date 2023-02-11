@@ -1,0 +1,104 @@
+﻿
+@model List<Review>
+@{ 
+    var Title = "";
+}
+
+
+
+<div class="styles_cartPopupItems addtocart" style="position: relative;padding :0px;">
+    @if (Model.Count > 0)
+    {
+        <h1 class="emptyCart" style="width:70%;top:-8%;">Sizin Rəyləriniz</h1>
+        <div class="styles_cartPopupItems-products mt-5 pt-5" style="overflow-y: auto; max-height: 50rem">
+            <div class="product-specs" style="padding:0px;">
+
+                <div class="product-specs-items">
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="product-rews col-lg-10 col-12">
+                                @foreach (Review review in Model)
+                                {
+                                    Title = review.Product.Title + " " + string.Join(" ", review.Product.ProductDetails.OrderByDescending(x => x.DetailKey.UpdatedAt).Where(x => x.DetailKey.ForTitle).Select(p => p.DetailValue.Name));
+                                    <div class="product-rew-items col-lg-12 col-12 ">
+                                        <div class="product-rew-items-box justify-content-between">
+                                            @if (review.AppUser.UserName == User.Identity.Name)
+                                            {
+                                                <button type="button" class="rew-delete" asp-controller="product" asp-action="DelReviews" asp-route-id="@review.Id">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            }
+
+                                            <div class="user-img col-lg-1 col-2">
+                                                <a href="#">
+                                                    @if (review.Product.MainImage != null)
+                                                    {
+                                                        <img style="width:100%" src="~/User/assets/img/productimg/@review.Product.MainImage" alt="Alternate Text" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/User/assets/img/userimg/Avatar-Profile-PNG.png" alt="Alternate Text" />
+                                                    }
+
+                                                </a>
+                                               
+
+                                            </div>
+                                            <div class="user-rew-info col-lg-5 col-9">
+                                                <div class="user-name">
+                                                    <a asp-controller="product" asp-action="productdetail" asp-route-id="@review.ProductId">
+                                                        <h5>@Title</h5>
+                                                    </a>
+                                                    
+                                                </div>
+                                                <h5 class="styles_reviewText">Qiymətləndirmə</h5>
+                                                <div class="user-star">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if ((review.Star != null && review.Star > 0) && i <= review.Star)
+                                                        {
+
+                                                            <span class="star-rait"><i class="fas fa-star"></i></span>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <span class="star-notrait"><i class="fas fa-star"></i></span>
+                                                        }
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                            <div class="user-rew col-lg-5 col-12">
+                                                <h6 class="rew-title d-none d-lg-block">
+                                                    Rəy
+                                                </h6>
+                                                <div class="rew-body">
+
+                                                    <span class="rew-body-text">@review.Message</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    }
+    else
+    {
+        <h1 class="emptyCart" style="width:70%;top:20%;">Sizin Rəy siyahısı boşdur məhsulların rəy bölməsindən məhsul haqqında rəyinizi yaza bilərsiniz</h1>
+    }
+
+</div>

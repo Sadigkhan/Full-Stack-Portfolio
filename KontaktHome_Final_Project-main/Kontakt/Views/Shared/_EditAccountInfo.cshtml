@@ -1,0 +1,127 @@
+﻿@model UserProfileVM
+
+    <div class="modal-contents">
+        <div class="styles_title">
+            <div class="styles_leftSide col-lg-9 col-sm-6 col-md-6 col-12">
+                <svg class="styles_headerIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23"><path fill="#c1c1c1" d="M16.27 7.745a4.649 4.649 0 1 1-9.297 0 4.649 4.649 0 0 1 9.297 0zm2.325 0a6.973 6.973 0 1 0-13.946 0 6.973 6.973 0 0 0 13.946 0z"></path><path fill="#c1c1c1" d="M2.731 22.26a9.297 9.297 0 0 1 17.781 0h2.731A11.924 11.924 0 0 0 0 22.26z"></path></svg>
+                <h4 class="styles_leftText">Hesab məlumatları</h4>
+            </div>
+            <div class="styles_rightSide col-lg-3 col-sm-6 col-md-6 col-12 justify-content-between">
+                <button type="button" class="styles_rightSide-btn-save account-info-edit">
+                    <span class="styles_rightSide-btn-save-text">Yadda saxla</span>
+                </button>
+                <button class="styles_rightSide-btn-close">
+                    <span class="styles_rightSide-btn-save-text">Bağlamaq</span>
+                </button>
+
+            </div>
+        </div>
+        <div class="styles_body">
+            <div class="text-danger login-validation-summary mb-2"></div>
+            <input type="hidden" name="name" id="Gender" value="@Model.Member.Gender" />
+            <form method="post" asp-controller="account" asp-action="ProfilUpdate" id="info-edit">
+                <div class="styles_fieldWrap">
+                    <div class="styles_hintWrap">
+                        <span class="styles_label">
+                            Ad: *
+                        </span>
+                    </div>
+                    <div class="styles_inputComponent">
+                        <div class="styles_inputBlock">
+                            <div class="styles_inputWrappe">
+                                <div class="styles_inputInner">
+                                    <input asp-for="Member.Name" class="styles_input" placeholder="Ad">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="styles_fieldWrap">
+                    <div class="styles_hintWrap">
+                        <span class="styles_label">
+                            Soyad: *
+                        </span>
+                    </div>
+                    <div class="styles_inputComponent">
+                        <div class="styles_inputBlock">
+                            <div class="styles_inputWrappe">
+                                <div class="styles_inputInner">
+                                    <input asp-for="Member.SurName" class="styles_input" placeholder="Soyad">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="styles_fieldWrap">
+                    <div class="styles_hintWrap">
+                        <span class="styles_label">
+                            Ata adı:
+                        </span>
+                    </div>
+                    <div class="styles_inputComponent">
+                        <div class="styles_inputBlock">
+                            <div class="styles_inputWrappe">
+                                <div class="styles_inputInner">
+                                    <input asp-for="Member.ParentName" class="styles_input" placeholder="Ata adı">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="styles_fieldWrap">
+                    <div class="styles_hintWrap">
+                        <span class="styles_label">
+                            Doğum tarixi:
+                        </span>
+                    </div>
+                    <div class="styles_inputComponent">
+                        <div class="styles_inputBlock">
+                            <div class="styles_inputWrappe">
+                                <div class="styles_inputInner">
+                                    <input asp-for="Member.Birthday" class="styles_input" placeholder="Ata adı">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="styles_inputField-check">
+                    <span class="styles_label">Cins:</span>
+                    <div class="styles_checkboxField">
+                        <button class="styles_checkbox-btn " type="button">
+
+                            <input id="Member.Gender" value="0" class="styles_input-check styles_input-check-male">
+                            <svg class="styles_input-check-svg styles_checkbox-male" xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8"><path fill="#e32300" d="M4.023 7.829a.48.48 0 0 1-.68 0L.624 5.11a.722.722 0 0 1 0-1.021l.34-.34a.722.722 0 0 1 1.02 0l1.698 1.696L8.267.862a.722.722 0 0 1 1.021 0l.34.34a.722.722 0 0 1 0 1.02z"></path></svg>
+                        </button>
+                        <span class="styles_link-text">Kişi</span>
+                    </div>
+                    <div class="styles_checkboxField">
+                        <button class="styles_checkbox-btn" type="button">
+                            <input id="Member.Gender" value="1" class="styles_input-check styles_input-check-fmale">
+                            <svg class="styles_input-check-svg styles_checkbox-fmale" xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8"><path fill="#e32300" d="M4.023 7.829a.48.48 0 0 1-.68 0L.624 5.11a.722.722 0 0 1 0-1.021l.34-.34a.722.722 0 0 1 1.02 0l1.698 1.696L8.267.862a.722.722 0 0 1 1.021 0l.34.34a.722.722 0 0 1 0 1.02z"></path></svg>
+                        </button>
+                        <span class="styles_link-text">Qadın</span>
+                    </div>
+                </div>
+                <div class="styles_fieldWrap">
+                    <div class="styles_hintWrap">
+                        <span class="styles_label">
+                            Telefon nömrəsi::
+                        </span>
+                    </div>
+                    <div class="styles_inputComponent">
+                        <div class="styles_inputBlock">
+                            <div class="styles_inputWrappe">
+                                <div class="styles_inputInner">
+                                    <input asp-for="Member.PhoneNumber" class="styles_input" placeholder="Telefon nömrəsi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+        
+    </div>
+    

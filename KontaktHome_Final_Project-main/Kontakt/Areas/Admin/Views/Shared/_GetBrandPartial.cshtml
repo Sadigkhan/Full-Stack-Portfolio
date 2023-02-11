@@ -1,0 +1,16 @@
+﻿@model List<CategoryBrand>
+
+<div class="form-group">
+    <label>Brand</label>
+    <select class="form-control detailInput deactive searchDetailBtn" id="BrandId" name="BrandId">
+        <option value="" selected>Choose...</option>
+        @foreach (var item in Model)
+        {
+            if (!item.Brand.IsDeleted)
+            {
+                <option value="@item.BrandId">@item.Brand.Name</option>
+            }
+            
+        }
+    </select>
+</div>

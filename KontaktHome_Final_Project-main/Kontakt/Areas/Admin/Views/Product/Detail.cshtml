@@ -1,0 +1,115 @@
+﻿
+@model Product
+@{ ViewData["Title"] = "Detail";
+
+}
+
+<div class="row">
+    <div class="col-lg-6 h3 mb-4 text-gray-800">
+        <h6>@Model.Title</h6>
+    </div>
+    <div class="col-lg-8 mx-auto ">
+        <div class="card box-form detail-box">
+            <div class="card-img-top text-center pt-1">
+                <h5 class="card-title font-weight-bold">Product Images</h5>
+                <hr />
+                <div class="d-flex mt-2 justify-content-between align-items-center">
+                    <div class="col-lg-3 box-form">
+
+                        @if (Model.MainImage != null)
+                        {
+
+                            <img class="card-img-top" style="max-width:100%; object-fit:contain" src="~/user/assets/img/productimg/@Model.MainImage" alt="Card image cap">
+
+                        }
+                        else
+                        {
+                            <span class="text-danger">Main image silinib</span>
+                        }
+                       
+                    </div>
+                    <div class="col-lg-8 d-flex justify-content-between align-items-center box-form">
+                        @foreach (ProductImage productImage in Model.ProductImages)
+                        {
+                            <div class="col">
+                                <img class="card-img-top" style="max-width:100%; border-radius:5px; object-fit:contain" src="~/user/assets/img/productimg/@productImage.Image" alt="Card image cap">
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="card-footer mt-2">
+                <table class="table table-striped ">
+                    <tbody>
+                        <tr>
+                            <th colspan="2" style="text-align:center; font-size:2rem; color:black; background-color:white">Product Main Detail</th>
+                        </tr>
+                        <tr>
+                            <th class="pro-main-detail" style="vertical-align: inherit; vertical-align: middle ">Title</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">@Model.Title</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">Category</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">@Model.Category.Name</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">Brand</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">@Model.Brand.Name</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">Price</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">$ @Model.Price</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">DiscountPrice</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">$ @Model.DiscountPrice</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">Tags</th>
+                            <th style="vertical-align: inherit; vertical-align: middle "> @string.Join(", ", Model.ProductTags.Select(x => x.Tag.Name))</th>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: inherit; vertical-align: middle ">Description</th>
+                            <th style="vertical-align: inherit; vertical-align: middle ">@Html.Raw(Model.Description)</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="text-align: center; font-size: 2rem; color: darkgreen; background-color: white">Product Sub Detail</th>
+                        </tr>
+                        @foreach (var item in Model.ProductDetails)
+                        {
+
+                    <tr>
+                        @if (!item.DetailKey.IsDeleted)
+                        {
+                            <th style="vertical-align: inherit; vertical-align: middle ">@item.DetailKey.Name</th>
+                            if (item.DetailValue.IsDeleted)
+                            {
+                                <th style="vertical-align: inherit; vertical-align: middle " class="text-danger">Detail Value Deleted</th>
+                            }
+                            else
+                            {
+                                <th style="vertical-align: inherit; vertical-align: middle ">@item.DetailValue.Name</th>
+
+                            }
+                        }
+                       
+
+
+                    </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            
+        </div>
+        <div class="mt-2">
+            <a asp-action="Index" class="btn btn-primary">Go Back</a>
+        </div>
+        
+    </div>
+</div>
+

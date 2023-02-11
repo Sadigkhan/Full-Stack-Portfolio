@@ -1,0 +1,269 @@
+﻿@model UserProfileVM
+<div class="styles_accountMainBlocks">
+    <div class="styles_accountBox-main col-lg-4 col-12">
+        <div class="styles_accountBox">
+            <h4 class="styles_accountBox-title">
+                Hesab məlumatları
+            </h4>
+            <div class="styles_accountBox-body">
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Ad:
+                    </span>
+                    @if (Model.Member.Name != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.Name
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Soyad:
+                    </span>
+                    @if (Model.Member.SurName != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.SurName
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Ata Adı:
+                    </span>
+                    @if (Model.Member.ParentName != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.ParentName
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item-multi">
+                    <div class="styles_accountBox-body-item-multi-halfField">
+                        <span class="styles_accountBox-body-item-multi-halfField-title">
+                            Doğum tarixi:
+                        </span>
+                        @if (Model.Member.Birthday != null)
+                        {
+                            <strong class="styles_accountBox-body-item-multi-halfField-text-bold">@(Model.Member.Birthday.ToString().Substring(0,9))</strong>
+                        }
+                        else
+                        {
+                            <strong class="styles_accountBox-body-item-multi-halfField-text">
+                                Məlumat qeyd olunmayıb
+                            </strong>
+                        }
+
+                    </div>
+                    <div class="styles_accountBox-body-item-multi-halfField">
+                        <span class="styles_accountBox-body-item-multi-halfField-title">
+                            Cins:
+                        </span>
+                        @if (Model.Member.Gender != null)
+                        {
+                            <strong class="styles_accountBox-body-item-multi-halfField-text-bold">@Model.Member.Gender</strong>
+                        }
+                        else
+                        {
+                            <strong class="styles_accountBox-body-item-multi-halfField-text">
+                                Məlumat qeyd olunmayıb
+                            </strong>
+                        }
+                    </div>
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Telefon nömrəsi:
+                    </span>
+                    @if (Model.Member.PhoneNumber != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.PhoneNumber
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        İstifadəçi adı:
+                    </span>
+                    @if (Model.Member.UserName != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.UserName
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+
+            </div>
+            <div class="styles_accountBox-footer">
+                <button class="styles_accountBox-footer-btn styles_accountBox-footer-btn-info">
+                    <svg class="styles_accountBox-footer-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="#d8d8d8" d="M0 12.016v2.965h2.965l8.748-8.748-2.965-2.965zM13.998 2.83L12.152.982a.792.792 0 0 0-1.12 0L9.587 2.43l2.965 2.965 1.447-1.447a.792.792 0 0 0 0-1.119z"></path></svg>
+                    <span class="styles_accountBox-footer-text">Məlumatları dəyişmək</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="styles_accountBox-main col-lg-4 col-12">
+        <div class="styles_accountBox">
+            <h4 class="styles_accountBox-title">
+                Ünvan məlumatları
+            </h4>
+            <div class="styles_accountBox-body">
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Ölkə:
+                    </span>
+                    @if (Model.Member.Country != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.Country
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Şəhər:
+                    </span>
+                    @if (Model.Member.City != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.City
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Rayon:
+                    </span>
+                    @if (Model.Member.State != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.State
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Poçt kodu:
+                    </span>
+                    @if (Model.Member.ZipCode != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.ZipCode
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Ünvan:
+                    </span>
+                    @if (Model.Member.Address != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.Address
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+
+
+            </div>
+            <div class="styles_accountBox-footer">
+                <button class="styles_accountBox-footer-btn styles_accountBox-footer-btn-adress">
+                    <svg class="styles_accountBox-footer-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="#d8d8d8" d="M0 12.016v2.965h2.965l8.748-8.748-2.965-2.965zM13.998 2.83L12.152.982a.792.792 0 0 0-1.12 0L9.587 2.43l2.965 2.965 1.447-1.447a.792.792 0 0 0 0-1.119z"></path></svg>
+                    <span class="styles_accountBox-footer-text">Məlumatları dəyişmək</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="styles_accountBox-main col-lg-4 col-12">
+        <div class="styles_accountBox">
+            <h4 class="styles_accountBox-title">
+                Giriş məlumatları
+            </h4>
+            <div class="styles_accountBox-body">
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Elektron poçt ünvanı:
+                    </span>
+                    @if (Model.Member.Email != null)
+                    {
+                        <strong class="styles_accountBox-body-item-text">
+                            @Model.Member.Email
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="styles_accountBox-body-item-text-italic">Məlumat qeyd olunmayıb</strong>
+                    }
+
+                </div>
+                <div class="styles_accountBox-body-item">
+                    <span class="styles_accountBox-body-item-title">
+                        Şifrə:
+                    </span>
+                    <strong class="styles_accountBox-body-item-text-italic">**********</strong>
+
+                </div>
+
+            </div>
+            <div class="styles_accountBox-footer">
+                <button class="styles_accountBox-footer-btn styles_accountBox-footer-btn-auth">
+                    <svg class="styles_accountBox-footer-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="#d8d8d8" d="M0 12.016v2.965h2.965l8.748-8.748-2.965-2.965zM13.998 2.83L12.152.982a.792.792 0 0 0-1.12 0L9.587 2.43l2.965 2.965 1.447-1.447a.792.792 0 0 0 0-1.119z"></path></svg>
+                    <span class="styles_accountBox-footer-text">Məlumatları dəyişmək</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

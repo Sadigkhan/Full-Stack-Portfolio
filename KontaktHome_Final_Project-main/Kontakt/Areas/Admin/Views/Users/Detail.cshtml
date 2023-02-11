@@ -1,0 +1,122 @@
+﻿@model UserVM
+@{ ViewData["Title"] = "Detail"; }
+
+<div class="container">
+    <div class="row justify-content-center box-form" style="height:620px;overflow-y:auto">
+        <div class="col-lg-10 bg-gray-200 px-3 py-3">
+
+            <form asp-action="ProfilUpdate" asp-controller="Account" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="single-input-item">
+                            <label for="first-name" class="required">First Name</label>
+                            <input disabled asp-for="Name" placeholder="First Name" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="position:relative">
+                        <div class="" style="position: absolute; top: 10%; left: 50%; transform: translate(-50%);">
+                            @if (Model.Image != null)
+                            {
+                                 <img style="max-width: 340px; min-width: 340px; max-height: 210px; min-height: 210px; border: 2px solid gray; border-radius: 5px " src="~/User/assets/img/userimg/@Model.Image" alt="Alternate Text" /> 
+                                 }
+                            else
+                            {
+                                <img style=" max-width:240px;min-width:240px;max-height:240px;min-height:120px; border:2px solid gray; border-radius:5px" src="~/User/assets/img/userimg/Avatar-Profile-PNG.png" alt="Alternate Text" />
+                                }
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-input-item">
+                            <label for="last-name" class="required">Last Name</label>
+                            <input disabled asp-for="SurName" placeholder="Last Name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label for="display-name" class="required">Role</label>
+                            <input disabled asp-for="Role" style="cursor:no-drop" placeholder="Display Name" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label for="display-name" class="required">UserName</label>
+                            <input disabled asp-for="UserName" style="cursor:no-drop" placeholder="Display Name" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label for="email" class="required">Email Addres</label>
+                            <input disabled asp-for="Email" style="cursor:no-drop" placeholder="Email Address" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label asp-for="PhoneNumber" class="required">Phone Number</label>
+                            <input disabled asp-for="PhoneNumber" placeholder="Phone Number" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label asp-for="Country" class="required"></label>
+                            <input disabled asp-for="Country" placeholder="Address" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label asp-for="City" class="required">City</label>
+                            <input disabled asp-for="City" placeholder="City" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label asp-for="State" class="required">State</label>
+                            <input disabled asp-for="State" placeholder="State" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="single-input-item">
+                            <label asp-for="ZipCode" class="required">ZipCode</label>
+                            <input disabled asp-for="ZipCode" placeholder="ZipCode" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="single-input-item">
+                    <label asp-for="Address" class="required"></label>
+                    <input disabled asp-for="Address" placeholder="ZipCode" />
+
+                </div>
+                <div class="single-input-item">
+                    <a asp-action="Index" class="btn btn-info">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Script{
+
+}
+@section Style{
+
+    <!--=== Main Style CSS ===-->
+    <link href="~/Admin/assets/dist/css/UserStyle.css" rel="stylesheet">
+}
+
+
+
+

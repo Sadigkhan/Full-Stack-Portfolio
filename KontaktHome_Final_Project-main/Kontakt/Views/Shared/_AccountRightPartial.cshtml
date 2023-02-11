@@ -1,0 +1,172 @@
+﻿
+
+
+    
+<ul class="styles_accountLinks">
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink " asp-controller="account" asp-action="myaccount">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <img class="styles_iconWrap-img" src="~/User/assets/img/setting/accountInfo_1.svg" alt="icon">
+                    </figure>
+                </div>
+                <span class="styles_link-text">
+                    Mənim Hesabım
+                </span>
+            </button>
+        </a>
+    </li>
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="order">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <img class="styles_iconWrap-img" src="~/User/assets/img/setting/accountInfo_2.svg" alt="icon">
+                    </figure>
+                    @if (ViewBag.OrderCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.OrderCount</span>
+                    }
+
+                </div>
+                <span class="styles_link-text">
+                    Mənim sifarişlərim
+                </span>
+            </button>
+        </a>
+    </li>
+
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="compare">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <svg style="filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(0%) hue-rotate(159deg) brightness(89%) contrast(104%);" class="styles_buttonBody-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18"><path fill="#bebebe" d="M6.235 5.626l1.52-3.308a.137.137 0 0 1 .113-.067h5.085a.1.1 0 0 1 .1.067l1.522 3.308zm-3.304 2.25h15.005c.09.083.12.211.079.326l-1.316 7.368a.296.296 0 0 1-.09.18H4.235a.238.238 0 0 1-.101-.18L2.829 8.202a.335.335 0 0 1 .102-.326zm13.7 10.123a2.397 2.397 0 0 0 2.318-2.036l1.316-7.367a2.6 2.6 0 0 0-.563-2.138 2.247 2.247 0 0 0-1.755-.832H17.1l-1.897-4.23a2.394 2.394 0 0 0-2.25-1.394H7.868a2.37 2.37 0 0 0-2.159 1.394l-1.945 4.23h-.833a2.25 2.25 0 0 0-1.8.832 2.634 2.634 0 0 0-.552 2.138l1.43 7.367A2.395 2.395 0 0 0 4.256 18z"></path></svg>
+                    </figure>
+                    @if (ViewBag.BasketCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.BasketCount</span>
+                    }
+
+                </div>
+
+                <span class="styles_link-text">
+
+                    Mənim səbətim
+                </span>
+            </button>
+        </a>
+    </li>
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="favorite">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <img class="styles_iconWrap-img" src="~/User/assets/img/setting/accountInfo_3.svg" alt="icon">
+                    </figure>
+                    @if (ViewBag.WishCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.WishCount</span>
+                    }
+
+                </div>
+                <span class="styles_link-text">
+
+                    İstək siyahısı
+                </span>
+            </button>
+        </a>
+    </li>
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="comment">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <img class="styles_iconWrap-img" src="~/User/assets/img/setting/accountInfo_7.svg" alt="icon">
+                    </figure>
+                    @if (ViewBag.RevCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.RevCount</span>
+                    }
+                </div>
+                <span class="styles_link-text">
+
+                    Mənim rəylərim
+                </span>
+            </button>
+        </a>
+    </li>
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="view">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <svg class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                    </figure>
+                    @if (ViewBag.LikeCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.LikeCount</span>
+                    }
+                </div>
+                <span class="styles_link-text">
+
+                    Bəyəndiyim məhsullar
+                </span>
+            </button>
+        </a>
+    </li>
+    <li class="styles_accountLinks-list">
+        <a class="styles_accountLink" asp-controller="account" asp-action="myaccount" asp-route-to="dislike">
+            <button type="button" class="styles_accountLink-btn">
+                <div class="styles_iconWrap">
+                    <figure class="styles_iconWrap-figure">
+                        <svg style="transform: scaleY(-1)" class="pro-action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24"><g><g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M2 10.045v10.168c0 .702.569 1.271 1.271 1.271h3.813v0-12.71 0H3.27c-.702 0-1.271.568-1.271 1.27z"></path></g><g><path fill="none" stroke="#afafaf" stroke-miterlimit="20" stroke-width="2.5" d="M25.424 9.25v0H20.97a.744.744 0 0 1-.65-.357.69.69 0 0 1-.009-.72l1.57-2.719c.344-.595.38-1.296.098-1.921a2.221 2.221 0 0 0-1.527-1.245l-1.106-.266a.77.77 0 0 0-.743.218l-6.01 6.424a3.547 3.547 0 0 0-.966 2.425v7.588c0 2 1.69 3.626 3.768 3.626l7.497-.001c1.693 0 3.187-1.097 3.634-2.667l1.609-7.103a2.6 2.6 0 0 0 .071-.603c0-1.476-1.249-2.678-2.783-2.678z"></path></g></g></g></svg>
+                    </figure>
+                    @if (ViewBag.DisLikeCount > 0)
+                    {
+                        <span class="styles_iconLabel">@ViewBag.DisLikeCount</span>
+                    }
+                </div>
+                <span class="styles_link-text">
+
+                    Bəyənmədiyim məhsullar
+                </span>
+            </button>
+        </a>
+    </li>
+
+
+</ul>
+<ul class="styles_faqLinksWrap">
+    <li>
+        <a class="styles_faqLink" aria-hidden="true" href="/delivery-and-payment/">
+            <span class="styles_link-text">
+                Çatdırılma və ödəniş
+            </span>
+        </a>
+    </li>
+    <li>
+        <a class="styles_faqLink" aria-hidden="true" href="/delivery-and-payment/">
+            <span class="styles_link-text">
+                Zəmanət və qaytarılma
+            </span>
+        </a>
+    </li>
+    <li>
+        <a class="styles_faqLink" aria-hidden="true" href="/delivery-and-payment/">
+            <span class="styles_link-text">
+                FAQ
+            </span>
+        </a>
+    </li>
+    <li>
+        <a class="styles_faqLink" aria-hidden="true" href="/delivery-and-payment/">
+            <span class="styles_link-text">
+                Yardım və məsləhət
+            </span>
+        </a>
+    </li>
+</ul>
+
+

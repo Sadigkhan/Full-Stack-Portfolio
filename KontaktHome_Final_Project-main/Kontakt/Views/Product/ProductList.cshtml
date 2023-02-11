@@ -1,0 +1,313 @@
+﻿@model ProductListVM
+@{
+    ViewData["Title"] = "ProductList";
+    List<string> valname = new List<string>();
+    var AllProductsValue = ViewBag.ProductsDetail as IEnumerable<DetailValue>;
+    var valCount = 0;
+}
+
+<div class="styles_product-list container-fluid">
+    <div class="product-list-main">
+        <div class="styles_desktopPanel">
+            <div class="product-list-header d-none d-lg-block col-lg-12">
+                <div class="product-list-header-text-div col-lg-8 col-12">
+                    @if (ViewBag.keyfrom == "brand")
+                    {
+                        if (Model.Products.Count() > 0)
+                        {
+                            <h1 class="product-list-header-text">@Model.Brand.Name</h1>
+                        }
+                        else
+                        {
+                            <h1 class="product-list-header-text">@Model.Brand.Name <span class="text-danger" style="font-size:20px">brendi üçün məhsul tapılmadı</span>  </h1>
+                        }
+
+
+
+
+                        <input id="BrandId" type="hidden" name="name" value="@Model.CategoryBrand.Id" />
+                    }
+                    else
+                    {
+                        if (Model.Products.Count() > 0)
+                        {
+                            <h1 class="product-list-header-text">@Model.Category.Name</h1>
+                        }
+                        else
+                        {
+                            <h1 class="product-list-header-text">@Model.Category.Name
+                                
+                                <span class="text-danger" style="font-size:20px">kateqoriyası üçün məhsul tapılmadı</span>
+                            </h1>
+                        }
+
+                        
+                        <input id="CtgId" type="hidden" name="name" value="@Model.Category.Id" />
+                    }
+
+                </div>
+                
+            </div>
+            <div class="crumbs_wrapper col-lg-12">
+                <div class="crumbs_wrapper-routes d-none d-lg-block">
+                    <a asp-controller="home" asp-action="index" style="text-decoration:none">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-angle-right"></i>
+                    @if (ViewBag.keyfrom == "ctg")
+                    {
+                        if (Model.Category.Parent.ParentId != null)
+                        {
+                            <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.Parent.Parent.Id">
+
+                                <span>@Model.Category.Parent.Parent.Name</span>
+                            </a>
+                            <i class="fa-solid fa-angle-right"></i>
+                        }
+                        <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.Parent.Id">
+
+                            <span>@Model.Category.Parent.Name</span>
+                        </a>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a style="cursor:pointer">
+
+                            <span>@Model.Category.Name</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.Parent.Id">
+
+                            <span>@Model.Category.Parent.Name</span>
+                        </a>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a asp-controller="product" asp-action="productlist" asp-route-keyfrom="ctg" asp-route-id="@Model.Category.Id">
+
+                            <span>@Model.Category.Name</span>
+                        </a>
+                        <i class="fa-solid fa-angle-right"></i>
+                        <a style="cursor:pointer">
+
+                            <span>@Model.Brand.Name</span>
+                        </a>
+                    }
+
+                </div>
+
+                <div class="crumbs_wrapper-routes-mob d-block d-lg-none">
+
+                    @if (ViewBag.keyfrom == "ctg")
+                    {
+                    <a asp-controller="category" asp-action="getsubcategory" asp-route-id="@Model.Category.Parent.Id">
+                        <i class="fa-solid fa-angle-left"></i>
+                        @if (Model.Products.Count() > 0)
+                        {
+                            <span>
+                                @Model.Category.Parent.Name
+                            </span>
+                        }
+                        else
+                        {
+                    <span >
+                        <span >@Model.Category.Parent.Name</span>
+                        
+                        <span class="text-danger" style="font-size:14px;display:block;margin-top:4px">@Model.Category.Name kateqoriyası üçün məhsul tapılmadı</span>
+                    </span>
+                        }
+
+
+
+                    </a>
+                    }
+
+                    else if (ViewBag.keyfrom == "brand")
+                    {
+                <a asp-controller="product" asp-action="productlist" asp-route-id="@Model.CategoryBrand.Category.Id" asp-route-keyFrom="ctg">
+                    <i class="fa-solid fa-angle-left"></i>
+                    @if (Model.Products.Count() > 0)
+                    {
+                        <span>
+                            @Model.CategoryBrand.Category.Name
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            <span>
+                                @Model.CategoryBrand.Category.Name
+                            </span>
+                            
+                            <span class="text-danger" style="font-size: 14px; display: block; margin-top: 4px">@Model.Brand.Name brendi üçün məhsul tapılmadı</span>
+
+                        </span>
+                    }
+
+
+
+
+                </a>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="product-list-content justify-content-between">
+            <div class="col-lg-3 product-list-filter d-none d-lg-block">
+                
+                @if (Model.Products.Count() > 0)
+                {
+                    <div class="product-list-filter-list">
+
+                        @foreach (CategoryDetailKey categoryDetailKey in Model.CategoryDetailKeys)
+                        {
+
+                            <div class="style-filter-item" data-key-id="@categoryDetailKey.DetailKeyId">
+                                <div class="style-filter-item-text">
+                                    <h3 class="filter-item-text">
+                                        @categoryDetailKey.DetailKey.Name
+                                    </h3>
+                                    <button class="filter-item-btn">
+                                        <svg class="" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="#171717" d="M.694 1.49A.926.926 0 0 1 2.277.831L6.25 4.813 10.221.832a.93.93 0 1 1 1.315 1.315L6.249 7.424.963 2.147a.926.926 0 0 1-.269-.658z"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="style-filter-item-body">
+                                    <div class="listCheckBoxes">
+                                        @if (ViewBag.keyfrom == "ctg")
+                                        {
+
+
+                                            @foreach (DetailValue detailValue in categoryDetailKey.DetailKey.DetailValues)
+                                            {
+                                                if (AllProductsValue.Any(x => x.Id == detailValue.Id))
+                                                {
+                                                    valCount += 1;
+                                                    <div class="ListCheckItem" data-val-id="@detailValue.Id">
+                                                        <div class="listdWrapInner">
+                                                            <div class="listdWrapInner-item">
+                                                                <button class="listdWrapInner-check-btn">
+                                                                    <input class="listdWrapInner-check-btn-inp" type="checkbox" name="name" value="" />
+                                                                    <svg class="check-icon d-none" xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8"><path fill="#e32300" d="M4.023 7.829a.48.48 0 0 1-.68 0L.624 5.11a.722.722 0 0 1 0-1.021l.34-.34a.722.722 0 0 1 1.02 0l1.698 1.696L8.267.862a.722.722 0 0 1 1.021 0l.34.34a.722.722 0 0 1 0 1.02z"></path></svg>
+                                                                </button>
+                                                                <div class="listdWrapInner-check-text-div">
+
+                                                                    <h5 class="listdWrapInner-check-text">
+                                                                        @detailValue.Name
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (valCount > 5)
+                                                {
+                                                    <div class="filter-sh-more">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="5" viewBox="0 0 26 5">
+                                                            <path fill="#bebebe" d="M.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM10.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM20.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z">
+                                                            </path>
+                                                        </svg>
+                                                        <span class=" filter-sh-more-text filter-sh-more-text-max">
+                                                            Daha çox
+                                                        </span>
+                                                        <span class="d-none filter-sh-more-text filter-sh-more-text-min">
+                                                            Daha az
+                                                        </span>
+                                                    </div>
+                                                }
+
+
+
+                                            }
+
+                                            valCount = 0;
+                                        }
+
+
+                                        else if (ViewBag.keyfrom == "brand")
+                                        {
+
+                                            @foreach (DetailValue detailValue in categoryDetailKey.DetailKey.DetailValues.Where(x => @*x.BrandId == Model.Brand.Id &&*@ x.CategoryId == Model.Category.Id))
+                                            {
+                                                if (AllProductsValue.Any(x => x.Id == detailValue.Id))
+                                                {
+                                                    valCount += 1;
+                                                    <div class="ListCheckItem" data-val-id="@detailValue.Id">
+                                                        <div class="listdWrapInner">
+                                                            <div class="listdWrapInner-item">
+                                                                <button class="listdWrapInner-check-btn">
+                                                                    <input class="listdWrapInner-check-btn-inp" type="checkbox" name="name" value="" />
+                                                                    <svg class="check-icon d-none" xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 10 8"><path fill="#e32300" d="M4.023 7.829a.48.48 0 0 1-.68 0L.624 5.11a.722.722 0 0 1 0-1.021l.34-.34a.722.722 0 0 1 1.02 0l1.698 1.696L8.267.862a.722.722 0 0 1 1.021 0l.34.34a.722.722 0 0 1 0 1.02z"></path></svg>
+                                                                </button>
+                                                                <div class="listdWrapInner-check-text-div">
+
+                                                                    <h5 class="listdWrapInner-check-text">
+                                                                        @detailValue.Name
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (valCount > 5)
+                                                {
+                                                    <div class="filter-sh-more">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="5" viewBox="0 0 26 5">
+                                                            <path fill="#bebebe" d="M.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM10.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM20.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z">
+                                                            </path>
+                                                        </svg>
+                                                        <span class=" filter-sh-more-text filter-sh-more-text-max">
+                                                            Daha çox
+                                                        </span>
+                                                        <span class="d-none filter-sh-more-text filter-sh-more-text-min">
+                                                            Daha az
+                                                        </span>
+                                                    </div>
+                                                }
+
+
+
+                                            }
+
+                                            valCount = 0;
+
+
+                                        }
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        }
+
+
+                    </div>
+                }
+
+
+            </div>
+            <div class="col-lg-9 col-12 product-list-items">
+                <div class="product-list-items-list">
+                    
+                    @await Html.PartialAsync("_GetFilterProList", Model.Products)
+                </div>
+                <div>
+                    @if (ViewBag.procount > 6)
+                    {
+                        <a asp-controller="product" asp-action="FilterProList" class="pro-load-more-btn-filter mb-5">
+                            <span class="pro-load-more-btn-text">Daha çox göstər</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="5" viewBox="0 0 26 5"><path fill="#bebebe" d="M.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM10.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0zM20.5 2.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0z"></path></svg>
+
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+

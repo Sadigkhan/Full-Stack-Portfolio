@@ -1,0 +1,200 @@
+﻿@model List<BasketVM>
+@{
+    var Title = "";
+    double total = 0;
+    int totalItem = 0;
+    foreach (var item in Model)
+    {
+        total += (item.Price * item.Count);
+        totalItem += item.Count;
+
+    }
+ }
+
+<div class="styles_cartPopupItems">
+    @if (Model.Count > 0)
+    {
+        <div class="styles_cartPopupItems-products">
+            @foreach (BasketVM basketVM in Model)
+            {
+                Title = basketVM.Title + " " + string.Join(" ", basketVM.Product.ProductDetails.OrderByDescending(x => x.DetailKey.UpdatedAt).Where(x => x.DetailKey.ForTitle).Select(p => p.DetailValue.Name));
+                <div class="styles_cartProductItem">
+                    <button class="styles_removeButton DeleteFromCartBtn" type="button" asp-action="DeleteBasket" asp-controller="Basket" asp-route-id="@basketVM.ProductId">
+                        <svg class="styles_removeIcon" xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13"><path fill="#bebebe" d="M.826 12.474a.83.83 0 0 1-.59-.25.83.83 0 0 1 0-1.17L10.461.838a.83.83 0 0 1 1.162 0 .83.83 0 0 1 0 1.18L1.416 12.224a.83.83 0 0 1-.59.249z"></path><path fill="#bebebe" d="M11.042 12.474a.83.83 0 0 1-.581-.24L.237 2.016A.834.834 0 1 1 1.416.837l10.207 10.225a.83.83 0 0 1-.58 1.412z"></path></svg>
+                    </button>
+                    <div class="styles_cartProductItemWrapper">
+                        <button class="styles_navigateButton">
+                            <a class="styles_imageWrapper" asp-controller="product" asp-action="ProductDetail" asp-route-id="@basketVM.ProductId">
+                                <div class="styles_productImage">
+                                    <span class="styles_productImage-span">
+                                        <img class="styles_productImage-span-img" src="~/User/assets/img/ProductImg/@basketVM.Image" alt="Alternate Text" />
+                                    </span>
+                                </div>
+                            </a>
+                        </button>
+
+                        <div class="styles_productInfo">
+                            <button class="styles_navigateButton">
+                                <a class="styles_productTitleWrap" asp-controller="product" asp-action="ProductDetail" asp-route-id="@basketVM.ProductId">
+                                    <div class="styles_textProductItem">
+                                        <h6 class="styles_productTitle">@Title</h6>
+                                    </div>
+
+                                </a>
+                            </button>
+                            <div class="styles_reviews">
+                                <div class="styles_stars">
+
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if ((basketVM.Reviews != null && basketVM.Reviews.Count() > 0) && i <= (int)Math.Ceiling(basketVM.Reviews.Average(s => s.Star)))
+                                        {
+
+                                            <svg class="rew-stared" width="16.125" height="16.52" viewBox="0 0 16.125 16.52"><g id="star_empty" data-name="star empty" transform="matrix(0.309, 0.951, -0.951, 0.309, 12.457, -0.139)"><path id="Path_935" data-name="Path 935" d="M6.944.66,8.631,4.653l4.318.371a.34.34,0,0,1,.194.6L9.867,8.458l.982,4.222a.34.34,0,0,1-.507.368L6.631,10.81,2.919,13.048a.34.34,0,0,1-.507-.368l.982-4.222L.118,5.619a.34.34,0,0,1,.194-.6L4.63,4.652,6.317.66a.34.34,0,0,1,.627,0Z" transform="translate(0)" fill="#ddd"></path></g></svg>
+
+                                        }
+                                        else
+                                        {
+
+                                            <svg width="16.125" height="16.52" viewBox="0 0 16.125 16.52"><g id="star_empty" data-name="star empty" transform="matrix(0.309, 0.951, -0.951, 0.309, 12.457, -0.139)"><path id="Path_935" data-name="Path 935" d="M6.944.66,8.631,4.653l4.318.371a.34.34,0,0,1,.194.6L9.867,8.458l.982,4.222a.34.34,0,0,1-.507.368L6.631,10.81,2.919,13.048a.34.34,0,0,1-.507-.368l.982-4.222L.118,5.619a.34.34,0,0,1,.194-.6L4.63,4.652,6.317.66a.34.34,0,0,1,.627,0Z" transform="translate(0)" fill="#ddd"></path></g></svg>
+
+                                        }
+                                    }
+                                </div>
+                                <button class="styles_navigateButton">
+                                    <a class="styles_reviewsNumber" asp-controller="product" asp-action="ProductDetail" asp-route-id="@basketVM.ProductId">
+                                        <span class="styles_tips-text">@basketVM.Reviews.Count() rəy</span>
+                                    </a>
+                                </button>
+
+
+                            </div>
+                            <div class="styles_productTagWrapper">
+
+                            </div>
+                            <div class="styles_productPriceControls">
+                                <div class="styles_productAmount">
+                                    <div class="styles_counter">
+                                        @if (basketVM.Count == 1)
+                                        {
+                                            <button disabled="disabled" class="styles_productAmountButton-plus OneEditFromCartBtn">
+                                                <svg class="styles_plus-disabled" xmlns="http://www.w3.org/2000/svg" width="10" height="2" viewBox="0 0 10 2"><path fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="20" stroke-width="1.5" d="M8.579 1.057H.733"></path></svg>
+
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="styles_productAmountButton-minus OneEditFromCartBtn" asp-action="OneEditBasket" asp-controller="Basket" asp-route-id="@basketVM.ProductId" asp-route-key="true">
+                                                <svg class="styles_minus" xmlns="http://www.w3.org/2000/svg" width="10" height="2" viewBox="0 0 10 2"><path fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="20" stroke-width="1.5" d="M8.579 1.057H.733"></path></svg>
+                                            </button>
+                                        }
+
+                                        <span class="styles_amountNumber">
+                                            @basketVM.Count
+                                        </span>
+                                        @if (basketVM.Count < basketVM.Product.Count)
+                                        {
+                                            <button class="styles_productAmountButton-plus OneEditFromCartBtn" asp-action="OneEditBasket" asp-controller="Basket" asp-route-id="@basketVM.ProductId" asp-route-key="false">
+                                                <svg class="styles_plus" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="20" stroke-width="1.5" d="M4.757 1v7.519M8.52 4.756H1"></path></svg>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button disabled="disabled" class="styles_productAmountButton-plus OneEditFromCartBtn">
+                                                <svg class="styles_plus-disabled" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="20" stroke-width="1.5" d="M4.757 1v7.519M8.52 4.756H1"></path></svg>
+                                            </button>
+                                        }
+
+                                    </div>
+                                </div>
+                                <div class="styles_priceWrapper">
+                                    <div>
+
+                                        <span class="styles_priceWrapper-text">@((Math.Truncate(basketVM.Price*basketVM.Count)))</span>
+                                        @if ((int)(((basketVM.Price * basketVM.Count) - (int)(basketVM.Price * basketVM.Count)) * 100) > 0)
+                                        {
+                                            <span class="styles_priceWrapper-sub">.@((int)(((basketVM.Price * basketVM.Count) - (int)(basketVM.Price * basketVM.Count)) * 100))</span>
+                                        }
+
+                                        <svg class="styles_priceWrapper-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="styles_cartPopupSummary">
+            <div class="styles_productInfo-bottom">
+                <span class="styles_products-count">
+                    <span class="styles_tipsLarge">@totalItem</span>
+                    <span class="styles_tipsLarge">Məhsul</span>
+                </span>
+                <span class="styles_sumText">məbləğ:</span>
+                <div class="styles_TotalPrice">
+                    <div class="styles_priceWrapper">
+                        <div class="styles_priceWrapText">
+                            <span>
+                                <h4 class="styles_priceWrapText-num">@(Math.Truncate(total))</h4>
+                            </span>
+                            <span class="styles_priceWrapText-num-sub">
+                                <span class="styles_priceWrapText-num-sub-num">
+                                    @if ((int)((total - (int)total) * 100) > 0)
+                                    {
+                                        @(".") @((int)((total - (int)total) * 100))
+                                    }
+
+                                </span>
+                            </span>
+                        </div>
+                        <svg class="" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="styles_buttons">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="account" asp-action="myaccount" asp-route-to="compare" class="styles_cartButton">
+                        <button class="styles_btnText">
+                            <span class="styles_buttonBody">
+                                <svg class="styles_buttonBody-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18"><path fill="#bebebe" d="M6.235 5.626l1.52-3.308a.137.137 0 0 1 .113-.067h5.085a.1.1 0 0 1 .1.067l1.522 3.308zm-3.304 2.25h15.005c.09.083.12.211.079.326l-1.316 7.368a.296.296 0 0 1-.09.18H4.235a.238.238 0 0 1-.101-.18L2.829 8.202a.335.335 0 0 1 .102-.326zm13.7 10.123a2.397 2.397 0 0 0 2.318-2.036l1.316-7.367a2.6 2.6 0 0 0-.563-2.138 2.247 2.247 0 0 0-1.755-.832H17.1l-1.897-4.23a2.394 2.394 0 0 0-2.25-1.394H7.868a2.37 2.37 0 0 0-2.159 1.394l-1.945 4.23h-.833a2.25 2.25 0 0 0-1.8.832 2.634 2.634 0 0 0-.552 2.138l1.43 7.367A2.395 2.395 0 0 0 4.256 18z"></path></svg>
+                                <span class="styles_button-text">Səbət</span>
+                            </span>
+                        </button>
+                    </a>
+                }
+                else
+                {
+                    <a  class="styles_cartButton user-btn">
+                        <button class="styles_btnText">
+                            <span class="styles_buttonBody">
+                                <svg class="styles_buttonBody-svg" xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18"><path fill="#bebebe" d="M6.235 5.626l1.52-3.308a.137.137 0 0 1 .113-.067h5.085a.1.1 0 0 1 .1.067l1.522 3.308zm-3.304 2.25h15.005c.09.083.12.211.079.326l-1.316 7.368a.296.296 0 0 1-.09.18H4.235a.238.238 0 0 1-.101-.18L2.829 8.202a.335.335 0 0 1 .102-.326zm13.7 10.123a2.397 2.397 0 0 0 2.318-2.036l1.316-7.367a2.6 2.6 0 0 0-.563-2.138 2.247 2.247 0 0 0-1.755-.832H17.1l-1.897-4.23a2.394 2.394 0 0 0-2.25-1.394H7.868a2.37 2.37 0 0 0-2.159 1.394l-1.945 4.23h-.833a2.25 2.25 0 0 0-1.8.832 2.634 2.634 0 0 0-.552 2.138l1.43 7.367A2.395 2.395 0 0 0 4.256 18z"></path></svg>
+                                <span class="styles_button-text">Səbət</span>
+                            </span>
+                        </button>
+                    </a>
+                }
+
+                <a asp-controller="order" asp-action="Create" class="styles_cartButton-checkout cartButton-checkout">
+                    <button class="styles_submitOrderButton" type="button">
+                        <span class="styles_buttonText">
+                            Sifarişi  rəsimləşdir
+                        </span>
+                        <svg class="styles_buttonArrow" xmlns="http://www.w3.org/2000/svg" width="22" height="10" viewBox="0 0 22 10"><g><g><g><g><path fill="#191919" d="M16.71.294a1.004 1.004 0 0 0-1.42 1.42l2.3 2.29H1a1 1 0 0 0 0 2h16.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.7-4.71z"></path></g></g></g></g></svg>
+                    </button>
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1 class="emptyCart">Sizin Səbətiniz boşdur məhsul əlavə edərək alış-verişə davam edin</h1>
+
+        
+    }
+
+</div>
+
+

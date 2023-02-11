@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+    <g>
+        <g >
+            <g>
+                <g >
+                    <path fill="none" stroke="#171717" stroke-miterlimit="20" stroke-width="2"
+                          d="M1 3c0-1 1-2 2-2h19c1 0 2 1 2 2v14c0 1-1 2-2 2H3c-1 0-2-1-2-2z"/>
+                </g>
+                <g >
+                    <path fill="none" stroke="#171717" stroke-miterlimit="20" stroke-width="2"
+                          d="M1 2.534v0l10.671 8.539a1.272 1.272 0 0 0 1.582 0l10.671-8.54v0"/>
+                </g>
+                <g >
+                    <path fill="none" stroke="#171717" stroke-miterlimit="20" stroke-width="2"
+                          d="M9.023 9.411l-7.507 8.333"/>
+                </g>
+                <g >
+                    <path fill="none" stroke="#171717" stroke-miterlimit="20" stroke-width="2"
+                          d="M23.282 17.881l-7.381-8.47"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

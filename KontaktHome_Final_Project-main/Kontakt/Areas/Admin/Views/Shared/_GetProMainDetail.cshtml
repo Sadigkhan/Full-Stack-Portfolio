@@ -1,0 +1,50 @@
+﻿
+@model Product
+
+<div class="form-group">
+    <label asp-for="Title"></label>
+    <input class="form-control" asp-for="Title" placeholder="Enter Title">
+    <span class="text-danger" asp-validation-for="Title"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Price"></label>
+    <input class="form-control" asp-for="Price" placeholder="Enter Price">
+    <span class="text-danger" asp-validation-for="Price"></span>
+</div>
+<div class="form-group">
+    <label asp-for="DiscountPrice"></label>
+    <input class="form-control" asp-for="DiscountPrice" placeholder="Enter DiscountPrice">
+    <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Description"></label>
+    <textarea class="form-control" asp-for="Description" placeholder="Enter Description"></textarea>
+    <span class="text-danger" asp-validation-for="Description"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Count"></label>
+    <input class="form-control" asp-for="Count" placeholder="Enter Count">
+    <span class="text-danger" asp-validation-for="Count"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MainImageFile"></label>
+    <input class="form-control" accept="image/jpeg" asp-for="MainImageFile" placeholder="Enter MainImage">
+    <span class="text-danger" asp-validation-for="MainImageFile"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="ProductImagesFile"></label>
+    <input class="form-control" accept="image/jpeg" asp-for="ProductImagesFile" placeholder="Enter ProductImagesFile">
+    <span class="text-danger" asp-validation-for="ProductImagesFile"></span>
+</div>
+
+
+<div class="form-group">
+    <label asp-for="TagIds"></label>
+    <select class="form-control" asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Name))">
+        <option value="">Choose...</option>
+    </select>
+    <span class="text-danger" asp-validation-for="TagIds"></span>
+</div>
+<button type="submit" class="btn btn-primary ">Create</button>

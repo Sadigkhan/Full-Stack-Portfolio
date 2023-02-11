@@ -1,0 +1,106 @@
+﻿
+
+@model DetailValue
+@{ ViewData["Title"] = "UpdateValue";
+
+    var BrandList = ViewBag.Brands as IEnumerable<CategoryBrand>;
+    var DetailList = ViewBag.DetailKeys as IEnumerable<CategoryDetailKey>;
+    }
+
+<div class="row">
+    <div class="col-lg-12 h3 mb-4 text-gray-800">
+        <h1> Detail Value Create</h1>
+    </div>
+    <div class="col-lg-6 mx-auto box-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group  categoryParentInput">
+                <label>Please choose a category</label>
+                <select class="form-control detailInput deactive searchBrandBtn searchDetailKeyBtn" asp-for="CategoryId" asp-items="@new SelectList(ViewBag.SubCategory, nameof(Category.Id), nameof(Category.Name))">
+                    <option value="" selected>Choose...</option>
+                </select>
+
+                <span class="text-danger" asp-validation-for="CategoryId"></span>
+            </div>
+            @*<div class="BrandList">
+                <div class="form-group">
+                    <label asp-for="BrandId"></label>
+                    <select class="form-control detailInput deactive searchDetailBtn" id="BrandId" name="BrandId">
+                        <option value="">Choose...</option>
+                        @foreach (var item in ViewBag.Brands)
+                        {
+                            if (Model.BrandId == item.BrandId)
+                            {
+                                <option selected value="@item.BrandId">@item.Brand.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.BrandId">@item.Brand.Name</option>
+                            }
+
+                        }
+                    </select>
+                    <span class="text-danger" asp-validation-for="BrandId"></span>
+                </div>
+            </div>*@
+
+            <div class="DetailKeyList">
+                <div class="form-group">
+                    <label asp-for="DetailKeyId"></label>
+                    <select class="form-control detailInput detailkeylist deactive searchDetailBtn" asp-for="DetailKeyId">
+                        <option value="">Choose...</option>
+                        @foreach (CategoryDetailKey item in DetailList)
+                        {
+                            if (Model.DetailKeyId == item.DetailKeyId)
+                            {
+                                <option selected value="@item.DetailKey.Id">@item.DetailKey.Name</option>
+                            }
+                            else
+                            {
+                                <option  value="@item.DetailKey.Id">@item.DetailKey.Name</option>
+                            }
+
+                        }
+                    </select>
+                    @*<span class="text-danger" asp-validation-for="BrandId"></span>*@
+                </div>
+
+            </div>
+            <span class="text-danger" asp-validation-for="DetailKeyId"></span>
+            <div class="static-group ">
+                <div class="ValueListStatic">
+                    <div class="form-group ">
+                        <label>please enter value</label>
+                        <div class="input d-flex align-items-end justify-content-between">
+                            <div class="left col-lg-11">
+                                <input asp-for="Name" class="form-control" placeholder="Enter Value">
+                            </div>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-primary" asp-action="ValueIndex" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.PageIndex">Back To List</a>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Script{
+    <partial name="_ValidationPartial">
+        <script src="~/admin/assets/dist/js/Search.js" asp-append-version="true"></script>
+
+}
+
+
+
+
+
+

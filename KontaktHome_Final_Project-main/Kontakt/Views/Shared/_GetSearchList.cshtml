@@ -1,0 +1,89 @@
+﻿@model IQueryable<Product>
+@{ 
+    var Title = " ";
+}
+<div class="modal-contents">
+   
+    <div class="styles_body">
+        <div class="styles_cartPopupItems">
+            @foreach (Product product in Model)
+            {
+                Title = product.Title + " " + string.Join(" ", product.ProductDetails.OrderByDescending(x => x.DetailKey.UpdatedAt).Where(x => x.DetailKey.ForTitle).Select(p => p.DetailValue.Name));
+                <div class="styles_cartProductItem">
+
+                    <div class="styles_cartProductItemWrapper">
+                        <button class="styles_navigateButton">
+                            <a class="styles_imageWrapper" asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">
+                                <div class="styles_productImage">
+                                    <span class="styles_productImage-span">
+                                        <img class="styles_productImage-span-img" src="~/User/assets/img/ProductImg/@product.MainImage" alt="Alternate Text" />
+                                    </span>
+                                </div>
+                            </a>
+                        </button>
+
+                        <div class="styles_productInfo">
+                            <button class="styles_navigateButton">
+                                <a class="styles_productTitleWrap" asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">
+                                    <div class="styles_textProductItem">
+                                        <h6 class="styles_productTitle">@Title</h6>
+                                    </div>
+
+                                </a>
+                            </button>
+                            <div class="styles_reviews">
+                                <div class="styles_stars">
+
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if ((product.Reviews != null && product.Reviews.Count() > 0) && i <= (int)Math.Ceiling(product.Reviews.Average(s => s.Star)))
+                                        {
+
+                                            <svg class="rew-stared" width="16.125" height="16.52" viewBox="0 0 16.125 16.52"><g id="star_empty" data-name="star empty" transform="matrix(0.309, 0.951, -0.951, 0.309, 12.457, -0.139)"><path id="Path_935" data-name="Path 935" d="M6.944.66,8.631,4.653l4.318.371a.34.34,0,0,1,.194.6L9.867,8.458l.982,4.222a.34.34,0,0,1-.507.368L6.631,10.81,2.919,13.048a.34.34,0,0,1-.507-.368l.982-4.222L.118,5.619a.34.34,0,0,1,.194-.6L4.63,4.652,6.317.66a.34.34,0,0,1,.627,0Z" transform="translate(0)" fill="#ddd"></path></g></svg>
+
+                                        }
+                                        else
+                                        {
+
+                                            <svg width="16.125" height="16.52" viewBox="0 0 16.125 16.52"><g id="star_empty" data-name="star empty" transform="matrix(0.309, 0.951, -0.951, 0.309, 12.457, -0.139)"><path id="Path_935" data-name="Path 935" d="M6.944.66,8.631,4.653l4.318.371a.34.34,0,0,1,.194.6L9.867,8.458l.982,4.222a.34.34,0,0,1-.507.368L6.631,10.81,2.919,13.048a.34.34,0,0,1-.507-.368l.982-4.222L.118,5.619a.34.34,0,0,1,.194-.6L4.63,4.652,6.317.66a.34.34,0,0,1,.627,0Z" transform="translate(0)" fill="#ddd"></path></g></svg>
+
+                                        }
+                                    }
+                                </div>
+                                <button class="styles_navigateButton">
+                                    <a class="styles_reviewsNumber" asp-controller="product" asp-action="ProductDetail" asp-route-id="@product.Id">
+                                        <span class="styles_tips-text">@product.Reviews.Count() rəy</span>
+                                    </a>
+                                </button>
+
+
+                            </div>
+                            <div class="styles_productTagWrapper">
+
+                            </div>
+                            <div class="styles_productPriceControls">
+                                <div class="styles_productAmount">
+                              
+                                </div>
+                                <div class="styles_priceWrapper">
+                                    <div>
+
+                                        <span class="styles_priceWrapper-text">@((Math.Truncate(product.Price)))</span>
+                                        @if ((int)(((product.Price) - (int)(product.Price)) * 100) > 0)
+                                        {
+                                            <span class="styles_priceWrapper-sub">.@((int)(((product.Price) - (int)(product.Price)) * 100))</span>
+                                        }
+
+                                        <svg class="styles_priceWrapper-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13"><path fill="#171717" d="M8.11 1.78L8.092.388 6.983.86l-.029.938C.214 2.851 0 12.56 0 12.56l1.516.077c.096-8.41 4.847-9.656 5.407-9.774L6.65 11.91l1.57-.879-.098-8.168c5.33.717 5.33 9.772 5.33 9.772l1.545.085c.042-.489-.252-10.15-6.888-10.94z"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>
